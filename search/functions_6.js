@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['sendmessage_0',['sendMessage',['../classGateway.html#afe477aee27f31b06e50af0cc1de7bc7f',1,'Gateway::sendMessage()'],['../classDialog.html#a5f14ce86974a0ab006d0339e84743017',1,'Dialog::sendMessage()']]],
-  ['start_1',['start',['../classGateway.html#a26066f5eb2903773e19454e27fc98b5f',1,'Gateway']]],
-  ['stop_2',['stop',['../classGateway.html#abccb88bed26ccf1bd48f3db9fc41da06',1,'Gateway']]],
-  ['storage_3',['Storage',['../classStorage.html#a80ef6af5e4c9fd4424ae16e808d05291',1,'Storage']]]
+  ['removeuser_0',['removeUser',['../classClient.html#a9df267393b1ab617ca4fbaf4c9d981e1',1,'Client::removeUser()'],['../classStorage.html#abbf2e29f997229a63a748961e086b0d0',1,'Storage::removeUser()']]],
+  ['restart_1',['restart',['../classClient.html#ae6510932696da67087a7953870cfe83e',1,'Client::restart()'],['../classServer.html#aa0b9b7f00b9b71e230321869b1c5ddd0',1,'Server::restart()']]]
 ];

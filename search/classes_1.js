@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gateway_0',['Gateway',['../classGateway.html',1,'']]]
+  ['dialog_0',['Dialog',['../classDialog.html',1,'']]]
 ];

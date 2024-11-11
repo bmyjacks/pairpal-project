@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['dialog_0',['Dialog',['../classDialog.html#aed03e160f48fbbaff4d64d7a1f6e4b4e',1,'Dialog']]]
+  ['client_0',['Client',['../classClient.html#ae51af7aa6b8f591496a8f6a4a87a14bf',1,'Client']]]
 ];
