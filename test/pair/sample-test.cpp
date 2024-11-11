@@ -1,8 +1,6 @@
 #include <iostream>
 
-#include "api/server.hpp"
-
 int main() {
-
+  std::cout << "Hello, World!" << std::endl;
   return 0;
 }
