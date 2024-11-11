@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "api/gateway.hpp"
+#include "api/client.hpp"
 
 int main() {
   std::cout << "Frontend Hello, World!" << std::endl;
 
-  Gateway gateway;
+  Client gateway;
 
   return 0;
 }
