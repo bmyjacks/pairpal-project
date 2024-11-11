@@ -1,24 +1,24 @@
-#ifndef GATEWAY_HPP
-#define GATEWAY_HPP
+#ifndef CLIENT_HPP
+#define CLIENT_HPP
 
 #include <string>
 #include <vector>
 
 /**
- * @class Gateway
+ * @class Client
  * @brief A class to manage the API gateway operations.
  */
-class Gateway {
+class Client {
  public:
   /**
    * @brief Constructor for the Gateway class.
    */
-  Gateway();
+  Client();
 
   /**
    * @brief Destructor for the Gateway class.
    */
-  ~Gateway();
+  ~Client();
 
   /**
    * @brief Starts the gateway.
@@ -112,4 +112,4 @@ class Gateway {
   std::string getPair(std::string username);
 };
 
-#endif  // GATEWAY_HPP
+#endif  // CLIENT_HPP
