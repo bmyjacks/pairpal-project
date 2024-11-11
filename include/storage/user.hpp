@@ -3,11 +3,11 @@
 
 #include <string>
 
-class User {
+class user {
  public:
-  User();
+  user();
 
-  ~User();
+  ~user();
 
   bool setUsername(const std::string& username);
 

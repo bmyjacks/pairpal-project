@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "User.hpp"
+#include "user.hpp"
 
 /**
  * @class Storage
@@ -48,7 +48,7 @@ class Storage {
    * @brief Gets a list of all users.
    * @return A vector of usernames.
    */
-  std::vector<User> getUsers();
+  std::vector<user> getUsers();
 
   /**
    * @brief Authenticates a user.
