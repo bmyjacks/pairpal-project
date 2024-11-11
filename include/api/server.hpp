@@ -37,6 +37,9 @@ class Server {
    * @return True if the server restarted successfully, false otherwise.
    */
   bool restart();
+
+ private:
+  uint8_t port = 0;
 };
 
 #endif  // SERVER_HPP
