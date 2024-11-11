@@ -1,0 +1,28 @@
+name: CMake on a single platform
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run CMake
+        # Build your program with the given configuration
+        run: cmake -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} .
+
+      - name: Build backend
+        run: make backend
+
+      - name: Build frontend
+        run: make frontend
