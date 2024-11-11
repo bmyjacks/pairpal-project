@@ -22,7 +22,8 @@ add_library(pair STATIC
 add_library(storage STATIC
         include/storage/storage.hpp
         src/storage/storage.cpp
-        include/storage/user.hpp)
+        include/storage/user.hpp
+        src/storage/user.cpp)
 add_library(ui STATIC
         include/ui/ui.hpp
         src/ui/ui.cpp)
