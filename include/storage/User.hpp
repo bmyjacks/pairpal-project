@@ -4,16 +4,18 @@
 #include <string>
 
 class User {
-public:
-    User();
+ public:
+  User();
 
-    ~User();
+  ~User();
 
-    bool setUsername(const std::string&username);
+  bool setUsername(const std::string& username);
 
-    [[nodiscard]] std::string getUsername() const;
+  [[nodiscard]] std::string getUsername() const;
 
-    bool sendMessage(const std::string&message);
+  bool setTags(const std::string& tags);
+
+  [[nodiscard]] std::string getTags() const;
 };
 
-#endif //USER_HPP
+#endif  // USER_HPP

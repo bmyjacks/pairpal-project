@@ -3,9 +3,9 @@
 #include "api/gateway.hpp"
 
 int main() {
-    std::cout << "Front hello, world!" << std::endl;
+  std::cout << "Front hello, world!" << std::endl;
 
-    Gateway gateway;
+  Gateway gateway;
 
-    return 0;
+  return 0;
 }

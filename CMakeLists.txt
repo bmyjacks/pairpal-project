@@ -5,14 +5,18 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_library(api STATIC
         include/api/gateway.hpp
-        src/api/gateway.cpp)
+        src/api/gateway.cpp
+)
+add_library(chat STATIC
+        include/chat/dialog.hpp
+        include/chat/message.hpp
+        src/chat/message.cpp
+        src/chat/dialog.cpp)
 add_library(storage STATIC
         include/storage/storage.hpp
         src/storage/storage.cpp
         include/storage/user.hpp)
-add_library(chat STATIC
-        include/chat/chat.hpp
-        src/chat/chat.cpp)
+
 
 target_include_directories(api PUBLIC include)
 target_include_directories(storage PUBLIC include)
