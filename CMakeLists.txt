@@ -16,6 +16,9 @@ add_library(storage STATIC
         include/storage/storage.hpp
         src/storage/storage.cpp
         include/storage/user.hpp)
+add_library(ui STATIC
+        include/ui/ui.hpp
+        src/ui/ui.cpp)
 
 
 target_include_directories(api PUBLIC include)
@@ -33,4 +36,4 @@ add_executable(frontend
         src/frontend.cpp)
 
 # Link libraries to the frontend executable
-target_link_libraries(frontend PRIVATE api)
+target_link_libraries(frontend PRIVATE api ui)
