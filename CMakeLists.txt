@@ -1,16 +1,23 @@
 cmake_minimum_required(VERSION 3.29)
-project(pairpal)
+project(pairpal LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
 enable_testing()
 
+# API library
+
 add_library(api STATIC
         include/api/client.hpp
         src/api/client.cpp
+        include/api/message.hpp
         include/api/server.hpp
         src/api/server.cpp
+        src/api/message.cpp
 )
+target_include_directories(api PUBLIC include)
+add_subdirectory(lib)
+
 add_library(chat STATIC
         include/chat/dialog.hpp
         include/chat/message.hpp
@@ -29,7 +36,6 @@ add_library(ui STATIC
         src/ui/ui.cpp)
 
 
-target_include_directories(api PUBLIC include)
 target_include_directories(chat PUBLIC include)
 target_include_directories(pair PUBLIC include)
 target_include_directories(storage PUBLIC include)
