@@ -2,6 +2,7 @@
 #define MESSAGE_HPP
 
 #include <string>
+#include <nlohmann/json.hpp>
 
 enum class MessageType {
     UNKNOWN,
@@ -17,18 +18,21 @@ enum class MessageType {
 
 class Message {
 public:
-    Message();
+    explicit Message(MessageType type, nlohmann::json content);
 
-    explicit Message(MessageType type, const std::string&content);
-
-    explicit Message(const std::string&json);
+    explicit Message(const nlohmann::json&json);
 
     ~Message();
 
-    [[nodiscard]] std::string toJson() const;
+    [[nodiscard]] MessageType getType() const;
+
+    [[nodiscard]] nlohmann::json getContent() const;
+
+    [[nodiscard]] nlohmann::json toJson() const;
 
 private:
     MessageType type_;
+    nlohmann::json content_;
 };
 
 

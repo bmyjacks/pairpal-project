@@ -1,19 +1,29 @@
 #include "api/message.hpp"
 
-Message::Message() : type_(MessageType::UNKNOWN) {
+#include <nlohmann/json.hpp>
+#include <utility>
+
+Message::Message(MessageType type, nlohmann::json content) : type_(type), content_(std::move(content)) {
 }
 
-Message::Message(MessageType type, const std::string&content) : type_(type) {
-    // Set content_
-}
-
-Message::Message(const std::string&json) {
-    // Parse json and set type_
+Message::Message(const nlohmann::json&json) {
+    type_ = static_cast<MessageType>(json["type"].get<int>());
+    content_ = json["content"];
 }
 
 Message::~Message() = default;
 
-std::string Message::toJson() const {
-    // Return json representation of the message
-    return "";
+MessageType Message::getType() const {
+    return type_;
+}
+
+nlohmann::json Message::getContent() const {
+    return content_;
+}
+
+nlohmann::json Message::toJson() const {
+    nlohmann::json json;
+    json["type"] = type_;
+    json["content"] = content_;
+    return json;
 }

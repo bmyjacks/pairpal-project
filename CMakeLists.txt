@@ -57,6 +57,15 @@ target_link_libraries(frontend PRIVATE api ui)
 
 
 # Tests
+## Add google test
+add_subdirectory(libs/googletest)
+
+## API tests
+add_executable(test-message test/api/test-message.cpp)
+target_link_libraries(test-message PRIVATE api gtest)
+add_test(NAME test-message COMMAND test-message)
+
+
 add_executable(pair-test test/pair/sample-test.cpp)
 target_link_libraries(pair-test pair)
 
