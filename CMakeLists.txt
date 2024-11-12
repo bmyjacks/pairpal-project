@@ -10,23 +10,33 @@ add_library(api STATIC
         src/api/client.cpp
         include/api/server.hpp
         src/api/server.cpp
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c
 )
 add_library(chat STATIC
         include/chat/dialog.hpp
         include/chat/message.hpp
         src/chat/message.cpp
-        src/chat/dialog.cpp)
+        src/chat/dialog.cpp
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c)
 add_library(pair STATIC
         include/pair/pair.hpp
-        src/pair/pair.cpp)
+        src/pair/pair.cpp
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c)
 add_library(storage STATIC
         include/storage/storage.hpp
         src/storage/storage.cpp
         include/storage/user.hpp
-        src/storage/user.cpp)
+        src/storage/user.cpp
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c)
 add_library(ui STATIC
         include/ui/ui.hpp
-        src/ui/ui.cpp)
+        src/ui/ui.cpp
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c)
 
 
 target_include_directories(api PUBLIC include)
@@ -37,20 +47,26 @@ target_include_directories(storage PUBLIC include)
 
 # Define backend
 add_executable(backend
-        src/backend.cpp)
+        src/backend.cpp
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c)
 
 target_link_libraries(backend PRIVATE storage chat pair api)
 
 # Define frontend
 add_executable(frontend
-        src/frontend.cpp)
+        src/frontend.cpp
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c)
 
 # Link libraries to the frontend executable
 target_link_libraries(frontend PRIVATE api ui)
 
 
 # Tests
-add_executable(pair-test test/pair/sample-test.cpp)
+add_executable(pair-test test/pair/sample-test.cpp
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c)
 target_link_libraries(pair-test pair)
 
 add_test(NAME pair-test COMMAND pair-test)
