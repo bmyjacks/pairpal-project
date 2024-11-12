@@ -16,7 +16,8 @@ add_library(api STATIC
         src/api/message.cpp
 )
 target_include_directories(api PUBLIC include)
-add_subdirectory(lib)
+add_subdirectory(libs/nlohmann-json)
+target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json)
 
 add_library(chat STATIC
         include/chat/dialog.hpp
