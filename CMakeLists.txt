@@ -16,7 +16,8 @@ add_library(api STATIC
         src/api/message.cpp
 )
 target_include_directories(api PUBLIC include)
-add_subdirectory(libs/nlohmann-json)
+find_package(nlohmann_json CONFIG REQUIRED)
+set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
 target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json)
 
 add_library(chat STATIC
@@ -58,11 +59,11 @@ target_link_libraries(frontend PRIVATE api ui)
 
 # Tests
 ## Add google test
-add_subdirectory(libs/googletest)
+find_package(GTest CONFIG REQUIRED)
 
 ## API tests
 add_executable(test-message test/api/test-message.cpp)
-target_link_libraries(test-message PRIVATE api gtest)
+target_link_libraries(test-message PRIVATE api GTest::gtest)
 add_test(NAME test-message COMMAND test-message)
 
 
