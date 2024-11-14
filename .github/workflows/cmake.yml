@@ -1,14 +1,13 @@
-name: CMake
+name: CMake debug build
 
 on:
   pull_request:
     branches: [ "master" ]
 
-
 env:
   CC: gcc-14
   CXX: g++-14
-  BUILD_TYPE: Release
+  BUILD_TYPE: Debug
 
 jobs:
   build:
@@ -24,7 +23,6 @@ jobs:
           path: vcpkg
       - name: Bootstrap vcpkg
         run: ${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh
-
       - name: Run vcpkg
         run: ${{ github.workspace }}/vcpkg/vcpkg install
 
@@ -33,7 +31,6 @@ jobs:
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
-
       - name: Test
         working-directory: ${{github.workspace}}/build
         run: ctest -C ${{env.BUILD_TYPE}}
