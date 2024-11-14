@@ -1,6 +1,7 @@
 #include "api/server.hpp"
 
 #include <chrono>
+#include <format>
 #include <iostream>
 #include <list>
 #include <thread>
