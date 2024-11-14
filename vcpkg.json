@@ -1,6 +1,7 @@
 {
   "name": "pairpal",
   "version-string": "1.0.0",
+  "builtin-baseline": "772f784ba8d1add92420bd6b81d4cd6a91fb36ac",
   "dependencies": [
     {
       "name": "gtest",
