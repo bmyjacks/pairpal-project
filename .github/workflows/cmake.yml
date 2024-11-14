@@ -15,7 +15,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Cache vcpkg
+        uses: actions/cache@v4
+        with:
+          path: vcpkg
+          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-vcpkg-
       - name: Clone vcpkg
+        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
           repository: microsoft/vcpkg
