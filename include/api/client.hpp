@@ -45,7 +45,8 @@ class Client {
    * @param password The password of the user.
    * @return True if the user was added successfully, false otherwise.
    */
-  bool addUser(std::string username, std::string password);
+  [[nodiscard]] bool addUser(const std::string& username,
+                             const std::string& password);
 
   /**
    * @brief Removes a user from the system.

@@ -7,6 +7,8 @@
 #include <thread>
 #include <zmq.hpp>
 
+#include "api/message.hpp"
+
 using namespace std::chrono_literals;
 
 Server::Server(std::string listenAddr)
@@ -20,21 +22,24 @@ bool Server::start() {
 
   std::cout << std::format("Server started on {}", listenAddr_) << std::endl;
 
-  // prepare some static data for responses
-  const std::string data{"World8"};
+  const Message message(MessageType::SUCCESS, {"SUCCESS"});
+  const std::string serializedMessage = message.toString();
+  zmq::message_t reply(serializedMessage);
 
   for (;;) {
-    zmq::message_t request;
+    try {
+      zmq::message_t request;
+      socket_.recv(request, zmq::recv_flags::none);
+      std::cout << "Received request" << request.to_string() << std::endl;
+    } catch (const zmq::error_t& e) {
+      std::cerr << "Error receiving message: " << e.what() << std::endl;
+    }
 
-    // receive a request from client
-    socket_.recv(request, zmq::recv_flags::none);
-    std::cout << "Received " << request.to_string() << std::endl;
-
-    // simulate work
-    // std::this_thread::sleep_for(1s);
-
-    // send the reply to the client
-    socket_.send(zmq::buffer(data), zmq::send_flags::none);
+    try {
+      socket_.send(reply, zmq::send_flags::none);
+    } catch (const zmq::error_t& e) {
+      std::cerr << "Error sending message: " << e.what() << std::endl;
+    }
   }
 
   return true;

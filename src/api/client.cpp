@@ -4,6 +4,8 @@
 #include <utility>
 #include <zmq.hpp>
 
+#include "api/message.hpp"
+
 Client::Client(std::string serverAddr)
     : serverAddr_(std::move(serverAddr)),
       context_(1),
@@ -12,30 +14,19 @@ Client::Client(std::string serverAddr)
 Client::~Client() = default;
 
 bool Client::start() {
-  socket_.connect(serverAddr_);
-
-  const std::string data{"Hello6"};
-
-  for (auto request_num = 0; request_num < 10; ++request_num) {
-    // send the request message
-    std::cout << "Sending Hello " << request_num << "..." << std::endl;
-    socket_.send(zmq::buffer(data), zmq::send_flags::none);
-
-    // wait for reply from server
-    zmq::message_t reply{};
-    socket_.recv(reply, zmq::recv_flags::none);
-
-    std::cout << "Received " << reply.to_string();
-    std::cout << " (" << request_num << ")";
-    std::cout << std::endl;
+  try {
+    socket_.connect(serverAddr_);
+  } catch (const zmq::error_t& e) {
+    std::cerr << "Error starting client: " << e.what() << std::endl;
+    return false;
   }
-
   return true;
 }
 
 bool Client::stop() {
   try {
     socket_.disconnect(serverAddr_);
+    context_.close();
   } catch (const zmq::error_t& e) {
     std::cerr << "Error stopping client: " << e.what() << std::endl;
     return false;
@@ -49,4 +40,32 @@ bool Client::restart() {
   }
 
   return start();
+}
+
+bool Client::addUser(const std::string& username, const std::string& password) {
+  nlohmann::json content;
+  content["username"] = username;
+  content["password"] = password;
+
+  const Message message(MessageType::ADD_USER, content);
+  const std::string serializedMessage = message.toString();
+
+  try {
+    zmq::message_t request(serializedMessage);
+    socket_.send(request, zmq::send_flags::none);
+  } catch (const zmq::error_t& e) {
+    std::cerr << "Error sending message: " << e.what() << std::endl;
+    return false;
+  }
+
+  try {
+    zmq::message_t reply;
+    socket_.recv(reply, zmq::recv_flags::none);
+    std::cout << "Received reply" << reply.to_string() << std::endl;
+  } catch (const zmq::error_t& e) {
+    std::cerr << "Error receiving message: " << e.what() << std::endl;
+    return false;
+  }
+
+  return true;
 }
