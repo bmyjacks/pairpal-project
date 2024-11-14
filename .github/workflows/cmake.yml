@@ -14,12 +14,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install latest CMake
-        run: |
-          wget https://apt.kitware.com/kitware-archive.sh
-          sh kitware-archive.sh
-          sudo apt update
-          sudo apt install -y cmake
+      - name: Setup CMake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: '3.29.x'
 
       - name: Clone vcpkg
         uses: actions/checkout@v4
