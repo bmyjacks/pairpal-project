@@ -3,10 +3,17 @@ project(pairpal LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
+# Add third-party libraries
+find_package(nlohmann_json CONFIG REQUIRED)
+find_package(cppzmq CONFIG REQUIRED)
+find_package(GTest CONFIG REQUIRED)
+
+# Configure third-party libraries
+set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
+
 enable_testing()
 
 # API library
-
 add_library(api STATIC
         include/api/client.hpp
         src/api/client.cpp
@@ -16,9 +23,6 @@ add_library(api STATIC
         src/api/message.cpp
 )
 target_include_directories(api PUBLIC include)
-find_package(nlohmann_json CONFIG REQUIRED)
-set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
-find_package(cppzmq CONFIG REQUIRED)
 target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
 add_library(chat STATIC
@@ -59,9 +63,6 @@ target_link_libraries(frontend PRIVATE api ui)
 
 
 # Tests
-## Add google test
-find_package(GTest CONFIG REQUIRED)
-
 ## API tests
 add_executable(test-message test/api/test-message.cpp)
 target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
