@@ -5,7 +5,8 @@
 int main() {
   std::cout << "Frontend Hello, World!" << std::endl;
 
-  Client gateway;
+  Client client("tcp://localhost:30200");
+  client.start();
 
   return 0;
 }
