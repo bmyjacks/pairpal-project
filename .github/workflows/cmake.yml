@@ -19,9 +19,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: vcpkg
-          key: ${{ runner.os }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+          key: ${{ runner.os }}-vcpkg
           restore-keys: |
-            ${{ runner.os }}-vcpkg-
+            ${{ runner.os }}-vcpkg
       - name: Clone vcpkg
         if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
