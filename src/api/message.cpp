@@ -11,6 +11,9 @@ Message::Message(const nlohmann::json& json) {
   content_ = json["content"];
 }
 
+Message::Message(const std::string& str)
+    : Message(nlohmann::json::parse(str)) {}
+
 Message::~Message() = default;
 
 MessageType Message::getType() const { return type_; }
@@ -23,3 +26,5 @@ nlohmann::json Message::toJson() const {
   json["content"] = content_;
   return json;
 }
+
+std::string Message::toString() const { return toJson().dump(); }

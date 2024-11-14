@@ -52,6 +52,30 @@ TEST(MessageTest, TestToJsonComplex) {
   ASSERT_EQ(json["content"], content);
 }
 
+TEST(MessageTest, TestStringSimple) {
+  constexpr auto type = MessageType::ADD_USER;
+  const std::string content = "content";
+
+  const Message original(type, content);
+
+  const Message message(original.toString());
+
+  ASSERT_EQ(message.getType(), type);
+  ASSERT_EQ(message.getContent(), content);
+}
+
+TEST(MessageTest, TestStringComplex) {
+  constexpr auto type = MessageType::ADD_USER;
+  nlohmann::json content;
+  content["key"] = "value";
+  const Message original(type, content);
+
+  const Message message(original.toString());
+
+  ASSERT_EQ(message.getType(), type);
+  ASSERT_EQ(message.getContent(), content);
+}
+
 int main(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

@@ -38,6 +38,8 @@ class Message {
    */
   explicit Message(const nlohmann::json& json);
 
+  explicit Message(const std::string& str);
+
   /**
    * @brief Destructor for the Message class.
    */
@@ -60,6 +62,8 @@ class Message {
    * @return The JSON representation of the message.
    */
   [[nodiscard]] nlohmann::json toJson() const;
+
+  [[nodiscard]] std::string toString() const;
 
  private:
   MessageType type_;        ///< The type of the message
