@@ -8,6 +8,8 @@
  * @brief Enum representing different types of messages.
  */
 enum class MessageType {
+  SUCCESS,          ///< Message type for successful operations
+  FAILURE,          ///< Message type for failed operations
   UNKNOWN,          ///< Unknown message type
   ADD_USER,         ///< Message type for adding a user
   REMOVE_USER,      ///< Message type for removing a user
@@ -38,6 +40,10 @@ class Message {
    */
   explicit Message(const nlohmann::json& json);
 
+  /**
+   * @brief Constructs a Message from a string.
+   * @param str The string containing the message data.
+   */
   explicit Message(const std::string& str);
 
   /**
@@ -63,6 +69,10 @@ class Message {
    */
   [[nodiscard]] nlohmann::json toJson() const;
 
+  /**
+   * @brief Converts the message to a string.
+   * @return The string representation of the message.
+   */
   [[nodiscard]] std::string toString() const;
 
  private:
