@@ -15,7 +15,7 @@
     "name" : "vcpkg-cmake",
     "version>=" : "2024-04-23"
   }, {
-    "name" : "boost",
-    "version>=" : "1.86.0"
+    "name" : "cppzmq",
+    "version>=" : "4.10.0"
   } ]
 }

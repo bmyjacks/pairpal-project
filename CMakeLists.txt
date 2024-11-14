@@ -18,7 +18,8 @@ add_library(api STATIC
 target_include_directories(api PUBLIC include)
 find_package(nlohmann_json CONFIG REQUIRED)
 set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
-target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json)
+find_package(cppzmq CONFIG REQUIRED)
+target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
 add_library(chat STATIC
         include/chat/dialog.hpp
@@ -63,7 +64,7 @@ find_package(GTest CONFIG REQUIRED)
 
 ## API tests
 add_executable(test-message test/api/test-message.cpp)
-target_link_libraries(test-message PRIVATE api GTest::gtest)
+target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
 
 
