@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <zmq.hpp>
 
 /**
  * @class Client
@@ -13,7 +14,7 @@ class Client {
   /**
    * @brief Constructor for the Gateway class.
    */
-  Client();
+  explicit Client(std::string serverAddr);
 
   /**
    * @brief Destructor for the Gateway class.
@@ -110,6 +111,11 @@ class Client {
    * @return A string containing the pair of the user.
    */
   std::string getPair(std::string username);
+
+ private:
+  std::string serverAddr_;
+  zmq::context_t context_;
+  zmq::socket_t socket_;
 };
 
 #endif  // CLIENT_HPP

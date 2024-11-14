@@ -2,6 +2,7 @@
 #define SERVER_HPP
 
 #include <cstdint>
+#include <zmq.hpp>
 
 /**
  * @class Server
@@ -12,7 +13,7 @@ class Server {
   /**
    * @brief Constructs a Server object.
    */
-  Server();
+  explicit Server(std::string listenAddr);
 
   /**
    * @brief Destroys the Server object.
@@ -21,10 +22,9 @@ class Server {
 
   /**
    * @brief Starts the server on the specified port.
-   * @param listenPort The port number to listen on.
    * @return True if the server started successfully, false otherwise.
    */
-  bool start(uint8_t listenPort);
+  bool start();
 
   /**
    * @brief Stops the server.
@@ -39,7 +39,9 @@ class Server {
   bool restart();
 
  private:
-  uint8_t port = 0;
+  std::string listenAddr_;
+  zmq::context_t context_;
+  zmq::socket_t socket_;
 };
 
 #endif  // SERVER_HPP
