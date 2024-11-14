@@ -11,19 +11,17 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache vcpkg
-        uses: actions/cache@v4
-        with:
-          path: vcpkg
-          key: ${{ runner.os }}-vcpkg
-          restore-keys: |
-            ${{ runner.os }}-vcpkg
+      - name: Install latest CMake
+        run: |
+          wget https://apt.kitware.com/kitware-archive.sh
+          sh kitware-archive.sh
+          sudo apt update
+          sudo apt install -y cmake
+
       - name: Clone vcpkg
-        if: steps.cache.outputs.cache-hit != 'true'
         uses: actions/checkout@v4
         with:
           repository: microsoft/vcpkg
