@@ -34,10 +34,10 @@ class Server {
   zmq::socket_t socket_;
 
   [[nodiscard]] bool handleRequest_(const zmq::message_t& request);
-  [[nodiscard]] bool addUser_(const std::string& username,
-                              const std::string& password);
-  [[nodiscard]] bool removeUser_(const std::string& username);
-  [[nodiscard]] bool authenticateUser_(const std::string& username,
+  [[nodiscard]] static bool addUser_(const std::string& username,
+                                     const std::string& password);
+  [[nodiscard]] static bool removeUser_(const std::string& username);
+  [[nodiscard]] static bool authenticateUser_(const std::string& username,
                                        const std::string& password);
   [[nodiscard]] bool isExistUser_(const std::string& username);
   [[nodiscard]] std::vector<std::string> listUsers();

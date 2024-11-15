@@ -117,8 +117,8 @@ std::vector<std::string> Server::listUsers() {
   return {};
 }
 
-bool sendMessage_(const std::string& from, const std::string& to,
-                  const std::string& message) {
+bool Server::sendMessage_(const std::string& from, const std::string& to,
+                          const std::string& message) {
   // Send message to user
   return true;
 }
