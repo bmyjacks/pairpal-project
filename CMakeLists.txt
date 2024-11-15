@@ -64,6 +64,10 @@ target_link_libraries(frontend PUBLIC api ui)
 
 # Tests
 # API
+## Client test
+add_executable(test-client test/api/test-client.cpp)
+target_link_libraries(test-client PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_test(NAME test-client COMMAND test-client)
 ## Message test
 add_executable(test-message test/api/test-message.cpp)
 target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
