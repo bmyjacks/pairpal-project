@@ -59,6 +59,32 @@ bool Server::handleRequest_(const zmq::message_t& request) {
     case MessageType::ADD_USER:
       return addUser_(message.getContent()["username"],
                       message.getContent()["password"]);
+    case MessageType::REMOVE_USER:
+      return removeUser_(message.getContent()["username"]);
+    case MessageType::AUTHENTICATE_USER:
+      return authenticateUser_(message.getContent()["username"],
+                               message.getContent()["password"]);
+    case MessageType::IS_EXIST_USER:
+      return isExistUser_(message.getContent()["username"]);
+    case MessageType::LIST_ALL_USERS:
+      // listUsers();
+      return true;
+    case MessageType::SEND_MESSAGE:
+      return sendMessage_(message.getContent()["from"],
+                          message.getContent()["to"],
+                          message.getContent()["message"]);
+    case MessageType::ADD_USER_TAG:
+      return addUserTag_(message.getContent()["username"],
+                         message.getContent()["tag"]);
+    case MessageType::GET_USER_TAGS:
+      // getUserTags_(message.getContent()["username"]);
+      return true;
+    case MessageType::GET_SENT_MESSAGES:
+      // getSentMessages_(message.getContent()["username"]);
+      return true;
+    case MessageType::GET_PAIR:
+      // getPair_(message.getContent()["username"]);
+      return true;
     default:
       return false;
   }
@@ -66,8 +92,53 @@ bool Server::handleRequest_(const zmq::message_t& request) {
 
 bool Server::addUser_(const std::string& username,
                       const std::string& password) {
-  std::cout << std::format("DATABASE ADD USER {}{}", username, password)
-            << std::endl;
-
+  // Add user to the database
   return true;
+}
+
+bool Server::removeUser_(const std::string& username) {
+  // Remove user from the database
+  return true;
+}
+
+bool Server::authenticateUser_(const std::string& username,
+                               const std::string& password) {
+  // Authenticate user
+  return true;
+}
+
+bool Server::isExistUser_(const std::string& username) {
+  // Check if user exists
+  return true;
+}
+
+std::vector<std::string> Server::listUsers() {
+  // List all users
+  return {};
+}
+
+bool sendMessage_(const std::string& from, const std::string& to,
+                  const std::string& message) {
+  // Send message to user
+  return true;
+}
+
+bool Server::addUserTag_(const std::string& username, const std::string& tag) {
+  // Add tag to user
+  return true;
+}
+
+std::vector<std::string> Server::getUserTags_(const std::string& username) {
+  // Get all tags of user
+  return {};
+}
+
+std::vector<std::string> Server::getSentMessages_(const std::string& username) {
+  // Get all sent messages of user
+  return {};
+}
+
+std::vector<std::string> Server::getPair_(const std::string& username) {
+  // Get all pairs of user
+  return {};
 }

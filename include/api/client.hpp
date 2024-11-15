@@ -12,30 +12,31 @@
 class Client {
  public:
   /**
-   * @brief Constructor for the Gateway class.
+   * @brief Constructor for the Client class.
+   * @param serverAddr The address of the server to connect to.
    */
   explicit Client(std::string serverAddr);
 
   /**
-   * @brief Destructor for the Gateway class.
+   * @brief Destructor for the Client class.
    */
   ~Client();
 
   /**
-   * @brief Starts the gateway.
-   * @return True if the gateway started successfully, false otherwise.
+   * @brief Starts the client.
+   * @return True if the client started successfully, false otherwise.
    */
   bool start();
 
   /**
-   * @brief Stops the gateway.
-   * @return True if the gateway stopped successfully, false otherwise.
+   * @brief Stops the client.
+   * @return True if the client stopped successfully, false otherwise.
    */
   bool stop();
 
   /**
-   * @brief Restarts the gateway.
-   * @return True if the gateway restarted successfully, false otherwise.
+   * @brief Restarts the client.
+   * @return True if the client restarted successfully, false otherwise.
    */
   bool restart();
 
@@ -83,7 +84,7 @@ class Client {
    * @param username The username of the user.
    * @return A string containing the tags of the user.
    */
-  [[nodiscard]] std::string getUserTags(std::string username);
+  [[nodiscard]] std::string getUserTags(const std::string& username);
 
   /**
    * @brief Gets a list of all users.
@@ -98,26 +99,37 @@ class Client {
    * @param message The message to send.
    * @return True if the message was sent successfully, false otherwise.
    */
-  bool sendMessage(std::string from, std::string to, std::string message);
+  bool sendMessage(const std::string& from, const std::string& to,
+                   const std::string& message);
 
   /**
-   * @brief Gets all sent message of a user.
-   *
+   * @brief Gets all sent messages of a user.
+   * @param from The username of the sender.
+   * @param to The username of the receiver.
+   * @return A vector of messages.
    */
-  std::vector<std::string> getSentMessages(std::string username);
+  std::vector<std::string> getSentMessages(const std::string& from,
+                                           const std::string& to);
 
   /**
    * @brief Gets the pair of a user.
    * @param username The username of the user.
-   * @return A string containing the pair of the user.
+   * @return A vector containing the pair of the user.
    */
-  std::string getPair(std::string username);
+  std::vector<std::string> getPair(std::string& username);
 
  private:
-  std::string serverAddr_;
-  zmq::context_t context_;
-  zmq::socket_t socket_;
+  std::string serverAddr_;  ///< The address of the server.
+  zmq::context_t context_;  ///< The ZeroMQ context.
+  zmq::socket_t socket_;    ///< The ZeroMQ socket.
 
+  /**
+   * @brief Sends a request and receives a reply.
+   * @param request The request message to send.
+   * @param reply The reply message to receive.
+   * @return True if the request was sent and the reply was received
+   * successfully, false otherwise.
+   */
   bool sendRequestAndReceiveReply_(zmq::message_t& request,
                                    zmq::message_t& reply);
 };

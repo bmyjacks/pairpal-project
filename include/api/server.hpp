@@ -36,6 +36,21 @@ class Server {
   [[nodiscard]] bool handleRequest_(const zmq::message_t& request);
   [[nodiscard]] bool addUser_(const std::string& username,
                               const std::string& password);
+  [[nodiscard]] bool removeUser_(const std::string& username);
+  [[nodiscard]] bool authenticateUser_(const std::string& username,
+                                       const std::string& password);
+  [[nodiscard]] bool isExistUser_(const std::string& username);
+  [[nodiscard]] std::vector<std::string> listUsers();
+  [[nodiscard]] bool sendMessage_(const std::string& from,
+                                  const std::string& to,
+                                  const std::string& message);
+  [[nodiscard]] bool addUserTag_(const std::string& username,
+                                 const std::string& tag);
+  [[nodiscard]] std::vector<std::string> getUserTags_(
+      const std::string& username);
+  [[nodiscard]] std::vector<std::string> getSentMessages_(
+      const std::string& username);
+  [[nodiscard]] std::vector<std::string> getPair_(const std::string& username);
 };
 
 #endif  // SERVER_HPP

@@ -100,7 +100,7 @@ bool Client::isExistUser(const std::string& username) {
   nlohmann::json content;
   content["username"] = username;
 
-  const Message message(MessageType::USER_EXISTS, content);
+  const Message message(MessageType::IS_EXIST_USER, content);
   const std::string serializedMessage = message.toString();
 
   zmq::message_t request(serializedMessage);
@@ -118,7 +118,7 @@ bool Client::authenticate(const std::string& username,
   content["username"] = username;
   content["password"] = password;
 
-  const Message message(MessageType::AUTHENTICATE, content);
+  const Message message(MessageType::AUTHENTICATE_USER, content);
   const std::string serializedMessage = message.toString();
 
   zmq::message_t request(serializedMessage);
@@ -145,4 +145,97 @@ bool Client::addUserTag(const std::string& username, const std::string& tag) {
     return replyMessage.getType() == MessageType::SUCCESS;
   }
   return false;
+}
+
+std::string Client::getUserTags(const std::string& username) {
+  nlohmann::json content;
+  content["username"] = username;
+
+  const Message message(MessageType::GET_USER_TAGS, content);
+  const std::string serializedMessage = message.toString();
+
+  zmq::message_t request(serializedMessage);
+
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    if (const Message replyMessage(reply.to_string());
+        replyMessage.getType() == MessageType::SUCCESS) {
+      return replyMessage.getContent()["tags"];
+    }
+  }
+  return "";
+}
+
+std::vector<std::string> Client::getAllUsers() {
+  nlohmann::json content;
+  content["LIST_ALL_USERS"] = true;
+
+  const Message message(MessageType::LIST_ALL_USERS, content);
+  const std::string serializedMessage = message.toString();
+
+  zmq::message_t request(serializedMessage);
+
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    if (const Message replyMessage(reply.to_string());
+        replyMessage.getType() == MessageType::SUCCESS) {
+      return replyMessage.getContent()["users"];
+    }
+  }
+  return {};
+}
+
+bool Client::sendMessage(const std::string& from, const std::string& to,
+                         const std::string& message) {
+  nlohmann::json content;
+  content["from"] = from;
+  content["to"] = to;
+  content["message"] = message;
+
+  const Message msg(MessageType::SEND_MESSAGE, content);
+  const std::string serializedMessage = msg.toString();
+
+  zmq::message_t request(serializedMessage);
+
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    const Message replyMessage(reply.to_string());
+    return replyMessage.getType() == MessageType::SUCCESS;
+  }
+  return false;
+}
+
+std::vector<std::string> Client::getSentMessages(const std::string& from,
+                                                 const std::string& to) {
+  nlohmann::json content;
+  content["from"] = from;
+  content["to"] = to;
+
+  const Message message(MessageType::GET_SENT_MESSAGES, content);
+  const std::string serializedMessage = message.toString();
+
+  zmq::message_t request(serializedMessage);
+
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    if (const Message replyMessage(reply.to_string());
+        replyMessage.getType() == MessageType::SUCCESS) {
+      return replyMessage.getContent()["messages"];
+    }
+  }
+  return {};
+}
+
+std::vector<std::string> Client::getPair(std::string& username) {
+  nlohmann::json content;
+  content["username"] = username;
+
+  const Message message(MessageType::GET_PAIR, content);
+  const std::string serializedMessage = message.toString();
+
+  zmq::message_t request(serializedMessage);
+
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    if (const Message replyMessage(reply.to_string());
+        replyMessage.getType() == MessageType::SUCCESS) {
+      return replyMessage.getContent()["messages"];
+    }
+  }
+  return {};
 }
