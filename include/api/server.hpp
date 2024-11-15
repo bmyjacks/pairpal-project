@@ -2,6 +2,7 @@
 #define SERVER_HPP
 
 #include <cstdint>
+#include <zmq.hpp>
 
 /**
  * @class Server
@@ -12,7 +13,7 @@ class Server {
   /**
    * @brief Constructs a Server object.
    */
-  Server();
+  explicit Server(std::string listenAddr);
 
   /**
    * @brief Destroys the Server object.
@@ -21,22 +22,35 @@ class Server {
 
   /**
    * @brief Starts the server on the specified port.
-   * @param listenPort The port number to listen on.
    * @return True if the server started successfully, false otherwise.
    */
-  bool start(uint8_t listenPort);
+  bool start();
 
-  /**
-   * @brief Stops the server.
-   * @return True if the server stopped successfully, false otherwise.
-   */
-  bool stop();
+  [[nodiscard]] std::string getListenAddr() const;
 
-  /**
-   * @brief Restarts the server.
-   * @return True if the server restarted successfully, false otherwise.
-   */
-  bool restart();
+ private:
+  std::string listenAddr_;
+  zmq::context_t context_;
+  zmq::socket_t socket_;
+
+  [[nodiscard]] bool handleRequest_(const zmq::message_t& request);
+  [[nodiscard]] static bool addUser_(const std::string& username,
+                                     const std::string& password);
+  [[nodiscard]] static bool removeUser_(const std::string& username);
+  [[nodiscard]] static bool authenticateUser_(const std::string& username,
+                                       const std::string& password);
+  [[nodiscard]] bool isExistUser_(const std::string& username);
+  [[nodiscard]] std::vector<std::string> listUsers();
+  [[nodiscard]] bool sendMessage_(const std::string& from,
+                                  const std::string& to,
+                                  const std::string& message);
+  [[nodiscard]] bool addUserTag_(const std::string& username,
+                                 const std::string& tag);
+  [[nodiscard]] std::vector<std::string> getUserTags_(
+      const std::string& username);
+  [[nodiscard]] std::vector<std::string> getSentMessages_(
+      const std::string& username);
+  [[nodiscard]] std::vector<std::string> getPair_(const std::string& username);
 };
 
 #endif  // SERVER_HPP

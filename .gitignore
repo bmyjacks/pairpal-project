@@ -1,5 +1,5 @@
 .idea/
-cmake-build-debug/
+cmake-build-*/
 html/
 latex/
 .DS_Store
