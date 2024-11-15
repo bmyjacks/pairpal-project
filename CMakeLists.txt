@@ -52,24 +52,19 @@ target_include_directories(storage PUBLIC include)
 add_executable(backend
         src/backend.cpp)
 
-target_link_libraries(backend PRIVATE storage chat pair api)
+target_link_libraries(backend PUBLIC storage chat pair api)
 
 # Define frontend
 add_executable(frontend
         src/frontend.cpp)
 
 # Link libraries to the frontend executable
-target_link_libraries(frontend PRIVATE api ui)
+target_link_libraries(frontend PUBLIC api ui)
 
 
 # Tests
-## API tests
+# API
+## Message test
 add_executable(test-message test/api/test-message.cpp)
 target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
-
-
-add_executable(pair-test test/pair/sample-test.cpp)
-target_link_libraries(pair-test pair)
-
-add_test(NAME pair-test COMMAND pair-test)
