@@ -46,8 +46,7 @@ class Client {
    * @param password The password of the user.
    * @return True if the user was added successfully, false otherwise.
    */
-  [[nodiscard]] bool addUser(const std::string& username,
-                             const std::string& password);
+  bool addUser(const std::string& username, const std::string& password);
 
   /**
    * @brief Removes a user from the system.
@@ -108,15 +107,15 @@ class Client {
    * @param to The username of the receiver.
    * @return A vector of messages.
    */
-  std::vector<std::string> getSentMessages(const std::string& from,
-                                           const std::string& to);
+  [[nodiscard]] std::vector<std::string> getSentMessages(
+      const std::string& from, const std::string& to);
 
   /**
    * @brief Gets the pair of a user.
    * @param username The username of the user.
    * @return A vector containing the pair of the user.
    */
-  std::vector<std::string> getPair(std::string& username);
+  [[nodiscard]] std::vector<std::string> getPair(std::string& username);
 
  private:
   std::string serverAddr_;  ///< The address of the server.
