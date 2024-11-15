@@ -1,7 +1,7 @@
 #include "api/client.hpp"
 
+#include <chrono>
 #include <iostream>
-#include <utility>
 #include <zmq.hpp>
 
 #include "api/message.hpp"
@@ -42,6 +42,27 @@ bool Client::restart() {
   return start();
 }
 
+bool Client::sendRequestAndReceiveReply_(zmq::message_t& request,
+                                         zmq::message_t& reply) {
+  try {
+    // const auto start = std::chrono::high_resolution_clock::now();
+
+    socket_.send(request, zmq::send_flags::none);
+    socket_.recv(reply, zmq::recv_flags::none);
+    //
+    // const auto end = std::chrono::high_resolution_clock::now();
+    //
+    // const auto duration =
+    //     std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    // std::cout << "Request took " << duration.count() << "ms" << std::endl;
+  } catch (const zmq::error_t& e) {
+    std::cerr << "Error sending&receiving message: " << e.what() << std::endl;
+    return false;
+  }
+
+  return true;
+}
+
 bool Client::addUser(const std::string& username, const std::string& password) {
   nlohmann::json content;
   content["username"] = username;
@@ -50,22 +71,78 @@ bool Client::addUser(const std::string& username, const std::string& password) {
   const Message message(MessageType::ADD_USER, content);
   const std::string serializedMessage = message.toString();
 
-  try {
-    zmq::message_t request(serializedMessage);
-    socket_.send(request, zmq::send_flags::none);
-  } catch (const zmq::error_t& e) {
-    std::cerr << "Error sending message: " << e.what() << std::endl;
-    return false;
-  }
+  zmq::message_t request(serializedMessage);
 
-  try {
-    zmq::message_t reply;
-    socket_.recv(reply, zmq::recv_flags::none);
-    std::cout << "Received reply" << reply.to_string() << std::endl;
-  } catch (const zmq::error_t& e) {
-    std::cerr << "Error receiving message: " << e.what() << std::endl;
-    return false;
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    const Message replyMessage(reply.to_string());
+    return replyMessage.getType() == MessageType::SUCCESS;
   }
+  return false;
+}
 
-  return true;
+bool Client::removeUser(const std::string& username) {
+  nlohmann::json content;
+  content["username"] = username;
+
+  const Message message(MessageType::REMOVE_USER, content);
+  const std::string serializedMessage = message.toString();
+
+  zmq::message_t request(serializedMessage);
+
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    const Message replyMessage(reply.to_string());
+    return replyMessage.getType() == MessageType::SUCCESS;
+  }
+  return false;
+}
+
+bool Client::isExistUser(const std::string& username) {
+  nlohmann::json content;
+  content["username"] = username;
+
+  const Message message(MessageType::USER_EXISTS, content);
+  const std::string serializedMessage = message.toString();
+
+  zmq::message_t request(serializedMessage);
+
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    const Message replyMessage(reply.to_string());
+    return replyMessage.getType() == MessageType::SUCCESS;
+  }
+  return false;
+}
+
+bool Client::authenticate(const std::string& username,
+                          const std::string& password) {
+  nlohmann::json content;
+  content["username"] = username;
+  content["password"] = password;
+
+  const Message message(MessageType::AUTHENTICATE, content);
+  const std::string serializedMessage = message.toString();
+
+  zmq::message_t request(serializedMessage);
+
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    const Message replyMessage(reply.to_string());
+    return replyMessage.getType() == MessageType::SUCCESS;
+  }
+  return false;
+}
+
+bool Client::addUserTag(const std::string& username, const std::string& tag) {
+  nlohmann::json content;
+  content["username"] = username;
+  content["tag"] = tag;
+
+  const Message message(MessageType::ADD_USER_TAG, content);
+  const std::string serializedMessage = message.toString();
+
+  zmq::message_t request(serializedMessage);
+
+  if (zmq::message_t reply; sendRequestAndReceiveReply_(request, reply)) {
+    const Message replyMessage(reply.to_string());
+    return replyMessage.getType() == MessageType::SUCCESS;
+  }
+  return false;
 }

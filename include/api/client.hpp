@@ -53,14 +53,14 @@ class Client {
    * @param username The username of the user to remove.
    * @return True if the user was removed successfully, false otherwise.
    */
-  bool removeUser(std::string username);
+  bool removeUser(const std::string& username);
 
   /**
    * @brief Checks if a user exists in the system.
    * @param username The username to check.
    * @return True if the user exists, false otherwise.
    */
-  bool isExistUser(std::string username);
+  bool isExistUser(const std::string& username);
 
   /**
    * @brief Authenticates a user.
@@ -68,7 +68,7 @@ class Client {
    * @param password The password of the user.
    * @return True if the authentication was successful, false otherwise.
    */
-  bool authenticate(std::string username, std::string password);
+  bool authenticate(const std::string& username, const std::string& password);
 
   /**
    * @brief Adds a tag to a user.
@@ -76,7 +76,7 @@ class Client {
    * @param tag The tag to add.
    * @return True if the tag was added successfully, false otherwise.
    */
-  bool addUserTag(std::string username, std::string tag);
+  bool addUserTag(const std::string& username, const std::string& tag);
 
   /**
    * @brief Gets the tags of a user.
@@ -117,6 +117,9 @@ class Client {
   std::string serverAddr_;
   zmq::context_t context_;
   zmq::socket_t socket_;
+
+  bool sendRequestAndReceiveReply_(zmq::message_t& request,
+                                   zmq::message_t& reply);
 };
 
 #endif  // CLIENT_HPP

@@ -26,22 +26,16 @@ class Server {
    */
   bool start();
 
-  /**
-   * @brief Stops the server.
-   * @return True if the server stopped successfully, false otherwise.
-   */
-  bool stop();
-
-  /**
-   * @brief Restarts the server.
-   * @return True if the server restarted successfully, false otherwise.
-   */
-  bool restart();
+  [[nodiscard]] std::string getListenAddr() const;
 
  private:
   std::string listenAddr_;
   zmq::context_t context_;
   zmq::socket_t socket_;
+
+  [[nodiscard]] bool handleRequest_(const zmq::message_t& request);
+  [[nodiscard]] bool addUser_(const std::string& username,
+                              const std::string& password);
 };
 
 #endif  // SERVER_HPP
