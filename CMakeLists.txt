@@ -25,7 +25,8 @@ add_library(storage STATIC
         include/storage/user.hpp
         src/storage/user.cpp
         include/storage/sqlite3.h
-        src/storage/sqlite3.c)
+        src/storage/sqlite3.c
+        test/Storage_test/s-test.cpp)
 add_library(ui STATIC
         include/ui/ui.hpp
         src/ui/ui.cpp)
