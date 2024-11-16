@@ -10,21 +10,15 @@ add_library(api STATIC
         src/api/client.cpp
         include/api/server.hpp
         src/api/server.cpp
-        include/storage/sqlite3.h
-        src/storage/sqlite3.c
 )
 add_library(chat STATIC
         include/chat/dialog.hpp
         include/chat/message.hpp
         src/chat/message.cpp
-        src/chat/dialog.cpp
-        include/storage/sqlite3.h
-        src/storage/sqlite3.c)
+        src/chat/dialog.cpp)
 add_library(pair STATIC
         include/pair/pair.hpp
-        src/pair/pair.cpp
-        include/storage/sqlite3.h
-        src/storage/sqlite3.c)
+        src/pair/pair.cpp)
 add_library(storage STATIC
         include/storage/storage.hpp
         src/storage/storage.cpp
@@ -34,9 +28,7 @@ add_library(storage STATIC
         src/storage/sqlite3.c)
 add_library(ui STATIC
         include/ui/ui.hpp
-        src/ui/ui.cpp
-        include/storage/sqlite3.h
-        src/storage/sqlite3.c)
+        src/ui/ui.cpp)
 
 
 target_include_directories(api PUBLIC include)
