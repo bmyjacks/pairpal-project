@@ -85,12 +85,18 @@ class Client {
    */
   bool addUserTag(const std::string& username, const std::string& tag);
 
+  /**
+   * @brief Removes a tag from a user.
+   * @param username The username of the user.
+   * @param tag The tag to remove.
+   * @return True if the tag was removed successfully, false otherwise.
+   */
   bool removeUserTag(const std::string& username, const std::string& tag);
 
   /**
    * @brief Gets the tags of a user.
    * @param username The username of the user.
-   * @return A string containing the tags of the user.
+   * @return A vector of tags.
    */
   [[nodiscard]] std::vector<std::string> getUserTags(
       const std::string& username);
@@ -105,9 +111,19 @@ class Client {
   bool sendMessage(const std::string& from, const std::string& to,
                    const std::string& message);
 
+  /**
+   * @brief Gets the messages sent by a user.
+   * @param username The username of the user.
+   * @return A vector of sent messages.
+   */
   [[nodiscard]] std::vector<std::string> getSentMessages(
       const std::string& username);
 
+  /**
+   * @brief Gets the messages received by a user.
+   * @param username The username of the user.
+   * @return A vector of received messages.
+   */
   [[nodiscard]] std::vector<std::string> getReceivedMessages(
       const std::string& username);
 
