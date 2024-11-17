@@ -52,45 +52,6 @@ bool Storage::addUser(const std::string& username, const std::string& password) 
   std::cout<<"Successfully added"<<std::endl;
   return true;
 }
-/*
-bool Storage::authenticateUser(const std::string& username, const std::string& password) {
-  if(!db) {
-    std::cout<<"Error opening database"<<std::endl;
-    return false;
-  }
-  const char* querySQL = "SELECT Password FROM Users_list WHERE Name=?; ";
-  sqlite3_stmt *stmt;
-  if(sqlite3_prepare_v2(db, querySQL, -1, &stmt, nullptr) != SQLITE_OK) {
-    std::cout<<"Error preparing statement"<<std::endl;
-    return false;
-  }
-  sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
-  std::string cor_password;
-  int rc = sqlite3_step(stmt);
-  if(rc != SQLITE_ROW) {
-    std::cout<<"Error executing statement"<<std::endl;
-    return false;
-  }
-  if(rc == SQLITE_ROW) {
-    const char* pw = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
-    if(pw) {
-      cor_password = pw;
-    }
-    else {
-      std::cout<<"Error getting the user's name"<<std::endl;
-      return false;
-    }
-    if(cor_password == password) {
-      return true;
-    }
-    if(cor_password != password) {
-      std::cout<<"Wrong password"<<std::endl;
-      std::cout << "THe correct password is:" << cor_password << std::endl;
-      return false;
-    }
-  }
-}
-*/
 bool Storage::authenticateUser(const std::string& username, const std::string& password) {
   if (!db) {
     std::cerr << "Error: Database is not open! " << sqlite3_errmsg(db) << std::endl;
