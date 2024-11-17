@@ -63,12 +63,19 @@ class Client {
   bool isExistUser(const std::string& username);
 
   /**
+   * @brief Gets a list of all users.
+   * @return A vector of usernames.
+   */
+  [[nodiscard]] std::vector<std::string> listAllUsers();
+
+  /**
    * @brief Authenticates a user.
    * @param username The username of the user.
    * @param password The password of the user.
    * @return True if the authentication was successful, false otherwise.
    */
-  bool authenticate(const std::string& username, const std::string& password);
+  bool authenticateUser(const std::string& username,
+                        const std::string& password);
 
   /**
    * @brief Adds a tag to a user.
@@ -78,18 +85,14 @@ class Client {
    */
   bool addUserTag(const std::string& username, const std::string& tag);
 
+  bool removeUserTag(const std::string& username, const std::string& tag);
+
   /**
    * @brief Gets the tags of a user.
    * @param username The username of the user.
    * @return A string containing the tags of the user.
    */
   [[nodiscard]] std::string getUserTags(const std::string& username);
-
-  /**
-   * @brief Gets a list of all users.
-   * @return A vector of usernames.
-   */
-  [[nodiscard]] std::vector<std::string> getAllUsers();
 
   /**
    * @brief Sends a message from one user to another.
@@ -101,14 +104,11 @@ class Client {
   bool sendMessage(const std::string& from, const std::string& to,
                    const std::string& message);
 
-  /**
-   * @brief Gets all sent messages of a user.
-   * @param from The username of the sender.
-   * @param to The username of the receiver.
-   * @return A vector of messages.
-   */
   [[nodiscard]] std::vector<std::string> getSentMessages(
-      const std::string& from, const std::string& to);
+      const std::string& username);
+
+  [[nodiscard]] std::vector<std::string> getReceivedMessages(
+      const std::string& username);
 
   /**
    * @brief Gets the pair of a user.

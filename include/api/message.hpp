@@ -8,20 +8,21 @@
  * @brief Enum representing different types of messages.
  */
 enum class MessageType {
-  SUCCESS,            ///< Message type for successful operations
-  FAILURE,            ///< Message type for failed operations
-  UNKNOWN,            ///< Unknown message type
-  ADD_USER,           ///< Message type for adding a user
-  REMOVE_USER,        ///< Message type for removing a user
-  IS_EXIST_USER,     ///< Message type for checking if a user exists
-  LIST_ALL_USERS,     ///< Message type for getting a user
-  AUTHENTICATE_USER,  ///< Message type for authenticating a user
-  ADD_USER_TAG,       ///< Message type for adding a tag to a user
-  REMOVE_USER_TAG,    ///< Message type for removing a tag from a user
-  GET_USER_TAGS,      ///< Message type for getting tags of a user
-  SEND_MESSAGE,       ///< Message type for sending a message
-  GET_SENT_MESSAGES,  ///< Message type for getting sent messages
-  GET_PAIR            ///< Message type for getting the pair of a user
+  SUCCESS,                ///< Message type for successful operations
+  FAILURE,                ///< Message type for failed operations
+  UNKNOWN,                ///< Unknown message type
+  ADD_USER,               ///< Message type for adding a user
+  REMOVE_USER,            ///< Message type for removing a user
+  IS_EXIST_USER,          ///< Message type for checking if a user exists
+  LIST_ALL_USERS,         ///< Message type for getting a user
+  AUTHENTICATE_USER,      ///< Message type for authenticating a user
+  ADD_USER_TAG,           ///< Message type for adding a tag to a user
+  REMOVE_USER_TAG,        ///< Message type for removing a tag from a user
+  GET_USER_TAGS,          ///< Message type for getting tags of a user
+  SEND_MESSAGE,           ///< Message type for sending a message
+  GET_SENT_MESSAGES,      ///< Message type for getting all sent messages
+  GET_RECEIVED_MESSAGES,  ///< Message type for getting all received messages
+  GET_PAIR                ///< Message type for getting the pair of a user
 };
 
 /**
