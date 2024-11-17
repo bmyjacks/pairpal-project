@@ -8,6 +8,7 @@ Storage::Storage() {
   int exit = sqlite3_open("storage_test.db", &db);
   if (exit != SQLITE_OK) {
     std::cerr << "Error opening database" << std::endl;
+    return;
   }
   else {
     std::cout << "Opened database successfully" << std::endl;
@@ -88,3 +89,24 @@ bool Storage::authenticateUser(const std::string& username, const std::string& p
     }
   }
 }
+
+std::vector<std::tuple<int,std::string,std::string,std::string>> Storage::getUsers() {
+  const char* sql = "SELECT ID,Name,Password,Tag FROM Users_list";
+  sqlite3_stmt *stmt;
+  std::vector<std::tuple<int,std::string,std::string,std::string>> result;
+  int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+  if(rc!=SQLITE_OK) {
+    std::cerr<<"Error preparing statement"<<sqlite3_errmsg<<std::endl;
+    return result;
+  }
+  while(sqlite3_step(stmt) == SQLITE_ROW) {
+    int id = sqlite3_column_int(stmt, 0);
+    std::string name = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
+    std::string password = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
+    std::string tag = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));
+    result.emplace_back(id, name, password, tag);
+  }
+  sqlite3_finalize(stmt);
+  return result;
+
+};

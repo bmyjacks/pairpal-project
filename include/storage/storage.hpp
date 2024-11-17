@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-
+#include <tuple>
 #include "sqlite3.h"
 #include "storage/storage.hpp"
 #include "user.hpp"
@@ -52,7 +52,7 @@ class Storage {
    * @brief Gets a list of all users.
    * @return A vector of usernames.
    */
-  std::vector<user> getUsers();
+  std::vector<std::tuple<int,std::string,std::string,std::string>> getUsers();
 
   /**
    * @brief Authenticates a user.
