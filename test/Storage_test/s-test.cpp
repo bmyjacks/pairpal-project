@@ -7,10 +7,10 @@
 using namespace  std;
 int main() {
   Storage storage;
-  string name = "Ce";
+  string name = "CCCCCCc";
   string password = "11181118";
   storage.addUser( name, password );
-  std::cout << storage.authenticateUser("Ce","11181118");
+  std::cout << storage.authenticateUser("CCCCCCc","11181118");
   auto users = storage.getUsers();
 
   for(const auto& user : users) {

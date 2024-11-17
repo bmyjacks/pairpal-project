@@ -52,7 +52,7 @@ bool Storage::addUser(const std::string& username, const std::string& password) 
   std::cout<<"Successfully added"<<std::endl;
   return true;
 }
-
+/*
 bool Storage::authenticateUser(const std::string& username, const std::string& password) {
   if(!db) {
     std::cout<<"Error opening database"<<std::endl;
@@ -66,11 +66,12 @@ bool Storage::authenticateUser(const std::string& username, const std::string& p
   }
   sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
   std::string cor_password;
-  if(sqlite3_step(stmt) != SQLITE_ROW) {
+  int rc = sqlite3_step(stmt);
+  if(rc != SQLITE_ROW) {
     std::cout<<"Error executing statement"<<std::endl;
     return false;
   }
-  if(sqlite3_step(stmt) == SQLITE_ROW) {
+  if(rc == SQLITE_ROW) {
     const char* pw = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
     if(pw) {
       cor_password = pw;
@@ -89,7 +90,48 @@ bool Storage::authenticateUser(const std::string& username, const std::string& p
     }
   }
 }
+*/
+bool Storage::authenticateUser(const std::string& username, const std::string& password) {
+  if (!db) {
+    std::cerr << "Error: Database is not open! " << sqlite3_errmsg(db) << std::endl;
+    return false;
+  }
 
+  const char* querySQL = "SELECT Password FROM Users_list WHERE Name = ?;";
+  sqlite3_stmt* stmt;
+
+  if (sqlite3_prepare_v2(db, querySQL, -1, &stmt, nullptr) != SQLITE_OK) {
+    std::cerr << "Error preparing statement: " << sqlite3_errmsg(db) << std::endl;
+    return false;
+  }
+
+  sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_TRANSIENT);
+
+  int rc = sqlite3_step(stmt);
+  if (rc == SQLITE_ROW) {
+    // 获取密码字段
+    const char* pw = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
+    std::string cor_password = pw ? pw : "";
+
+    // 密码验证
+    if (cor_password == password) {
+      std::cout << "Authentication successful." << std::endl;
+      sqlite3_finalize(stmt);
+      return true;
+    } else {
+      std::cout << "Wrong password. The correct password is: " << cor_password << std::endl;
+      sqlite3_finalize(stmt);
+      return false;
+    }
+  } else if (rc == SQLITE_DONE) {
+    std::cout << "No user found with the given username." << std::endl;
+  } else {
+    std::cerr << "Error executing statement: " << sqlite3_errmsg(db) << std::endl;
+  }
+
+  sqlite3_finalize(stmt);
+  return false;
+}
 std::vector<std::tuple<int,std::string,std::string,std::string>> Storage::getUsers() {
   const char* sql = "SELECT ID,Name,Password,Tag FROM Users_list";
   sqlite3_stmt *stmt;
