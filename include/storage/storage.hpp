@@ -60,7 +60,7 @@ class Storage {
    * @param password The password of the user.
    * @return True if the authentication was successful, false otherwise.
    */
-  bool authenticateUser(std::string username, std::string password);
+  bool authenticateUser(const std::string& username, const std::string &password);
 
   /**
    * @brief Adds a tag to a user.
