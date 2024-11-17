@@ -7,6 +7,5 @@
 using namespace  std;
 int main() {
   Storage storage;
-  cout << "Hello World!" << endl;
-
+  storage.addUser( "Sam", "12345678");
 }
