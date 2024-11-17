@@ -7,8 +7,8 @@
 using namespace  std;
 int main() {
   Storage storage;
-  string name = "Tom";
-  string password = "111111";
+  string name = "Chloe";
+  string password = "11181118";
   storage.addUser( name, password );
-  std::cout << storage.authenticateUser("Sam","111111");
+  std::cout << storage.authenticateUser("Chloe","11181118");
 }
