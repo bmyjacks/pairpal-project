@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "sqlite3.h"
+#include "storage/storage.hpp"
 #include "user.hpp"
 
 /**
@@ -11,6 +13,8 @@
  * @brief A class to manage user data.
  */
 class Storage {
+ private:
+  sqlite3 *db;
  public:
   /**
    * @brief Constructor for the Storage class.
@@ -28,7 +32,7 @@ class Storage {
    * @param password The password of the user.
    * @return True if the user was added successfully, false otherwise.
    */
-  bool addUser(std::string username, std::string password);
+  bool addUser(const std::string &username, const std::string &password);
 
   /**
    * @brief Removes a user from the storage.
