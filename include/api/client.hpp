@@ -92,7 +92,8 @@ class Client {
    * @param username The username of the user.
    * @return A string containing the tags of the user.
    */
-  [[nodiscard]] std::string getUserTags(const std::string& username);
+  [[nodiscard]] std::vector<std::string> getUserTags(
+      const std::string& username);
 
   /**
    * @brief Sends a message from one user to another.
@@ -115,7 +116,7 @@ class Client {
    * @param username The username of the user.
    * @return A vector containing the pair of the user.
    */
-  [[nodiscard]] std::vector<std::string> getPair(std::string& username);
+  [[nodiscard]] std::vector<std::string> getPair(const std::string& username);
 
  private:
   std::string serverAddr_;  ///< The address of the server.
