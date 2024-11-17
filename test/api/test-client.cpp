@@ -176,10 +176,10 @@ TEST(ClientTest, TestListAllUsersTrue) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.listAllUsers();
-  EXPECT_EQ(users.size(), 2);
-  EXPECT_EQ(users.at(0), "item1");
-  EXPECT_EQ(users.at(1), "item2");
+  const std::vector<std::string> vec = client.listAllUsers();
+  EXPECT_EQ(vec.size(), 2);
+  EXPECT_EQ(vec.at(0), "item1");
+  EXPECT_EQ(vec.at(1), "item2");
 
   server.stop();
 }
@@ -191,8 +191,8 @@ TEST(ClientTest, TestListAllUsersFalse) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.listAllUsers();
-  EXPECT_EQ(users.size(), 0);
+  const std::vector<std::string> vec = client.listAllUsers();
+  EXPECT_EQ(vec.size(), 0);
 
   server.stop();
 }
@@ -276,10 +276,10 @@ TEST(ClientTest, TestGetUserTagsTrue) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.getUserTags("username");
-  EXPECT_EQ(users.size(), 2);
-  EXPECT_EQ(users.at(0), "item1");
-  EXPECT_EQ(users.at(1), "item2");
+  const std::vector<std::string> vec = client.getUserTags("username");
+  EXPECT_EQ(vec.size(), 2);
+  EXPECT_EQ(vec.at(0), "item1");
+  EXPECT_EQ(vec.at(1), "item2");
 
   server.stop();
 }
@@ -291,8 +291,8 @@ TEST(ClientTest, TestGetUserTagsFalse) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.getUserTags("username");
-  EXPECT_EQ(users.size(), 0);
+  const std::vector<std::string> vec = client.getUserTags("username");
+  EXPECT_EQ(vec.size(), 0);
 
   server.stop();
 }
@@ -328,10 +328,10 @@ TEST(ClientTest, TestGetSentMessagesTrue) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.getSentMessages("username");
-  EXPECT_EQ(users.size(), 2);
-  EXPECT_EQ(users.at(0), "item1");
-  EXPECT_EQ(users.at(1), "item2");
+  const std::vector<std::string> vec = client.getSentMessages("username");
+  EXPECT_EQ(vec.size(), 2);
+  EXPECT_EQ(vec.at(0), "item1");
+  EXPECT_EQ(vec.at(1), "item2");
 
   server.stop();
 }
@@ -343,8 +343,8 @@ TEST(ClientTest, TestGetSentMessagesFalse) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.getSentMessages("username");
-  EXPECT_EQ(users.size(), 0);
+  const std::vector<std::string> vec = client.getSentMessages("username");
+  EXPECT_EQ(vec.size(), 0);
 
   server.stop();
 }
@@ -356,10 +356,10 @@ TEST(ClientTest, TestGetReceiveMessagesTrue) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.getReceivedMessages("username");
-  EXPECT_EQ(users.size(), 2);
-  EXPECT_EQ(users.at(0), "item1");
-  EXPECT_EQ(users.at(1), "item2");
+  const std::vector<std::string> vec = client.getReceivedMessages("username");
+  EXPECT_EQ(vec.size(), 2);
+  EXPECT_EQ(vec.at(0), "item1");
+  EXPECT_EQ(vec.at(1), "item2");
 
   server.stop();
 }
@@ -371,8 +371,8 @@ TEST(ClientTest, TestGetReceiveMessagesFalse) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.getReceivedMessages("username");
-  EXPECT_EQ(users.size(), 0);
+  const std::vector<std::string> vec = client.getReceivedMessages("username");
+  EXPECT_EQ(vec.size(), 0);
 
   server.stop();
 }
@@ -384,10 +384,10 @@ TEST(ClientTest, TestGetPairTrue) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.getPair("username");
-  EXPECT_EQ(users.size(), 2);
-  EXPECT_EQ(users.at(0), "item1");
-  EXPECT_EQ(users.at(1), "item2");
+  const std::vector<std::string> vec = client.getPair("username");
+  EXPECT_EQ(vec.size(), 2);
+  EXPECT_EQ(vec.at(0), "item1");
+  EXPECT_EQ(vec.at(1), "item2");
 
   server.stop();
 }
@@ -399,8 +399,8 @@ TEST(ClientTest, TestGetPairFalse) {
   Client client("tcp://localhost:57880");
   client.start();
 
-  const std::vector<std::string> users = client.getPair("username");
-  EXPECT_EQ(users.size(), 0);
+  const std::vector<std::string> vec = client.getPair("username");
+  EXPECT_EQ(vec.size(), 0);
 
   server.stop();
 }

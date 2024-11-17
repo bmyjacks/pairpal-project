@@ -120,7 +120,7 @@ zmq::message_t Server::handleRequest_(const zmq::message_t& request) {
   if (requestType == MessageType::LIST_ALL_USERS) {
     const std::vector<std::string> users = listAllUsers();
     nlohmann::json content;
-    content["users"] = users;
+    content["vector"] = users;
 
     return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
   }
@@ -162,7 +162,7 @@ zmq::message_t Server::handleRequest_(const zmq::message_t& request) {
     const std::string username = requestContent["username"];
     const std::vector<std::string> tags = getUserTags_(username);
     nlohmann::json content;
-    content["tags"] = tags;
+    content["vector"] = tags;
 
     return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
   }
@@ -183,7 +183,7 @@ zmq::message_t Server::handleRequest_(const zmq::message_t& request) {
     const std::string username = requestContent["username"];
     const std::vector<std::string> messages = getSentMessages_(username);
     nlohmann::json content;
-    content["messages"] = messages;
+    content["vector"] = messages;
 
     return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
   }
@@ -192,7 +192,7 @@ zmq::message_t Server::handleRequest_(const zmq::message_t& request) {
     const std::string username = requestContent["username"];
     const std::vector<std::string> messages = getReceivedMessages_(username);
     nlohmann::json content;
-    content["messages"] = messages;
+    content["vector"] = messages;
 
     return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
   }
@@ -201,7 +201,7 @@ zmq::message_t Server::handleRequest_(const zmq::message_t& request) {
     const std::string username = requestContent["username"];
     const std::vector<std::string> pair = getPair_(username);
     nlohmann::json content;
-    content["pair"] = pair;
+    content["vector"] = pair;
 
     return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
   }
