@@ -57,9 +57,11 @@ target_link_libraries(frontend PRIVATE api ui)
 
 
 # Tests
-add_executable(pair-test test/pair/sample-test.cpp
-        include/storage/sqlite3.h
-        src/storage/sqlite3.c)
+add_executable(pair-test test/pair/sample-test.cpp)
 target_link_libraries(pair-test pair)
 
 add_test(NAME pair-test COMMAND pair-test)
+add_executable(s-test test/Storage_test/s-test.cpp)
+target_link_libraries(s-test storage)
+
+add_test(NAME s-test COMMAND s-test)
