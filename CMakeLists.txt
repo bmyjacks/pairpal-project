@@ -38,6 +38,7 @@ add_library(pair STATIC
         include/pair/pair.hpp
         src/pair/pair.cpp)
 target_include_directories(pair PUBLIC include)
+target_link_libraries(pair PUBLIC storage)
 
 # Storage library
 add_library(storage STATIC
@@ -76,3 +77,8 @@ add_test(NAME test-client COMMAND test-client)
 add_executable(test-message test/api/test-message.cpp)
 target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
+
+# Pair
+add_executable(test-pair test/pair/test-pair.cpp)
+target_link_libraries(test-pair PRIVATE pair GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_test(NAME test-pair COMMAND test-pair)
