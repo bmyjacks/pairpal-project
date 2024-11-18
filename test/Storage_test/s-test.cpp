@@ -9,12 +9,12 @@ int main() {
   Storage storage;
   string name = "D";
   string password = "118";
-  //storage.removeUser("C");
+ // storage.removeUser("D");
  storage.addUser( name, password );
 //  std::cout << storage.authenticateUser("C","11181118");
- // auto users = storage.getUsers();
-  storage.isUserExist("Fgjh");
-/*
+ auto users = storage.getUsers();
+ // storage.isUserExist("Fgjh");
+
   for(const auto& user : users) {
     std::cout<< "ID:" << std::get<0>(user)
     << " Name:" << std::get<1>(user)
@@ -23,6 +23,6 @@ int main() {
     << std::endl;
 
   }
-*/
+
   return 0;
 }

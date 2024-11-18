@@ -34,23 +34,39 @@ bool Storage::addUser(const std::string& username, const std::string& password) 
     std::cout<<"Error opening database"<<std::endl;
     return false;
   }
-  const char* insertSQL = "INSERT INTO Users_list (Name, Password) VALUES (?,?);";
-  sqlite3_stmt *stmt;
-  if(sqlite3_prepare_v2(db, insertSQL, -1, &stmt, nullptr) != SQLITE_OK) {
-    std::cout<<"Error preparing statement"<<std::endl;
+  const char* selectsql="SELECT Password FROM Users_list WHERE Name=?;";
+  sqlite3_stmt *stmt_0;
+  if(sqlite3_prepare(db, selectsql, -1, &stmt_0, nullptr) != SQLITE_OK) {
+    std::cerr<<"Error preparing statement"<<std::endl;
     return false;
   }
-  sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
-  sqlite3_bind_text(stmt, 2, password.c_str(), -1, SQLITE_STATIC);
-  if(sqlite3_step(stmt) != SQLITE_DONE) {
-    std::cout<<"Error executing statement"<<std::endl;
+  sqlite3_bind_text(stmt_0, 1, username.c_str(), -1, nullptr);
+  int qc=sqlite3_step(stmt_0);
+  if(qc==SQLITE_ROW) {
+    std::cout<<"the name has already been used!" << std::endl;
+    sqlite3_finalize(stmt_0);
+    return false;
+  }
+  else{  const char* insertSQL = "INSERT INTO Users_list (Name, Password) VALUES (?,?);";
+    sqlite3_stmt *stmt;
+    if(sqlite3_prepare_v2(db, insertSQL, -1, &stmt, nullptr) != SQLITE_OK) {
+      std::cout<<"Error preparing statement"<<std::endl;
+      return false;
+    }
+    sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC);
+    sqlite3_bind_text(stmt, 2, password.c_str(), -1, SQLITE_STATIC);
+    if(sqlite3_step(stmt) != SQLITE_DONE) {
+      std::cout<<"Error executing statement"<<std::endl;
+      sqlite3_finalize(stmt_0);
+      sqlite3_finalize(stmt);
+      return false;
+    }
     sqlite3_finalize(stmt);
-    return false;
+    std::cout<<"The pass word is :"<< password << std::endl;
+    std::cout<<"Successfully added"<<std::endl;
+    return true;
   }
-  sqlite3_finalize(stmt);
-  std::cout<<"The pass word is :"<< password << std::endl;
-  std::cout<<"Successfully added"<<std::endl;
-  return true;
+
 }
 bool Storage::authenticateUser(const std::string& username, const std::string& password) {
   if (!db) {
@@ -145,7 +161,7 @@ bool Storage::isUserExist(std::string username) {
     std::cerr<<"Error opening database"<<std::endl;
     return false;
   }
-  const char* ssql = "SELECT ID FROM Users_list WHERE Name='?';";
+  const char* ssql = "SELECT ID FROM Users_list WHERE Name=?;";
   sqlite3_stmt *stmt;
   if(sqlite3_prepare_v2(db, ssql, -1, &stmt, nullptr) != SQLITE_OK) {
     std::cerr<<"Error preparing statement"<<std::endl;
