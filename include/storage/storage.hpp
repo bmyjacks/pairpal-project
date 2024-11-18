@@ -78,6 +78,14 @@ std::vector<std::tuple<int,std::string,std::string,std::vector<std::string>>> ge
    * @return A vector of tags.
    */
   std::vector<std::string> getTags(std::string username);
+  /**
+ * @brief delete tag for certain user
+ * @param username The name of user
+ * @param tag the tag wanna to remove
+ * @return the bool value if successfully remove the tag
+ */
+  bool removeTag(std::string username, std::string tag);
+
 };
 
 #endif  // STORAGE_HPP

@@ -7,7 +7,7 @@
 using namespace  std;
 int main() {
   Storage storage;
-  storage.removeUser("Timmy");
+  storage.removeTag("Jim","baseball");
 /*
  auto users = storage.getUsers();
   for(const auto& user : users) {

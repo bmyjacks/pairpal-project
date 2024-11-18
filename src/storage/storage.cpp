@@ -47,7 +47,7 @@ bool Storage::addUser(const std::string& username, const std::string& password) 
     return false;
   }
   else{  const char* insertSQL = "INSERT INTO Users_list (Name, Password) VALUES (?,?);";
-    sqlite3_stmt *stmt;
+    sqlite3_stmt *stmt = nullptr;
     if(sqlite3_prepare_v2(db, insertSQL, -1, &stmt, nullptr) != SQLITE_OK) {
       std::cout<<"Error preparing statement"<<std::endl;
       return false;
@@ -260,4 +260,71 @@ std::vector<std::string> Storage::getTags(std::string username) {
   }
   sqlite3_finalize(stmt);
   return tags;
+}
+bool Storage::removeTag(std::string username, std::string tag) {
+  if(!db) {
+    std::cerr<<"Error opening database"<<std::endl;
+    return false;
+  }
+  const char* sSQL = "SELECT Tag FROM Users_list WHERE Name=?;";
+  sqlite3_stmt *stmt;
+  if(sqlite3_prepare_v2(db, sSQL, -1, &stmt, nullptr) != SQLITE_OK) {
+    std::cerr<<"Error preparing statement"<<std::endl;
+    return false;
+  }
+  sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_TRANSIENT);
+  int qc = sqlite3_step(stmt);
+  if(qc != SQLITE_ROW) {
+    std::cerr<<"Not find the users!"<<std::endl;
+    sqlite3_finalize(stmt);
+    return false;
+  }
+  const char* tag_old_0 = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
+  std::string tag_old = tag_old_0;
+  //std::cout << tag_old << std::endl;
+  const size_t ps=tag_old.find(tag);
+  if(ps== std::string::npos) {
+    std::cerr<<"Tag do not exists."<<std::endl;
+    sqlite3_finalize(stmt);
+    return false;
+  }
+  std::string head = tag+"^^";
+  std::string tail = "^^"+tag;
+  std::string body = "^^"+tag+"^^";
+  size_t ps_h = tag_old.find(head);
+  size_t ps_t = tag_old.find(tail);
+  std::string tag_new;
+  if(tag_old.find(body)!= std::string::npos) {
+    tag_new = tag_old.erase(ps_h,head.length());
+  }
+  else if(ps_h!=std::string::npos) {
+    tag_new = tag_old.erase(ps_h,head.length());
+  }
+  else if (ps_t!=std::string::npos) {
+    tag_new = tag_old.erase(ps_t,tail.length());
+  }
+  else {
+    std::cerr << "Unknown error" << std::endl;
+    sqlite3_finalize(stmt);
+    return false;
+  }
+  //std::cout << tag_new << std::endl;
+  sqlite3_finalize(stmt);
+  const char *insert_SQL = "UPDATE Users_list SET Tag=? WHERE Name=?;";
+  sqlite3_stmt* stmt_update = nullptr;
+  if(sqlite3_prepare_v2(db, insert_SQL, -1, &stmt_update, nullptr) != SQLITE_OK) {
+    std::cerr<<"Error preparing statement"<<std::endl;
+    return false;
+  }
+  sqlite3_bind_text(stmt_update, 1, tag_new.c_str(), -1, SQLITE_TRANSIENT);
+  sqlite3_bind_text(stmt_update, 2, username.c_str(), -1, SQLITE_TRANSIENT);
+  int qc_update = sqlite3_step(stmt_update);
+
+  if(qc_update!=SQLITE_DONE) {
+    std::cerr<<"Error executing statement111"<<std::endl;
+    sqlite3_finalize(stmt_update);
+    return false;
+  }
+
+  sqlite3_finalize(stmt_update);
 }
