@@ -7,7 +7,7 @@
 using namespace  std;
 int main() {
   Storage storage;
-
+  storage.removeUser("Timmy");
 /*
  auto users = storage.getUsers();
   for(const auto& user : users) {
@@ -20,12 +20,12 @@ int main() {
     }
     std::cout << std::endl;
   }
-  */
+
   std::vector<std::string> tag = storage.getTags("Jim");
   for(const std::string& t : tag) {
     std::cout << t << " ";
   }
   std::cout << std::endl;
-
+*/
   return 0;
 }
