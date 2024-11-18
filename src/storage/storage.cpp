@@ -15,7 +15,7 @@ Storage::Storage() {
   }
   //先打开数据库
   const char* create_tableSQL = R"(CREATE TABLE IF NOT EXISTS Users_list (ID INTEGER PRIMARY KEY,
-                                    Name TEXT NOT NULL, Password TEXT NOT NULL, Tag TEXT NOT NULL DEFAULT '0000000');)";
+                                    Name TEXT NOT NULL, Password TEXT NOT NULL, Tag TEXT NOT NULL DEFAULT ' ');)";
   if(sqlite3_exec(db, create_tableSQL, nullptr, nullptr, nullptr) != SQLITE_OK) {
     std::cerr << "Error creating table" << std::endl;
     sqlite3_close(db);
@@ -113,3 +113,25 @@ std::vector<std::tuple<int,std::string,std::string,std::string>> Storage::getUse
   return result;
 
 };
+bool Storage::removeUser(std::string username) {
+  if (!db) {
+    std::cerr<<"Error opening database"<<std::endl;
+    return false;
+  }
+  const char* dsql = "DELETE FROM Users_list WHERE Name = ?;";
+  sqlite3_stmt *stmt;
+  if(sqlite3_prepare_v2(db, dsql, -1, &stmt, nullptr) != SQLITE_OK) {
+    std::cerr<<"Error preparing statement"<<std::endl;
+  }
+  if(sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_STATIC)!=SQLITE_OK) {
+    std::cerr<<"Error binding text"<<std::endl;
+    return false;
+  }
+  if(sqlite3_step(stmt)!=SQLITE_DONE) {
+    std::cerr<<"Error executing statement"<<std::endl;
+    return false;
+  }
+  sqlite3_finalize(stmt);
+  std::cout <<"Successfully delect the user." << std::endl;
+  return true;
+}
