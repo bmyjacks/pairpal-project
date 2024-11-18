@@ -25,33 +25,37 @@ add_library(api STATIC
 target_include_directories(api PUBLIC include)
 target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
+# Chat library
 add_library(chat STATIC
         include/chat/dialog.hpp
         include/chat/message.hpp
         src/chat/message.cpp
         src/chat/dialog.cpp)
+target_include_directories(chat PUBLIC include)
+
+# Pair library
 add_library(pair STATIC
         include/pair/pair.hpp
         src/pair/pair.cpp)
+target_include_directories(pair PUBLIC include)
+
+# Storage library
 add_library(storage STATIC
         include/storage/storage.hpp
         src/storage/storage.cpp
         include/storage/user.hpp
         src/storage/user.cpp)
+target_include_directories(storage PUBLIC include)
+
+# UI library
 add_library(ui STATIC
         include/ui/ui.hpp
         src/ui/ui.cpp)
 
 
-target_include_directories(chat PUBLIC include)
-target_include_directories(pair PUBLIC include)
-target_include_directories(storage PUBLIC include)
-
-
 # Define backend
 add_executable(backend
         src/backend.cpp)
-
 target_link_libraries(backend PUBLIC storage chat pair api)
 
 # Define frontend

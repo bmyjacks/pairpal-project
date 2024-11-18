@@ -1,8 +1,12 @@
+#include <chrono>
+
 #include "api/server.hpp"
 
-int main() {
+[[noreturn]] int main() {
   Server server("tcp://localhost:30200");
   server.start();
 
-  return 0;
+  while (true) {
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+  }
 }
