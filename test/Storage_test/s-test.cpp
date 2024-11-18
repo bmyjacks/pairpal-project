@@ -7,14 +7,14 @@
 using namespace  std;
 int main() {
   Storage storage;
-  string name = "D";
-  string password = "118";
  // storage.removeUser("D");
- storage.addUser( name, password );
-//  std::cout << storage.authenticateUser("C","11181118");
- auto users = storage.getUsers();
- // storage.isUserExist("Fgjh");
 
+  storage.addTag("Kim","Bell");
+ // storage.addUser( "Kim", "123" );
+ //std::cout << storage.authenticateUser("Ch","kehd");
+ //auto users = storage.getUsers();
+ // storage.isUserExist("Fgjh");
+/*
   for(const auto& user : users) {
     std::cout<< "ID:" << std::get<0>(user)
     << " Name:" << std::get<1>(user)
@@ -23,6 +23,6 @@ int main() {
     << std::endl;
 
   }
-
+*/
   return 0;
 }
