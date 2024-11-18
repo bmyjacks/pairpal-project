@@ -60,8 +60,8 @@ class Pair {
    * @param username2 The second username.
    * @return The similarity score between the two usernames.
    */
-  [[nodiscard]] virtual float_t getSimilarity_(const std::string &username1,
-                                               const std::string &username2);
+  [[nodiscard]] virtual float getSimilarity_(const std::string &username1,
+                                             const std::string &username2);
 };
 
 #endif  // PAIR_HPP

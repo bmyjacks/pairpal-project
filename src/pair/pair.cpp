@@ -11,7 +11,7 @@ void Pair::setStorage(const Storage &storage) { storage_ = storage; }
 std::vector<std::string> Pair::getPair(const std::string &username) {
   const auto allUsernames = getAllUsernames_();
 
-  std::vector<std::pair<std::string, float_t>> similarities;
+  std::vector<std::pair<std::string, float>> similarities;
 
   for (const auto &i : allUsernames) {
     if (i == username) {
@@ -42,8 +42,8 @@ std::vector<std::string> Pair::getUserTags_(const std::string &username) {
   return {};
 }
 
-float_t Pair::getSimilarity_(const std::string &username1,
-                             const std::string &username2) {
+float Pair::getSimilarity_(const std::string &username1,
+                           const std::string &username2) {
   const auto user1Tags = getUserTags_(username1);
   const auto user2Tags = getUserTags_(username2);
 
@@ -66,6 +66,6 @@ float_t Pair::getSimilarity_(const std::string &username1,
     return 0;
   }
 
-  return static_cast<float_t>(intersectionSet.size()) /
-         static_cast<float_t>(unionSet.size());
+  return static_cast<float>(intersectionSet.size()) /
+         static_cast<float>(unionSet.size());
 }

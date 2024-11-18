@@ -13,8 +13,8 @@ class MockPair final : public Pair {
     return Pair::getPair(username);
   }
 
-  float_t originalGetSimilarity(const std::string &username1,
-                                const std::string &username2) {
+  float originalGetSimilarity(const std::string &username1,
+                              const std::string &username2) {
     return Pair::getSimilarity_(username1, username2);
   }
 };
