@@ -5,7 +5,7 @@ var searchData=
   ['getfromuser_2',['getFromUser',['../classDialog.html#a5ff1700809f75fca4bd878e8a72fc243',1,'Dialog::getFromUser()'],['../classMessage.html#a731c019d211f7f78dbb718eaa34dc6a7',1,'Message::getFromUser()']]],
   ['getlistenaddr_3',['getListenAddr',['../classServer.html#aebcfefc1170d3f59d76850375c45b090',1,'Server']]],
   ['getmessage_4',['getMessage',['../classMessage.html#a9ca40a5c02537af7c1c63886efe5812c',1,'Message']]],
-  ['getpair_5',['getPair',['../classClient.html#adc3a8649ff4520f052d61daa7ad4b1ea',1,'Client']]],
+  ['getpair_5',['getPair',['../classClient.html#adc3a8649ff4520f052d61daa7ad4b1ea',1,'Client::getPair()'],['../classPair.html#a548907eb3db0025e0266cd3218f5a5ea',1,'Pair::getPair()']]],
   ['getreceivedmessages_6',['getReceivedMessages',['../classClient.html#a81aa201fcd8487bf79dba70cc4758b76',1,'Client']]],
   ['getsentmessages_7',['getSentMessages',['../classClient.html#a9c87c07668b108c895027ca24c499401',1,'Client']]],
   ['gettags_8',['getTags',['../classStorage.html#ab752eb6772d5f6a504ddfa5973568519',1,'Storage']]],

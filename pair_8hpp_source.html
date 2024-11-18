@@ -94,7 +94,45 @@ $(function(){ initResizable(false); });
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PAIR_HPP</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define PAIR_HPP</span></div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#endif </span><span class="comment">//PAIR_HPP</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;storage/storage.hpp&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="foldopen" id="foldopen00013" data-start="{" data-end="};">
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="classPair.html">   13</a></span><span class="keyword">class </span><a class="code hl_class" href="classPair.html">Pair</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classPair.html#af4048d0a7dfc586b82619107cf7f12e5">   18</a></span>  <a class="code hl_function" href="classPair.html#af4048d0a7dfc586b82619107cf7f12e5">Pair</a>();</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classPair.html#ac899d9dba2a8d9ccda54e5501d2c6d48">   23</a></span>  <span class="keyword">virtual</span> <a class="code hl_function" href="classPair.html#ac899d9dba2a8d9ccda54e5501d2c6d48">~Pair</a>();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classPair.html#a7b06830c4f33f39c021387eaaa59fa72">   29</a></span>  <span class="keywordtype">void</span> <a class="code hl_function" href="classPair.html#a7b06830c4f33f39c021387eaaa59fa72">setStorage</a>(<span class="keyword">const</span> <a class="code hl_class" href="classStorage.html">Storage</a> &amp;storage);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classPair.html#a548907eb3db0025e0266cd3218f5a5ea">   36</a></span>  [[nodiscard]] std::vector&lt;std::string&gt; <a class="code hl_function" href="classPair.html#a548907eb3db0025e0266cd3218f5a5ea">getPair</a>(<span class="keyword">const</span> std::string &amp;username);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classPair.html#a5a0b9f0d99bda7ca850b3f9583d1929d">   39</a></span>  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_friend" href="classPair.html#a5a0b9f0d99bda7ca850b3f9583d1929d">MockPair</a>;  </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <a class="code hl_class" href="classStorage.html">Storage</a> storage_;  </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  [[nodiscard]] <span class="keyword">virtual</span> std::vector&lt;std::string&gt; getAllUsernames_();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  [[nodiscard]] <span class="keyword">virtual</span> std::vector&lt;std::string&gt; getUserTags_(</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>      <span class="keyword">const</span> std::string &amp;username);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  [[nodiscard]] <span class="keyword">virtual</span> <span class="keywordtype">float</span> getSimilarity_(<span class="keyword">const</span> std::string &amp;username1,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                                             <span class="keyword">const</span> std::string &amp;username2);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>};</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="preprocessor">#endif  </span><span class="comment">// PAIR_HPP</span></div>
+<div class="ttc" id="aclassPair_html"><div class="ttname"><a href="classPair.html">Pair</a></div><div class="ttdoc">A class to manage user pairs and their similarities.</div><div class="ttdef"><b>Definition</b> pair.hpp:13</div></div>
+<div class="ttc" id="aclassPair_html_a548907eb3db0025e0266cd3218f5a5ea"><div class="ttname"><a href="classPair.html#a548907eb3db0025e0266cd3218f5a5ea">Pair::getPair</a></div><div class="ttdeci">std::vector&lt; std::string &gt; getPair(const std::string &amp;username)</div><div class="ttdoc">Gets a pair of usernames for the given username.</div></div>
+<div class="ttc" id="aclassPair_html_a5a0b9f0d99bda7ca850b3f9583d1929d"><div class="ttname"><a href="classPair.html#a5a0b9f0d99bda7ca850b3f9583d1929d">Pair::MockPair</a></div><div class="ttdeci">friend class MockPair</div><div class="ttdoc">Allows MockPair to access private members.</div><div class="ttdef"><b>Definition</b> pair.hpp:39</div></div>
+<div class="ttc" id="aclassPair_html_a7b06830c4f33f39c021387eaaa59fa72"><div class="ttname"><a href="classPair.html#a7b06830c4f33f39c021387eaaa59fa72">Pair::setStorage</a></div><div class="ttdeci">void setStorage(const Storage &amp;storage)</div><div class="ttdoc">Sets the storage object.</div></div>
+<div class="ttc" id="aclassPair_html_ac899d9dba2a8d9ccda54e5501d2c6d48"><div class="ttname"><a href="classPair.html#ac899d9dba2a8d9ccda54e5501d2c6d48">Pair::~Pair</a></div><div class="ttdeci">virtual ~Pair()</div><div class="ttdoc">Destructor for the Pair class.</div></div>
+<div class="ttc" id="aclassPair_html_af4048d0a7dfc586b82619107cf7f12e5"><div class="ttname"><a href="classPair.html#af4048d0a7dfc586b82619107cf7f12e5">Pair::Pair</a></div><div class="ttdeci">Pair()</div><div class="ttdoc">Constructor for the Pair class.</div></div>
+<div class="ttc" id="aclassStorage_html"><div class="ttname"><a href="classStorage.html">Storage</a></div><div class="ttdoc">A class to manage user data.</div><div class="ttdef"><b>Definition</b> storage.hpp:13</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
