@@ -29,7 +29,7 @@ Storage::~Storage() {
   sqlite3_close(db);
   std::cout << "Closed database successfully" << std::endl;
 }
-bool Storage::addUser(const std::string& username, const std::string& password) {
+bool Storage::addUser(const std::string& username, const std::string& password) {//准备增加一个拒绝重复用户名的功能
   if(!db) {
     std::cout<<"Error opening database"<<std::endl;
     return false;
