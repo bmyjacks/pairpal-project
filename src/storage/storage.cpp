@@ -1,5 +1,4 @@
 #include "storage/storage.hpp"
-
 #include <iostream>
 #include<ranges>
 #include <storage/sqlite3.h>
@@ -233,4 +232,32 @@ bool Storage::addTag(std::string username, std::string tag) {
     sqlite3_finalize(stmt_s);
     return true;
   }
+}
+std::vector<std::string> Storage::getTags(std::string username) {
+  if(!db) {
+    std::cerr<<"Error opening database"<<std::endl;
+    return {};
+  }
+  const char * sSQL = "SELECT Tag FROM Users_list WHERE Name=?;";
+  sqlite3_stmt *stmt;
+  if(sqlite3_prepare_v2(db, sSQL, -1, &stmt, nullptr) != SQLITE_OK) {
+    std::cerr<<"Error preparing statement"<<std::endl;
+    return {};
+  }
+  sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_TRANSIENT);
+  int qc = sqlite3_step(stmt);
+  if(qc!=SQLITE_ROW) {
+    std::cerr<<"Not find the users!"<<std::endl;
+    sqlite3_finalize(stmt);
+    return {};
+  }
+  const char* tag_s_0 = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 0));
+  std::string tag_s = tag_s_0;
+  std::vector<std::string> tags;
+  auto parts = tag_s | std::ranges::views::split(divide);
+  for(const auto& p : parts) {
+    tags.emplace_back(p.begin(),p.end());
+  }
+  sqlite3_finalize(stmt);
+  return tags;
 }
