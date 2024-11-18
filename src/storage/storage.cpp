@@ -84,7 +84,7 @@ bool Storage::authenticateUser(const std::string& username, const std::string& p
       sqlite3_finalize(stmt);
       return false;
     }
-  } else if (rc == SQLITE_DONE) {
+  } if (rc == SQLITE_DONE) {
     std::cout << "No user found with the given username." << std::endl;
   } else {
     std::cerr << "Error executing statement: " << sqlite3_errmsg(db) << std::endl;
@@ -130,6 +130,11 @@ bool Storage::removeUser(std::string username) {
   if(sqlite3_step(stmt)!=SQLITE_DONE) {
     std::cerr<<"Error executing statement"<<std::endl;
     return false;
+  }
+  if(sqlite3_changes(db)==0) {
+    std::cerr <<"No user found with the given username." << std::endl;
+    return false;
+    sqlite3_finalize(stmt);
   }
   sqlite3_finalize(stmt);
   std::cout <<"Successfully delect the user." << std::endl;
