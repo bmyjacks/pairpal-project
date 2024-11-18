@@ -1,7 +1,7 @@
 #include "storage/storage.hpp"
 
 #include <iostream>
-
+#include<ranges>
 #include <storage/sqlite3.h>
 Storage::Storage() {
   std::cout << "Storage constructor" << std::endl;
@@ -109,10 +109,10 @@ bool Storage::authenticateUser(const std::string& username, const std::string& p
   sqlite3_finalize(stmt);
   return false;
 }
-std::vector<std::tuple<int,std::string,std::string,std::string>> Storage::getUsers() {
+std::vector<std::tuple<int,std::string,std::string,std::vector<std::string>>> Storage::getUsers() {
   const char* sql = "SELECT ID,Name,Password,Tag FROM Users_list";
   sqlite3_stmt *stmt;
-  std::vector<std::tuple<int,std::string,std::string,std::string>> result;
+  std::vector<std::tuple<int,std::string,std::string,std::vector<std::string>>> result;
   int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
   if(rc!=SQLITE_OK) {
     std::cerr<<"Error preparing statement"<<sqlite3_errmsg<<std::endl;
@@ -122,8 +122,13 @@ std::vector<std::tuple<int,std::string,std::string,std::string>> Storage::getUse
     int id = sqlite3_column_int(stmt, 0);
     std::string name = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 1));
     std::string password = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 2));
-    std::string tag = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));
-    result.emplace_back(id, name, password, tag);
+    std::string tag = reinterpret_cast<const char*>(sqlite3_column_text(stmt, 3));//这里把字符串转化成vector形式
+    std::vector<std::string> tag_s;
+    auto parts = tag | std::ranges::views::split(divide);
+    for(const auto &part : parts) {
+      tag_s.emplace_back(part.begin(), part.end());
+    }
+    result.emplace_back(id, name, password, tag_s);
   }
   sqlite3_finalize(stmt);
   return result;

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <tuple>
+
 #include "sqlite3.h"
 #include "storage/storage.hpp"
 #include "user.hpp"
@@ -15,6 +16,7 @@
 class Storage {
  private:
   sqlite3 *db;
+  std::string divide = "^^";//用来在tag里进行区隔的
  public:
   /**
    * @brief Constructor for the Storage class.
@@ -52,7 +54,7 @@ class Storage {
    * @brief Gets a list of all users.
    * @return A vector, whose element is the tuple for each users, including their name password adn tag
    */
-  std::vector<std::tuple<int,std::string,std::string,std::string>> getUsers();
+std::vector<std::tuple<int,std::string,std::string,std::vector<std::string>>> getUsers();
 
   /**
    * @brief Authenticates a user.
