@@ -52,7 +52,7 @@ class Storage {
 
   /**
    * @brief Gets a list of all users.
-   * @return A vector, whose element is the tuple for each users, including their name password adn tag
+   * @return A vector, whose element is the tuple for each user, including their name password and the tag is return as a vector whose element is string
    */
 std::vector<std::tuple<int,std::string,std::string,std::vector<std::string>>> getUsers();
 
