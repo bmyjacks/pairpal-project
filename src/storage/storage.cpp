@@ -140,3 +140,25 @@ bool Storage::removeUser(std::string username) {
   std::cout <<"Successfully delect the user." << std::endl;
   return true;
 }
+bool Storage::isUserExist(std::string username) {
+  if(!db) {
+    std::cerr<<"Error opening database"<<std::endl;
+    return false;
+  }
+  const char* ssql = "SELECT ID FROM Users_list WHERE Name='?';";
+  sqlite3_stmt *stmt;
+  if(sqlite3_prepare_v2(db, ssql, -1, &stmt, nullptr) != SQLITE_OK) {
+    std::cerr<<"Error preparing statement"<<std::endl;
+    return false;
+  }
+  sqlite3_bind_text(stmt, 1, username.c_str(), -1, SQLITE_TRANSIENT);
+  int qc = sqlite3_step(stmt);
+  if(qc==SQLITE_DONE) {
+    //std::cout<< "User exits." << std::endl;
+    return false;
+  }
+  else {
+    //std::cout <<"The user exist" << std::endl;
+    return true;
+  }
+}

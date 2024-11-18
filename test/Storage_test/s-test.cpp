@@ -7,12 +7,13 @@
 using namespace  std;
 int main() {
   Storage storage;
-  string name = "C";
+  string name = "D";
   string password = "118";
-  storage.removeUser("C");
- // storage.addUser( name, password );
+  //storage.removeUser("C");
+ storage.addUser( name, password );
 //  std::cout << storage.authenticateUser("C","11181118");
  // auto users = storage.getUsers();
+  storage.isUserExist("Fgjh");
 /*
   for(const auto& user : users) {
     std::cout<< "ID:" << std::get<0>(user)
