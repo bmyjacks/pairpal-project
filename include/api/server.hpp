@@ -5,6 +5,9 @@
 #include <thread>
 #include <zmq.hpp>
 
+#include "pair/pair.hpp"
+#include "storage/storage.hpp"
+
 /**
  * @class Server
  * @brief Represents a server that can be started, stopped, and restarted.
@@ -54,6 +57,9 @@ class Server {
       running_;  ///< Atomic flag indicating if the server is running.
   std::thread serverThread_;  ///< The thread running the server.
 
+  Pair pair_;        ///< The Pair object.
+  Storage storage_;  ///< The Storage object.
+
   /**
    * @brief Runs the server.
    */
@@ -64,8 +70,7 @@ class Server {
    * @param request The incoming request message.
    * @return The response message.
    */
-  [[nodiscard]] static zmq::message_t handleRequest_(
-      const zmq::message_t& request);
+  [[nodiscard]] zmq::message_t handleRequest_(const zmq::message_t& request);
 
   /**
    * @brief Adds a user to the server.
@@ -73,28 +78,27 @@ class Server {
    * @param password The password of the user.
    * @return True if the user was added successfully, false otherwise.
    */
-  static bool addUser_(const std::string& username,
-                       const std::string& password);
+  bool addUser_(const std::string& username, const std::string& password);
 
   /**
    * @brief Removes a user from the server.
    * @param username The username of the user.
    * @return True if the user was removed successfully, false otherwise.
    */
-  static bool removeUser_(const std::string& username);
+  bool removeUser_(const std::string& username);
 
   /**
    * @brief Checks if a user exists.
    * @param username The username to check.
    * @return True if the user exists, false otherwise.
    */
-  [[nodiscard]] static bool isExistUser_(const std::string& username);
+  [[nodiscard]] bool isExistUser_(const std::string& username);
 
   /**
    * @brief Lists all users.
    * @return A vector of usernames.
    */
-  [[nodiscard]] static std::vector<std::string> listAllUsers();
+  [[nodiscard]] std::vector<std::string> listAllUsers();
 
   /**
    * @brief Authenticates a user.
@@ -102,8 +106,8 @@ class Server {
    * @param password The password of the user.
    * @return True if the user was authenticated successfully, false otherwise.
    */
-  static bool authenticateUser_(const std::string& username,
-                                const std::string& password);
+  bool authenticateUser_(const std::string& username,
+                         const std::string& password);
 
   /**
    * @brief Adds a tag to a user.
@@ -111,7 +115,7 @@ class Server {
    * @param tag The tag to add.
    * @return True if the tag was added successfully, false otherwise.
    */
-  static bool addUserTag_(const std::string& username, const std::string& tag);
+  bool addUserTag_(const std::string& username, const std::string& tag);
 
   /**
    * @brief Removes a tag from a user.
@@ -119,14 +123,14 @@ class Server {
    * @param tag The tag to remove.
    * @return True if the tag was removed successfully, false otherwise.
    */
-  static bool removeUserTag_(const std::string& username, const std::string& tag);
+  bool removeUserTag_(const std::string& username, const std::string& tag);
 
   /**
    * @brief Gets the tags of a user.
    * @param username The username of the user.
    * @return A vector of tags.
    */
-  [[nodiscard]] static std::vector<std::string> getUserTags_(
+  [[nodiscard]] std::vector<std::string> getUserTags_(
       const std::string& username);
 
   /**
@@ -136,15 +140,15 @@ class Server {
    * @param message The message content.
    * @return True if the message was sent successfully, false otherwise.
    */
-  static bool sendMessage_(const std::string& from, const std::string& to,
-                           const std::string& message);
+  bool sendMessage_(const std::string& from, const std::string& to,
+                    const std::string& message);
 
   /**
    * @brief Gets the sent messages of a user.
    * @param username The username of the user.
    * @return A vector of messages.
    */
-  [[nodiscard]] static std::vector<std::string> getSentMessages_(
+  [[nodiscard]] std::vector<std::string> getSentMessages_(
       const std::string& username);
 
   /**
@@ -152,7 +156,7 @@ class Server {
    * @param username The username of the user.
    * @return A vector of messages.
    */
-  [[nodiscard]] static std::vector<std::string> getReceivedMessages_(
+  [[nodiscard]] std::vector<std::string> getReceivedMessages_(
       const std::string& username);
 
   /**
@@ -160,8 +164,7 @@ class Server {
    * @param username The username of the user needs to pair.
    * @return A vector of paired usernames.
    */
-  [[nodiscard]] static std::vector<std::string> getPair_(
-      const std::string& username);
+  [[nodiscard]] std::vector<std::string> getPair_(const std::string& username);
 };
 
 #endif  // SERVER_HPP

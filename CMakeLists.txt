@@ -23,7 +23,7 @@ add_library(api STATIC
         src/api/message.cpp
 )
 target_include_directories(api PUBLIC include)
-target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json cppzmq cppzmq-static)
+target_link_libraries(api PUBLIC pair nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
 # Chat library
 add_library(chat STATIC
