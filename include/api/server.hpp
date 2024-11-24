@@ -1,7 +1,12 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
-#include <cstdint>
+#include <atomic>
+#include <thread>
+#include <zmq.hpp>
+
+#include "pair/pair.hpp"
+#include "storage/storage.hpp"
 
 /**
  * @class Server
@@ -11,8 +16,9 @@ class Server {
  public:
   /**
    * @brief Constructs a Server object.
+   * @param listenAddr The address the server will listen on.
    */
-  Server();
+  explicit Server(std::string listenAddr);
 
   /**
    * @brief Destroys the Server object.
@@ -21,10 +27,9 @@ class Server {
 
   /**
    * @brief Starts the server on the specified port.
-   * @param listenPort The port number to listen on.
    * @return True if the server started successfully, false otherwise.
    */
-  bool start(uint8_t listenPort);
+  bool start();
 
   /**
    * @brief Stops the server.
@@ -37,6 +42,129 @@ class Server {
    * @return True if the server restarted successfully, false otherwise.
    */
   bool restart();
+
+  /**
+   * @brief Gets the address the server is listening on.
+   * @return The listen address as a string.
+   */
+  [[nodiscard]] std::string getListenAddr() const;
+
+ private:
+  std::string listenAddr_;  ///< The address the server listens on.
+  zmq::context_t context_;  ///< The ZeroMQ context.
+  zmq::socket_t socket_;    ///< The ZeroMQ socket.
+  std::atomic_bool
+      running_;  ///< Atomic flag indicating if the server is running.
+  std::thread serverThread_;  ///< The thread running the server.
+
+  Pair pair_;        ///< The Pair object.
+  Storage storage_;  ///< The Storage object.
+
+  /**
+   * @brief Runs the server.
+   */
+  void run_();
+
+  /**
+   * @brief Handles incoming requests.
+   * @param request The incoming request message.
+   * @return The response message.
+   */
+  [[nodiscard]] zmq::message_t handleRequest_(const zmq::message_t& request);
+
+  /**
+   * @brief Adds a user to the server.
+   * @param username The username of the user.
+   * @param password The password of the user.
+   * @return True if the user was added successfully, false otherwise.
+   */
+  bool addUser_(const std::string& username, const std::string& password);
+
+  /**
+   * @brief Removes a user from the server.
+   * @param username The username of the user.
+   * @return True if the user was removed successfully, false otherwise.
+   */
+  bool removeUser_(const std::string& username);
+
+  /**
+   * @brief Checks if a user exists.
+   * @param username The username to check.
+   * @return True if the user exists, false otherwise.
+   */
+  [[nodiscard]] bool isExistUser_(const std::string& username);
+
+  /**
+   * @brief Lists all users.
+   * @return A vector of usernames.
+   */
+  [[nodiscard]] std::vector<std::string> listAllUsers();
+
+  /**
+   * @brief Authenticates a user.
+   * @param username The username of the user.
+   * @param password The password of the user.
+   * @return True if the user was authenticated successfully, false otherwise.
+   */
+  bool authenticateUser_(const std::string& username,
+                         const std::string& password);
+
+  /**
+   * @brief Adds a tag to a user.
+   * @param username The username of the user.
+   * @param tag The tag to add.
+   * @return True if the tag was added successfully, false otherwise.
+   */
+  bool addUserTag_(const std::string& username, const std::string& tag);
+
+  /**
+   * @brief Removes a tag from a user.
+   * @param username The username of the user.
+   * @param tag The tag to remove.
+   * @return True if the tag was removed successfully, false otherwise.
+   */
+  bool removeUserTag_(const std::string& username, const std::string& tag);
+
+  /**
+   * @brief Gets the tags of a user.
+   * @param username The username of the user.
+   * @return A vector of tags.
+   */
+  [[nodiscard]] std::vector<std::string> getUserTags_(
+      const std::string& username);
+
+  /**
+   * @brief Sends a message from one user to another.
+   * @param from The sender's username.
+   * @param to The recipient's username.
+   * @param message The message content.
+   * @return True if the message was sent successfully, false otherwise.
+   */
+  bool sendMessage_(const std::string& from, const std::string& to,
+                    const std::string& message);
+
+  /**
+   * @brief Gets the sent messages of a user.
+   * @param username The username of the user.
+   * @return A vector of messages.
+   */
+  [[nodiscard]] std::vector<std::string> getSentMessages_(
+      const std::string& username);
+
+  /**
+   * @brief Gets the received messages of a user.
+   * @param username The username of the user.
+   * @return A vector of messages.
+   */
+  [[nodiscard]] std::vector<std::string> getReceivedMessages_(
+      const std::string& username);
+
+  /**
+   * @brief Gets the pairing information of a user.
+   * @param username The username of the user needs to pair.
+   * @return A vector of paired usernames.
+   */
+  [[nodiscard]] std::vector<std::string> getPair_(const std::string& username);
 };
 
 #endif  // SERVER_HPP
