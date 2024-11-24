@@ -7,12 +7,15 @@
 #include <zmq.hpp>
 
 #include "api/message.hpp"
+#include "pair/pair.hpp"
 
 Server::Server(std::string listenAddr)
     : listenAddr_(std::move(listenAddr)),
       context_(1),
       socket_(context_, zmq::socket_type::rep),
-      running_(false) {}
+      running_(false) {
+  pair_.setStorage(storage_);
+}
 Server::~Server() = default;
 
 std::string Server::getListenAddr() const { return listenAddr_; }
@@ -270,6 +273,5 @@ std::vector<std::string> Server::getReceivedMessages_(
 }
 
 std::vector<std::string> Server::getPair_(const std::string& username) {
-  // Get all pairs of user
-  return {};
+  return pair_.getPair(username);
 }
