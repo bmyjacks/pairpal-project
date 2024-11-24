@@ -11,6 +11,10 @@
  * @brief Represents a dialog between two users.
  */
 class Dialog {
+
+private:
+ std::vector<Message> messages;  // 用于存储对话中的消息
+ std::vector<std::string> users; // 用于存储参与对话的用户
  public:
   /**
    * @brief Constructs a Dialog object.
@@ -50,4 +54,22 @@ class Dialog {
   bool sendMessage(std::string message);
 };
 
+/**
+ * @brief Deletes a message from the dialog.
+ * @param index The index of the message to delete.
+ * @return True if the message was deleted successfully, false otherwise.
+ */
+bool deleteMessage(size_t index);
+
+/**
+ * @brief Searches for messages containing the specified keyword.
+ * @param keyword The keyword to search for.
+ * @return A vector containing all messages that contain the keyword.
+ */
+[[nodiscard]] std::vector<Message> searchMessages(const std::string& keyword) const;
+
+/**
+ * @brief Displays all messages in the dialog in a formatted manner.
+ */
+void Dialog::displayMessages();
 #endif  // DIALOG_HPP

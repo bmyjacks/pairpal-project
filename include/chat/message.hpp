@@ -52,6 +52,11 @@ class Message {
    * @return The timestamp of the message.
    */
   [[nodiscard]] std::chrono::system_clock::time_point getTimestamp() const;
-};
 
+private:
+  std::string from;   // Sender's username
+  std::string to;     // Receiver's username
+  std::string message; // Content of the message
+  std::chrono::system_clock::time_point timestamp; // Timestamp of the message
+};
 #endif  // MESSAGE_HPP
