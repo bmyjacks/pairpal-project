@@ -1,17 +1,10 @@
-#include <iostream>
+#include <QApplication>
 
-#include "api/client.hpp"
+#include "ui/dialog.h"
 
-int main() {
-  std::cout << "Frontend Hello, World!" << std::endl;
-
-  Client client("tcp://localhost:30200");
-  client.start();
-
-  for (int i = 0; i <= 100; ++i) {
-    std::cout << std::format("user{}", i) << std::endl;
-    client.addUser(std::format("user{}", i), "password");
-  }
-
-  return 0;
+int main(int argc, char *argv[]) {
+  QApplication a(argc, argv);
+  Dialog w;  // zhuchuangkou
+  w.show();
+  return a.exec();
 }
