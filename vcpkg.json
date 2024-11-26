@@ -1,7 +1,7 @@
 {
   "name": "pairpal",
   "version-string": "1.0.0",
-  "builtin-baseline": "772f784ba8d1add92420bd6b81d4cd6a91fb36ac",
+  "builtin-baseline": "068d45478f5536589e19f83344749379724b3225",
   "dependencies": [
     {
       "name": "gtest",
@@ -22,6 +22,10 @@
     {
       "name": "cppzmq",
       "version>=": "4.10.0"
+    },
+    {
+      "name": "qt5",
+      "version>=": "5.15.15"
     }
   ]
 }
