@@ -14,8 +14,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-        fetch-depth: 0
-        submodules: 'recursive'
+        with:
+          fetch-depth: 0
+          submodules: 'recursive'
 
       - uses: rui314/setup-mold@v1
 
