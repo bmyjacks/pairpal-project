@@ -19,10 +19,7 @@ enable_testing()
 
 # API library
 add_library(api STATIC
-        include/api/client.hpp
         src/api/client.cpp
-        include/api/message.hpp
-        include/api/server.hpp
         src/api/server.cpp
         src/api/message.cpp
 )
@@ -31,54 +28,49 @@ target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json cppzmq cppzmq-stat
 
 # Chat library
 add_library(chat STATIC
-        include/chat/dialog.hpp
-        include/chat/message.hpp
         src/chat/message.cpp
         src/chat/dialog.cpp)
 target_include_directories(chat PUBLIC include)
 
 # Pair library
 add_library(pair STATIC
-        include/pair/pair.hpp
         src/pair/pair.cpp)
 target_include_directories(pair PUBLIC include)
 target_link_libraries(pair PUBLIC storage)
 
 # Storage library
 add_library(storage STATIC
-        include/storage/storage.hpp
         src/storage/storage.cpp
-        include/storage/user.hpp
         src/storage/user.cpp)
 target_include_directories(storage PUBLIC include)
 
 # Add UI forms
 set(UI_SOURCES
-        src/ui/dialog.ui
-        src/ui/eat.ui
-        src/ui/pairpal.ui
-        src/ui/play.ui
-        src/ui/registerpage.ui
-        src/ui/self.ui
-        src/ui/sport.ui
-        src/ui/study.ui)
+        src/frontend/dialog.ui
+        src/frontend/eat.ui
+        src/frontend/pairpal.ui
+        src/frontend/play.ui
+        src/frontend/registerpage.ui
+        src/frontend/self.ui
+        src/frontend/sport.ui
+        src/frontend/study.ui)
 # Add translation files
 set(TRANSLATIONS
-        src/ui/page1_zh_CN.ts)
+        src/frontend/page1_zh_CN.ts)
 
 qt5_add_translation(QM_FILES ${TRANSLATIONS})
 
 # Define frontend
 add_executable(frontend
-        src/ui/main.cpp
-        src/ui/dialog.cpp
-        src/ui/eat.cpp
-        src/ui/pairpal.cpp
-        src/ui/play.cpp
-        src/ui/registerpage.cpp
-        src/ui/self.cpp
-        src/ui/sport.cpp
-        src/ui/study.cpp
+        src/frontend/main.cpp
+        src/frontend/dialog.cpp
+        src/frontend/eat.cpp
+        src/frontend/pairpal.cpp
+        src/frontend/play.cpp
+        src/frontend/registerpage.cpp
+        src/frontend/self.cpp
+        src/frontend/sport.cpp
+        src/frontend/study.cpp
         ${UI_SOURCES}
         ${QM_FILES}
 )
