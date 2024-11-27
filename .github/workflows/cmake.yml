@@ -5,21 +5,26 @@ on:
     branches: [ "master" ]
 
 env:
-  CC: gcc-14
-  CXX: g++-14
-  BUILD_TYPE: Debug
+  CC: clang-18
+  CXX: clang++-18
+  BUILD_TYPE: Release
 
 jobs:
   build:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        fetch-depth: 0
+        submodules: 'recursive'
+
+      - uses: rui314/setup-mold@v1
 
       - name: Clone vcpkg
         uses: actions/checkout@v4
         with:
           repository: microsoft/vcpkg
           fetch-depth: 0
+          submodules: 'recursive'
           path: vcpkg
       - name: Bootstrap vcpkg
         run: ${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh
