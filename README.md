@@ -11,7 +11,7 @@ Documentation is available at [here](https://bmyjacks.github.io/pairpal-project/
 ## Components
 
 - Frontend
-    - [ ] Login page
+    - [x] Login page
 
 - API gateway
     - [x] API for client
@@ -22,6 +22,7 @@ Documentation is available at [here](https://bmyjacks.github.io/pairpal-project/
 
 - Matching system
     - [x] Tags-based matching
+    - [x] ~~Machine learning-based matching~~ (unnecessary)
 
 - Storage
     - [ ] Database
@@ -65,4 +66,13 @@ Then, you can start the client:
 - [Jinghan](https://github.com/Bella2005464) and [Jiayue](https://github.com/daijiayue) for frontend
 - [Jinlong](https://github.com/Sheriaties) for storage
 - [Yingying](https://github.com/yvvonie) for chat system
+
+## Thanks
+
+- [CMake](https://cmake.org/) for building the project
+- [vcpkg](https://vcpkg.io/en/) for managing dependencies
+- [googletest](https://github.com/google/googletest) for testing
+- [nlohmann-json](https://github.com/nlohmann/json) for JSON serialization
+- [cppzmq](https://github.com/zeromq/cppzmq) for networking
+- [Qt](https://www.qt.io/) for GUI
 
