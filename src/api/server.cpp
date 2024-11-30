@@ -64,6 +64,7 @@ bool Server::stop() noexcept {
     serverThread_.join();
 
     socket_.unbind(listenAddr_);
+    socket_.close();
     context_.close();
   } catch (const zmq::error_t& e) {
     std::cerr << "Error stopping server: " << e.what() << std::endl;
