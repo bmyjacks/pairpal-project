@@ -9,18 +9,18 @@
 #include "api/message.hpp"
 #include "pair/pair.hpp"
 
-Server::Server(std::string listenAddr)
+Server::Server(std::string listenAddr) noexcept
     : listenAddr_(std::move(listenAddr)),
       context_(1),
       socket_(context_, zmq::socket_type::rep),
       running_(false) {
   pair_.setStorage(storage_);
 }
-Server::~Server() = default;
+Server::~Server() noexcept = default;
 
-std::string Server::getListenAddr() const { return listenAddr_; }
+std::string Server::getListenAddr() const noexcept { return listenAddr_; }
 
-bool Server::start() {
+bool Server::start() noexcept {
   try {
     running_ = true;
     socket_.bind(listenAddr_);
@@ -36,7 +36,7 @@ bool Server::start() {
   return true;
 }
 
-void Server::run_() {
+void Server::run_() noexcept {
   while (running_) {
     try {
       zmq::message_t request;
@@ -58,7 +58,7 @@ void Server::run_() {
   }
 }
 
-bool Server::stop() {
+bool Server::stop() noexcept {
   try {
     running_ = false;
     serverThread_.join();
@@ -72,7 +72,7 @@ bool Server::stop() {
   return true;
 }
 
-bool Server::restart() {
+bool Server::restart() noexcept {
   if (!stop()) {
     return false;
   }
@@ -80,7 +80,7 @@ bool Server::restart() {
   return start();
 }
 
-zmq::message_t Server::handleRequest_(const zmq::message_t& request) {
+zmq::message_t Server::handleRequest_(const zmq::message_t& request) noexcept {
   const Message requestMessage(request.to_string());
   const MessageType requestType = requestMessage.getType();
   const nlohmann::json requestContent = requestMessage.getContent();
@@ -213,65 +213,69 @@ zmq::message_t Server::handleRequest_(const zmq::message_t& request) {
 }
 
 bool Server::addUser_(const std::string& username,
-                      const std::string& password) {
+                      const std::string& password) noexcept {
   // Add user to the database
   return true;
 }
 
-bool Server::removeUser_(const std::string& username) {
+bool Server::removeUser_(const std::string& username) noexcept {
   // Remove user from the database
   return true;
 }
 
-bool Server::isExistUser_(const std::string& username) {
+bool Server::isExistUser_(const std::string& username) noexcept {
   // Check if user exists
   return true;
 }
 
-std::vector<std::string> Server::listAllUsers() {
+std::vector<std::string> Server::listAllUsers() noexcept {
   // List all users
   return {};
 }
 
 bool Server::authenticateUser_(const std::string& username,
-                               const std::string& password) {
+                               const std::string& password) noexcept {
   // Authenticate user
   return true;
 }
 
-bool Server::addUserTag_(const std::string& username, const std::string& tag) {
+bool Server::addUserTag_(const std::string& username,
+                         const std::string& tag) noexcept {
   // Add tag to user
   return true;
 }
 
 bool Server::removeUserTag_(const std::string& username,
-                            const std::string& tag) {
+                            const std::string& tag) noexcept {
   // Remove tag from user
   return true;
 }
 
-std::vector<std::string> Server::getUserTags_(const std::string& username) {
+std::vector<std::string> Server::getUserTags_(
+    const std::string& username) noexcept {
   // Get all tags of user
   return {};
 }
 
 bool Server::sendMessage_(const std::string& from, const std::string& to,
-                          const std::string& message) {
+                          const std::string& message) noexcept {
   // Send message to user
   return true;
 }
 
-std::vector<std::string> Server::getSentMessages_(const std::string& username) {
+std::vector<std::string> Server::getSentMessages_(
+    const std::string& username) noexcept {
   // Get all sent messages of user
   return {};
 }
 
 std::vector<std::string> Server::getReceivedMessages_(
-    const std::string& username) {
+    const std::string& username) noexcept {
   // Get all received message of user
   return {};
 }
 
-std::vector<std::string> Server::getPair_(const std::string& username) {
+std::vector<std::string> Server::getPair_(
+    const std::string& username) noexcept {
   return pair_.getPair(username);
 }
