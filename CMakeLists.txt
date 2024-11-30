@@ -95,6 +95,10 @@ add_test(NAME test-client COMMAND test-client)
 add_executable(test-message test/api/test-message.cpp)
 target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
+## Server test
+add_executable(test-server test/api/test-server.cpp)
+target_link_libraries(test-server PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_test(NAME test-server COMMAND test-server)
 
 # Pair
 add_executable(test-pair test/pair/test-pair.cpp)

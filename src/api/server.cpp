@@ -84,130 +84,93 @@ bool Server::restart() noexcept {
 zmq::message_t Server::handleRequest_(const zmq::message_t& request) noexcept {
   const Message requestMessage(request.to_string());
   const MessageType requestType = requestMessage.getType();
-  const nlohmann::json requestContent = requestMessage.getContent();
+  // const nlohmann::json requestContent = requestMessage.getContent();
 
-  const Message successMessage(MessageType::SUCCESS, "");
-  const Message failureMessage(MessageType::FAILURE, "");
+  const Message successMessage(MessageType::SUCCESS);
+  const Message failureMessage(MessageType::FAILURE);
 
   zmq::message_t replySuccess(successMessage.toString());
   zmq::message_t replyFailure(failureMessage.toString());
 
-  if (requestType == MessageType::ADD_USER) {
-    const std::string username = requestContent["username"];
-    const std::string password = requestContent["password"];
-
-    if (addUser_(username, password)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::ADD_USER &&
+      addUser_(requestMessage.getUsername(), requestMessage.getPassword())) {
+    return replySuccess;
   }
 
-  if (requestType == MessageType::REMOVE_USER) {
-    const std::string username = requestContent["username"];
-    if (removeUser_(username)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::REMOVE_USER &&
+      removeUser_(requestMessage.getUsername())) {
+    return replySuccess;
   }
 
-  if (requestType == MessageType::IS_EXIST_USER) {
-    const std::string username = requestContent["username"];
-    if (isExistUser_(username)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::IS_EXIST_USER &&
+      isExistUser_(requestMessage.getUsername())) {
+    return replySuccess;
   }
 
   if (requestType == MessageType::LIST_ALL_USERS) {
     const std::vector<std::string> users = listAllUsers();
-    nlohmann::json content;
-    content["vector"] = users;
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    Message response(MessageType::SUCCESS);
+    response.setVector(users);
+
+    return std::move(*response.toZmqMessage());
   }
 
-  if (requestType == MessageType::AUTHENTICATE_USER) {
-    const std::string username = requestContent["username"];
-    const std::string password = requestContent["password"];
-
-    if (authenticateUser_(username, password)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::AUTHENTICATE_USER &&
+      authenticateUser_(requestMessage.getUsername(),
+                        requestMessage.getPassword())) {
+    return replySuccess;
   }
 
-  if (requestType == MessageType::ADD_USER_TAG) {
-    const std::string username = requestContent["username"];
-    const std::string tag = requestContent["tag"];
-
-    if (addUserTag_(username, tag)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::ADD_USER_TAG &&
+      addUserTag_(requestMessage.getUsername(), requestMessage.getTag())) {
+    return replySuccess;
   }
 
-  if (requestType == MessageType::REMOVE_USER_TAG) {
-    const std::string username = requestContent["username"];
-    const std::string tag = requestContent["tag"];
-
-    if (removeUserTag_(username, tag)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::REMOVE_USER_TAG &&
+      removeUserTag_(requestMessage.getUsername(), requestMessage.getTag())) {
+    return replySuccess;
   }
 
   if (requestType == MessageType::GET_USER_TAGS) {
-    const std::string username = requestContent["username"];
-    const std::vector<std::string> tags = getUserTags_(username);
-    nlohmann::json content;
-    content["vector"] = tags;
+    const auto tags = getUserTags_(requestMessage.getUsername());
+    Message response(MessageType::SUCCESS);
+    response.setVector(tags);
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    return std::move(*response.toZmqMessage());
   }
 
-  if (requestType == MessageType::SEND_MESSAGE) {
-    const std::string from = requestContent["from"];
-    const std::string to = requestContent["to"];
-    const std::string message = requestContent["message"];
-
-    if (sendMessage_(from, to, message)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::SEND_MESSAGE &&
+      sendMessage_(requestMessage.getFrom(), requestMessage.getTo(),
+                   requestMessage.getMessage())) {
+    return replySuccess;
   }
 
   if (requestType == MessageType::GET_SENT_MESSAGES) {
-    const std::string username = requestContent["username"];
-    const std::vector<std::string> messages = getSentMessages_(username);
-    nlohmann::json content;
-    content["vector"] = messages;
+    const auto messages = getSentMessages_(requestMessage.getUsername());
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    Message response(MessageType::SUCCESS);
+    response.setVector(messages);
+
+    return std::move(*response.toZmqMessage());
   }
 
   if (requestType == MessageType::GET_RECEIVED_MESSAGES) {
-    const std::string username = requestContent["username"];
-    const std::vector<std::string> messages = getReceivedMessages_(username);
-    nlohmann::json content;
-    content["vector"] = messages;
+    const auto messages = getReceivedMessages_(requestMessage.getUsername());
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    Message response(MessageType::SUCCESS);
+    response.setVector(messages);
+
+    return std::move(*response.toZmqMessage());
   }
 
   if (requestType == MessageType::GET_PAIR) {
-    const std::string username = requestContent["username"];
-    const std::vector<std::string> pair = getPair_(username);
-    nlohmann::json content;
-    content["vector"] = pair;
+    const auto messages = getPair_(requestMessage.getUsername());
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    Message response(MessageType::SUCCESS);
+    response.setVector(messages);
+
+    return std::move(*response.toZmqMessage());
   }
 
   return replyFailure;

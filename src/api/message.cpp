@@ -39,41 +39,44 @@ std::unique_ptr<zmq::message_t> Message::toZmqMessage() const noexcept {
 void Message::setUsername(const std::string& username) noexcept {
   content_["username"] = username;
 }
+std::string Message::getUsername() const noexcept {
+  return content_["username"].get<std::string>();
+}
 
 void Message::setPassword(const std::string& password) noexcept {
   content_["password"] = password;
 }
+std::string Message::getPassword() const noexcept {
+  return content_["password"].get<std::string>();
+}
 
 void Message::setTag(const std::string& tag) noexcept { content_["tag"] = tag; }
+std::string Message::getTag() const noexcept {
+  return content_["tag"].get<std::string>();
+}
 
 void Message::setFrom(const std::string& from) noexcept {
   content_["from"] = from;
 }
+std::string Message::getFrom() const noexcept {
+  return content_["from"].get<std::string>();
+}
 
 void Message::setTo(const std::string& to) noexcept { content_["to"] = to; }
+std::string Message::getTo() const noexcept {
+  return content_["to"].get<std::string>();
+}
 
 void Message::setMessage(const std::string& message) noexcept {
   content_["message"] = message;
 }
 
-std::string Message::getUsername() const noexcept {
-  return content_["username"].get<std::string>();
+void Message::setVector(const std::vector<std::string>& vec) noexcept {
+  content_["vec"] = vec;
 }
 
-std::string Message::getPassword() const noexcept {
-  return content_["password"].get<std::string>();
-}
-
-std::string Message::getTag() const noexcept {
-  return content_["tag"].get<std::string>();
-}
-
-std::string Message::getFrom() const noexcept {
-  return content_["from"].get<std::string>();
-}
-
-std::string Message::getTo() const noexcept {
-  return content_["to"].get<std::string>();
+std::vector<std::string> Message::getVector() const noexcept {
+  return content_["vec"].get<std::vector<std::string>>();
 }
 
 std::string Message::getMessage() const noexcept {

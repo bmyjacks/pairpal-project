@@ -91,6 +91,7 @@ class Message {
   void setFrom(const std::string& from) noexcept;
   void setTo(const std::string& to) noexcept;
   void setMessage(const std::string& message) noexcept;
+  void setVector(const std::vector<std::string>& vector) noexcept;
 
   [[nodiscard]] std::string getUsername() const noexcept;
   [[nodiscard]] std::string getPassword() const noexcept;
@@ -98,6 +99,7 @@ class Message {
   [[nodiscard]] std::string getFrom() const noexcept;
   [[nodiscard]] std::string getTo() const noexcept;
   [[nodiscard]] std::string getMessage() const noexcept;
+  [[nodiscard]] std::vector<std::string> getVector() const noexcept;
 
  private:
   MessageType type_;        ///< The type of the message
