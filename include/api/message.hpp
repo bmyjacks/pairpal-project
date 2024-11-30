@@ -2,6 +2,7 @@
 #define MESSAGE_HPP
 
 #include <nlohmann/json.hpp>
+#include <zmq.hpp>
 
 /**
  * @enum MessageType
@@ -36,19 +37,22 @@ class Message {
    * @param type The type of the message.
    * @param content The content of the message in JSON format.
    */
-  explicit Message(MessageType type, nlohmann::json content);
+  [[deprecated]] explicit Message(const MessageType& type,
+                                  nlohmann::json content) noexcept;
+
+  explicit Message(const MessageType& type) noexcept;
 
   /**
    * @brief Constructs a Message from a JSON object.
    * @param json The JSON object containing the message data.
    */
-  explicit Message(const nlohmann::json& json);
+  [[deprecated]] explicit Message(const nlohmann::json& json) noexcept;
 
   /**
    * @brief Constructs a Message from a string.
    * @param str The string containing the message data.
    */
-  explicit Message(const std::string& str);
+  explicit Message(const std::string& str) noexcept;
 
   /**
    * @brief Destructor for the Message class.
@@ -59,25 +63,41 @@ class Message {
    * @brief Gets the type of the message.
    * @return The type of the message.
    */
-  [[nodiscard]] MessageType getType() const;
+  [[nodiscard]] MessageType getType() const noexcept;
 
   /**
    * @brief Gets the content of the message.
    * @return The content of the message in JSON format.
    */
-  [[nodiscard]] nlohmann::json getContent() const;
+  [[nodiscard]] nlohmann::json getContent() const noexcept;
 
   /**
    * @brief Converts the message to a JSON object.
    * @return The JSON representation of the message.
    */
-  [[nodiscard]] nlohmann::json toJson() const;
+  [[nodiscard]] nlohmann::json toJson() const noexcept;
 
   /**
    * @brief Converts the message to a string.
    * @return The string representation of the message.
    */
-  [[nodiscard]] std::string toString() const;
+  [[nodiscard]] std::string toString() const noexcept;
+
+  [[nodiscard]] std::unique_ptr<zmq::message_t> toZmqMessage() const noexcept;
+
+  void setUsername(const std::string& username) noexcept;
+  void setPassword(const std::string& password) noexcept;
+  void setTag(const std::string& tag) noexcept;
+  void setFrom(const std::string& from) noexcept;
+  void setTo(const std::string& to) noexcept;
+  void setMessage(const std::string& message) noexcept;
+
+  [[nodiscard]] std::string getUsername() const noexcept;
+  [[nodiscard]] std::string getPassword() const noexcept;
+  [[nodiscard]] std::string getTag() const noexcept;
+  [[nodiscard]] std::string getFrom() const noexcept;
+  [[nodiscard]] std::string getTo() const noexcept;
+  [[nodiscard]] std::string getMessage() const noexcept;
 
  private:
   MessageType type_;        ///< The type of the message
