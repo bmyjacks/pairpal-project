@@ -8,6 +8,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 find_package(cppzmq CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Gui LinguistTools Widgets)
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
 # Configure third-party libraries
 set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
