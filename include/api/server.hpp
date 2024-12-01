@@ -38,12 +38,6 @@ class Server {
   bool stop() noexcept;
 
   /**
-   * @brief Restarts the server.
-   * @return True if the server restarted successfully, false otherwise.
-   */
-  bool restart() noexcept;
-
-  /**
    * @brief Gets the address the server is listening on.
    * @return The listen address as a string.
    */

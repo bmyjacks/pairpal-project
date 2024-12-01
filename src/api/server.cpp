@@ -61,7 +61,10 @@ void Server::run_() noexcept {
 bool Server::stop() noexcept {
   try {
     running_ = false;
-    serverThread_.join();
+
+    if (serverThread_.joinable()) {
+      serverThread_.join();
+    }
 
     socket_.unbind(listenAddr_);
     socket_.close();
@@ -73,18 +76,9 @@ bool Server::stop() noexcept {
   return true;
 }
 
-bool Server::restart() noexcept {
-  if (!stop()) {
-    return false;
-  }
-
-  return start();
-}
-
 zmq::message_t Server::handleRequest_(const zmq::message_t& request) noexcept {
   const Message requestMessage(request.to_string());
   const MessageType requestType = requestMessage.getType();
-  // const nlohmann::json requestContent = requestMessage.getContent();
 
   const Message successMessage(MessageType::SUCCESS);
   const Message failureMessage(MessageType::FAILURE);

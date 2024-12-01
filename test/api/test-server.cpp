@@ -1,9 +1,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include <atomic>
 #include <chrono>
-#include <thread>
 #include <zmq.hpp>
 
 #include "api/message.hpp"
@@ -65,21 +63,35 @@ class MockServer final : public Server {
               (override, noexcept));
 };
 
+const std::string kTestAddress = "tcp://localhost:57880";
+
 TEST(ServerTest, TestConstructor) {
-  const Server server("tcp://localhost:57880");
-  EXPECT_EQ(server.getListenAddr(), "tcp://localhost:57880");
+  const Server server(kTestAddress);
+  EXPECT_EQ(server.getListenAddr(), kTestAddress);
 }
 
 TEST(ServerTest, TestStartAndStop) {
-  Server server("tcp://localhost:57880");
+  Server server(kTestAddress);
   EXPECT_TRUE(server.start());
   EXPECT_TRUE(server.stop());
 }
 
+TEST(ServerTest, TestStartTwiceThenStop) {
+  Server server(kTestAddress);
+  EXPECT_TRUE(server.start());
+  EXPECT_FALSE(server.start());
+  EXPECT_TRUE(server.stop());
+}
+
+TEST(ServerTest, TestStopWithoutStart) {
+  Server server(kTestAddress);
+  EXPECT_FALSE(server.stop());
+}
+
 TEST(ServerTest, TestAddUserTrue) {
-  MockServer server("tcp://localhost:57880");
+  MockServer server(kTestAddress);
   server.start();
-  MockClient client("tcp://localhost:57880");
+  MockClient client(kTestAddress);
 
   Message request(MessageType::ADD_USER);
   request.setUsername("user");
@@ -97,9 +109,9 @@ TEST(ServerTest, TestAddUserTrue) {
 }
 
 TEST(ServerTest, TestAddUserFalse) {
-  MockServer server("tcp://localhost:57880");
+  MockServer server(kTestAddress);
   server.start();
-  MockClient client("tcp://localhost:57880");
+  MockClient client(kTestAddress);
 
   Message request(MessageType::ADD_USER);
   request.setUsername("user");
@@ -117,9 +129,9 @@ TEST(ServerTest, TestAddUserFalse) {
 }
 
 TEST(ServerTest, TestRemoveUserTrue) {
-  MockServer server("tcp://localhost:57880");
+  MockServer server(kTestAddress);
   server.start();
-  MockClient client("tcp://localhost:57880");
+  MockClient client(kTestAddress);
 
   Message request(MessageType::REMOVE_USER);
   request.setUsername("user");
@@ -135,9 +147,9 @@ TEST(ServerTest, TestRemoveUserTrue) {
 }
 
 TEST(ServerTest, TestRemoveUserFalse) {
-  MockServer server("tcp://localhost:57880");
+  MockServer server(kTestAddress);
   server.start();
-  MockClient client("tcp://localhost:57880");
+  MockClient client(kTestAddress);
 
   Message request(MessageType::REMOVE_USER);
   request.setUsername("user");
@@ -153,9 +165,9 @@ TEST(ServerTest, TestRemoveUserFalse) {
 }
 
 TEST(ServerTest, TestIsExistUserTrue) {
-  MockServer server("tcp://localhost:57880");
+  MockServer server(kTestAddress);
   server.start();
-  MockClient client("tcp://localhost:57880");
+  MockClient client(kTestAddress);
 
   Message request(MessageType::IS_EXIST_USER);
   request.setUsername("user");
@@ -171,9 +183,9 @@ TEST(ServerTest, TestIsExistUserTrue) {
 }
 
 TEST(ServerTest, TestIsExistUserFalse) {
-  MockServer server("tcp://localhost:57880");
+  MockServer server(kTestAddress);
   server.start();
-  MockClient client("tcp://localhost:57880");
+  MockClient client(kTestAddress);
 
   Message request(MessageType::IS_EXIST_USER);
   request.setUsername("user");
@@ -189,9 +201,9 @@ TEST(ServerTest, TestIsExistUserFalse) {
 }
 
 TEST(ServerTest, TestListAllUsersNonEmpty) {
-  MockServer server("tcp://localhost:57880");
+  MockServer server(kTestAddress);
   server.start();
-  MockClient client("tcp://localhost:57880");
+  MockClient client(kTestAddress);
 
   Message request(MessageType::LIST_ALL_USERS);
 
@@ -208,13 +220,339 @@ TEST(ServerTest, TestListAllUsersNonEmpty) {
 }
 
 TEST(ServerTest, TestListAllUsersEmpty) {
-  MockServer server("tcp://localhost:57880");
+  MockServer server(kTestAddress);
   server.start();
-  MockClient client("tcp://localhost:57880");
+  MockClient client(kTestAddress);
 
   Message request(MessageType::LIST_ALL_USERS);
 
   EXPECT_CALL(server, listAllUsers())
+      .WillOnce(testing::Return(std::vector<std::string>{}));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre());
+
+  server.stop();
+}
+
+TEST(ServerTest, TestAuthenticateUserTrue) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::AUTHENTICATE_USER);
+  request.setUsername("user");
+  request.setPassword("password");
+
+  EXPECT_CALL(server, authenticateUser_("user", "password"))
+      .WillOnce(testing::Return(true));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+
+  server.stop();
+}
+
+TEST(ServerTest, TestAuthenticateUserFalse) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::AUTHENTICATE_USER);
+  request.setUsername("user");
+  request.setPassword("password");
+
+  EXPECT_CALL(server, authenticateUser_("user", "password"))
+      .WillOnce(testing::Return(false));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+
+  server.stop();
+}
+
+TEST(ServerTest, TestAddUserTagTrue) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::ADD_USER_TAG);
+  request.setUsername("user");
+  request.setTag("tag");
+
+  EXPECT_CALL(server, addUserTag_("user", "tag"))
+      .WillOnce(testing::Return(true));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+
+  server.stop();
+}
+
+TEST(ServerTest, TestAddUserTagFalse) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::ADD_USER_TAG);
+  request.setUsername("user");
+  request.setTag("tag");
+
+  EXPECT_CALL(server, addUserTag_("user", "tag"))
+      .WillOnce(testing::Return(false));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+
+  server.stop();
+}
+
+TEST(ServerTest, TestRemoveUserTagTrue) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::REMOVE_USER_TAG);
+  request.setUsername("user");
+  request.setTag("tag");
+
+  EXPECT_CALL(server, removeUserTag_("user", "tag"))
+      .WillOnce(testing::Return(true));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+
+  server.stop();
+}
+
+TEST(ServerTest, TestRemoveUserTagFalse) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::REMOVE_USER_TAG);
+  request.setUsername("user");
+  request.setTag("tag");
+
+  EXPECT_CALL(server, removeUserTag_("user", "tag"))
+      .WillOnce(testing::Return(false));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+
+  server.stop();
+}
+
+TEST(ServerTest, TestGetUserTagsNonEmpty) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::GET_USER_TAGS);
+  request.setUsername("user");
+
+  EXPECT_CALL(server, getUserTags_("user"))
+      .WillOnce(testing::Return(std::vector<std::string>{"tag1", "tag2"}));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre("tag1", "tag2"));
+
+  server.stop();
+}
+
+TEST(ServerTest, TestGetUserTagsEmpty) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::GET_USER_TAGS);
+  request.setUsername("user");
+
+  EXPECT_CALL(server, getUserTags_("user"))
+      .WillOnce(testing::Return(std::vector<std::string>{}));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre());
+
+  server.stop();
+}
+
+TEST(ServerTest, TestSendMessageTrue) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::SEND_MESSAGE);
+  request.setFrom("from");
+  request.setTo("to");
+  request.setMessage("message");
+
+  EXPECT_CALL(server, sendMessage_("from", "to", "message"))
+      .WillOnce(testing::Return(true));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+
+  server.stop();
+}
+
+TEST(ServerTest, TestSendMessageFalse) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::SEND_MESSAGE);
+  request.setFrom("from");
+  request.setTo("to");
+  request.setMessage("message");
+
+  EXPECT_CALL(server, sendMessage_("from", "to", "message"))
+      .WillOnce(testing::Return(false));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+
+  server.stop();
+}
+
+TEST(ServerTest, TestGetSentMessagesNonEmpty) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::GET_SENT_MESSAGES);
+  request.setUsername("user");
+
+  EXPECT_CALL(server, getSentMessages_("user"))
+      .WillOnce(
+          testing::Return(std::vector<std::string>{"message1", "message2"}));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  EXPECT_THAT(replyMessage.getVector(),
+              testing::ElementsAre("message1", "message2"));
+
+  server.stop();
+}
+
+TEST(ServerTest, TestGetSentMessagesEmpty) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::GET_SENT_MESSAGES);
+  request.setUsername("user");
+
+  EXPECT_CALL(server, getSentMessages_("user"))
+      .WillOnce(testing::Return(std::vector<std::string>{}));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre());
+
+  server.stop();
+}
+
+TEST(ServerTest, TestGetReceivedMessagesNonEmpty) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::GET_RECEIVED_MESSAGES);
+  request.setUsername("user");
+
+  EXPECT_CALL(server, getReceivedMessages_("user"))
+      .WillOnce(
+          testing::Return(std::vector<std::string>{"message1", "message2"}));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  EXPECT_THAT(replyMessage.getVector(),
+              testing::ElementsAre("message1", "message2"));
+
+  server.stop();
+}
+
+TEST(ServerTest, TestGetReceivedMessagesEmpty) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::GET_RECEIVED_MESSAGES);
+  request.setUsername("user");
+
+  EXPECT_CALL(server, getReceivedMessages_("user"))
+      .WillOnce(testing::Return(std::vector<std::string>{}));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre());
+
+  server.stop();
+}
+
+TEST(ServerTest, TestGetPairNonEmpty) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::GET_PAIR);
+  request.setUsername("user");
+
+  EXPECT_CALL(server, getPair_("user"))
+      .WillOnce(testing::Return(std::vector<std::string>{"user1", "user2"}));
+
+  zmq::message_t reply;
+  client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
+  const Message replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre("user1", "user2"));
+
+  server.stop();
+}
+
+TEST(ServerTest, TestGetPairEmpty) {
+  MockServer server(kTestAddress);
+  server.start();
+  MockClient client(kTestAddress);
+
+  Message request(MessageType::GET_PAIR);
+  request.setUsername("user");
+
+  EXPECT_CALL(server, getPair_("user"))
       .WillOnce(testing::Return(std::vector<std::string>{}));
 
   zmq::message_t reply;
