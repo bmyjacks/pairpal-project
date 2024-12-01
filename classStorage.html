@@ -106,27 +106,30 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~Storage</b> ()</td></tr>
 <tr class="memdesc:a73cf30f0a34250396f9eabee7dc5c93d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the <a class="el" href="classStorage.html" title="A class to manage user data.">Storage</a> class. <br /></td></tr>
 <tr class="separator:a73cf30f0a34250396f9eabee7dc5c93d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5aa8159c67dad8744ceb52cbce46fe66" id="r_a5aa8159c67dad8744ceb52cbce46fe66"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5aa8159c67dad8744ceb52cbce46fe66">addUser</a> (std::string username, std::string password)</td></tr>
-<tr class="memdesc:a5aa8159c67dad8744ceb52cbce46fe66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a user to the storage.  <br /></td></tr>
-<tr class="separator:a5aa8159c67dad8744ceb52cbce46fe66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9595b7745b7917ad383101cdda36243f" id="r_a9595b7745b7917ad383101cdda36243f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9595b7745b7917ad383101cdda36243f">addUser</a> (const std::string &amp;username, const std::string &amp;password)</td></tr>
+<tr class="memdesc:a9595b7745b7917ad383101cdda36243f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a user to the storage.  <br /></td></tr>
+<tr class="separator:a9595b7745b7917ad383101cdda36243f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbf2e29f997229a63a748961e086b0d0" id="r_abbf2e29f997229a63a748961e086b0d0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abbf2e29f997229a63a748961e086b0d0">removeUser</a> (std::string username)</td></tr>
 <tr class="memdesc:abbf2e29f997229a63a748961e086b0d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes a user from the storage.  <br /></td></tr>
 <tr class="separator:abbf2e29f997229a63a748961e086b0d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59673c21c148386d6dcd57935fffb42d" id="r_a59673c21c148386d6dcd57935fffb42d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59673c21c148386d6dcd57935fffb42d">isUserExist</a> (std::string username)</td></tr>
 <tr class="memdesc:a59673c21c148386d6dcd57935fffb42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a user exists in the storage.  <br /></td></tr>
 <tr class="separator:a59673c21c148386d6dcd57935fffb42d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a56022de93f280a3e19222d90a15bf7" id="r_a5a56022de93f280a3e19222d90a15bf7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classuser.html">user</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5a56022de93f280a3e19222d90a15bf7">getUsers</a> ()</td></tr>
-<tr class="memdesc:a5a56022de93f280a3e19222d90a15bf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a list of all users.  <br /></td></tr>
-<tr class="separator:a5a56022de93f280a3e19222d90a15bf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e96b23dd9a8dd5ca1e7b88593f9616b" id="r_a0e96b23dd9a8dd5ca1e7b88593f9616b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e96b23dd9a8dd5ca1e7b88593f9616b">authenticateUser</a> (std::string username, std::string password)</td></tr>
-<tr class="memdesc:a0e96b23dd9a8dd5ca1e7b88593f9616b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Authenticates a user.  <br /></td></tr>
-<tr class="separator:a0e96b23dd9a8dd5ca1e7b88593f9616b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae62fb9793ae69bca35324d30b8eecc2b" id="r_ae62fb9793ae69bca35324d30b8eecc2b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::tuple&lt; int, std::string, std::string, std::vector&lt; std::string &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae62fb9793ae69bca35324d30b8eecc2b">getUsers</a> ()</td></tr>
+<tr class="memdesc:ae62fb9793ae69bca35324d30b8eecc2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a list of all users.  <br /></td></tr>
+<tr class="separator:ae62fb9793ae69bca35324d30b8eecc2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27a9eec5ba12b068b2d34b591841b407" id="r_a27a9eec5ba12b068b2d34b591841b407"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27a9eec5ba12b068b2d34b591841b407">authenticateUser</a> (const std::string &amp;username, const std::string &amp;password)</td></tr>
+<tr class="memdesc:a27a9eec5ba12b068b2d34b591841b407"><td class="mdescLeft">&#160;</td><td class="mdescRight">Authenticates a user.  <br /></td></tr>
+<tr class="separator:a27a9eec5ba12b068b2d34b591841b407"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93322ce5bf449a9bba5356869c67e27b" id="r_a93322ce5bf449a9bba5356869c67e27b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a93322ce5bf449a9bba5356869c67e27b">addTag</a> (std::string username, std::string tag)</td></tr>
 <tr class="memdesc:a93322ce5bf449a9bba5356869c67e27b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a tag to a user.  <br /></td></tr>
 <tr class="separator:a93322ce5bf449a9bba5356869c67e27b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab752eb6772d5f6a504ddfa5973568519" id="r_ab752eb6772d5f6a504ddfa5973568519"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab752eb6772d5f6a504ddfa5973568519">getTags</a> (std::string username)</td></tr>
 <tr class="memdesc:ab752eb6772d5f6a504ddfa5973568519"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a list of tags for a user.  <br /></td></tr>
 <tr class="separator:ab752eb6772d5f6a504ddfa5973568519"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac62f2fcdf63333fe0470c9db61991c8f" id="r_ac62f2fcdf63333fe0470c9db61991c8f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac62f2fcdf63333fe0470c9db61991c8f">removeTag</a> (std::string username, std::string tag)</td></tr>
+<tr class="memdesc:ac62f2fcdf63333fe0470c9db61991c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">delete tag for certain user  <br /></td></tr>
+<tr class="separator:ac62f2fcdf63333fe0470c9db61991c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to manage user data. </p>
@@ -162,8 +165,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5aa8159c67dad8744ceb52cbce46fe66" name="a5aa8159c67dad8744ceb52cbce46fe66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5aa8159c67dad8744ceb52cbce46fe66">&#9670;&#160;</a></span>addUser()</h2>
+<a id="a9595b7745b7917ad383101cdda36243f" name="a9595b7745b7917ad383101cdda36243f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9595b7745b7917ad383101cdda36243f">&#9670;&#160;</a></span>addUser()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,12 +174,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool Storage::addUser </td>
           <td>(</td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>username</em></span>, </td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>username</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>password</em></span>&#160;)</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>password</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -193,8 +196,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0e96b23dd9a8dd5ca1e7b88593f9616b" name="a0e96b23dd9a8dd5ca1e7b88593f9616b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0e96b23dd9a8dd5ca1e7b88593f9616b">&#9670;&#160;</a></span>authenticateUser()</h2>
+<a id="a27a9eec5ba12b068b2d34b591841b407" name="a27a9eec5ba12b068b2d34b591841b407"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27a9eec5ba12b068b2d34b591841b407">&#9670;&#160;</a></span>authenticateUser()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,12 +205,12 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool Storage::authenticateUser </td>
           <td>(</td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>username</em></span>, </td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>username</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>password</em></span>&#160;)</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>password</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -250,14 +253,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5a56022de93f280a3e19222d90a15bf7" name="a5a56022de93f280a3e19222d90a15bf7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a56022de93f280a3e19222d90a15bf7">&#9670;&#160;</a></span>getUsers()</h2>
+<a id="ae62fb9793ae69bca35324d30b8eecc2b" name="ae62fb9793ae69bca35324d30b8eecc2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae62fb9793ae69bca35324d30b8eecc2b">&#9670;&#160;</a></span>getUsers()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classuser.html">user</a> &gt; Storage::getUsers </td>
+          <td class="memname">std::vector&lt; std::tuple&lt; int, std::string, std::string, std::vector&lt; std::string &gt; &gt; &gt; Storage::getUsers </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -266,7 +269,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Gets a list of all users. </p>
-<dl class="section return"><dt>Returns</dt><dd>A vector of usernames. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector, whose element is the tuple for each user, including their name password and the tag is return as a vector whose element is string </dd></dl>
 
 </div>
 </div>
@@ -293,6 +296,37 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the user exists, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ac62f2fcdf63333fe0470c9db61991c8f" name="ac62f2fcdf63333fe0470c9db61991c8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac62f2fcdf63333fe0470c9db61991c8f">&#9670;&#160;</a></span>removeTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Storage::removeTag </td>
+          <td>(</td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>username</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string</td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>delete tag for certain user </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td>The name of user </td></tr>
+    <tr><td class="paramname">tag</td><td>the tag wanna to remove </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the bool value if successfully remove the tag </dd></dl>
 
 </div>
 </div>

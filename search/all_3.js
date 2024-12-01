@@ -12,6 +12,6 @@ var searchData=
   ['gettimestamp_9',['getTimestamp',['../classMessage.html#ae6be9af91468729225888a34a2b5f8d2',1,'Message']]],
   ['gettouser_10',['getToUser',['../classDialog.html#a0bc281f9b57eb370cc6746155c10088c',1,'Dialog::getToUser()'],['../classMessage.html#a7633c5610af5c184e148401325ad86ad',1,'Message::getToUser() const']]],
   ['gettype_11',['getType',['../classMessage.html#af277692989a6783d58f029e65c536328',1,'Message']]],
-  ['getusers_12',['getUsers',['../classStorage.html#a5a56022de93f280a3e19222d90a15bf7',1,'Storage']]],
+  ['getusers_12',['getUsers',['../classStorage.html#ae62fb9793ae69bca35324d30b8eecc2b',1,'Storage']]],
   ['getusertags_13',['getUserTags',['../classClient.html#a6aaf530900f157d3c5c473a24b857c05',1,'Client']]]
 ];
