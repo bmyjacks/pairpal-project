@@ -32,9 +32,7 @@ target_link_libraries(api PUBLIC pair nlohmann_json::nlohmann_json cppzmq cppzmq
 # Chat library
 add_library(chat STATIC
         src/chat/message.cpp
-        src/chat/dialog.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
+        src/chat/dialog.cpp)
 target_include_directories(chat PUBLIC include)
 
 # Pair library
