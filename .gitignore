@@ -1,5 +1,6 @@
 .idea/
 cmake-build-*/
+vcpkg_installed/
 html/
 latex/
 .DS_Store

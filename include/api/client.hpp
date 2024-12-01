@@ -26,19 +26,19 @@ class Client {
    * @brief Starts the client.
    * @return True if the client started successfully, false otherwise.
    */
-  bool start();
+  bool start() noexcept;
 
   /**
    * @brief Stops the client.
    * @return True if the client stopped successfully, false otherwise.
    */
-  bool stop();
+  bool stop() noexcept;
 
   /**
    * @brief Restarts the client.
    * @return True if the client restarted successfully, false otherwise.
    */
-  bool restart();
+  bool restart() noexcept;
 
   /**
    * @brief Adds a user to the system.
@@ -46,27 +46,27 @@ class Client {
    * @param password The password of the user.
    * @return True if the user was added successfully, false otherwise.
    */
-  bool addUser(const std::string& username, const std::string& password);
+  bool addUser(const std::string& username, const std::string& password) noexcept;
 
   /**
    * @brief Removes a user from the system.
    * @param username The username of the user to remove.
    * @return True if the user was removed successfully, false otherwise.
    */
-  bool removeUser(const std::string& username);
+  bool removeUser(const std::string& username) noexcept;
 
   /**
    * @brief Checks if a user exists in the system.
    * @param username The username to check.
    * @return True if the user exists, false otherwise.
    */
-  bool isExistUser(const std::string& username);
+  bool isExistUser(const std::string& username) noexcept;
 
   /**
    * @brief Gets a list of all users.
    * @return A vector of usernames.
    */
-  [[nodiscard]] std::vector<std::string> listAllUsers();
+  [[nodiscard]] std::vector<std::string> listAllUsers() noexcept;
 
   /**
    * @brief Authenticates a user.
@@ -75,7 +75,7 @@ class Client {
    * @return True if the authentication was successful, false otherwise.
    */
   bool authenticateUser(const std::string& username,
-                        const std::string& password);
+                        const std::string& password) noexcept;
 
   /**
    * @brief Adds a tag to a user.
@@ -83,7 +83,7 @@ class Client {
    * @param tag The tag to add.
    * @return True if the tag was added successfully, false otherwise.
    */
-  bool addUserTag(const std::string& username, const std::string& tag);
+  bool addUserTag(const std::string& username, const std::string& tag) noexcept;
 
   /**
    * @brief Removes a tag from a user.
@@ -91,7 +91,7 @@ class Client {
    * @param tag The tag to remove.
    * @return True if the tag was removed successfully, false otherwise.
    */
-  bool removeUserTag(const std::string& username, const std::string& tag);
+  bool removeUserTag(const std::string& username, const std::string& tag) noexcept;
 
   /**
    * @brief Gets the tags of a user.
@@ -99,7 +99,7 @@ class Client {
    * @return A vector of tags.
    */
   [[nodiscard]] std::vector<std::string> getUserTags(
-      const std::string& username);
+      const std::string& username) noexcept;
 
   /**
    * @brief Sends a message from one user to another.
@@ -109,7 +109,7 @@ class Client {
    * @return True if the message was sent successfully, false otherwise.
    */
   bool sendMessage(const std::string& from, const std::string& to,
-                   const std::string& message);
+                   const std::string& message) noexcept;
 
   /**
    * @brief Gets the messages sent by a user.
@@ -117,7 +117,7 @@ class Client {
    * @return A vector of sent messages.
    */
   [[nodiscard]] std::vector<std::string> getSentMessages(
-      const std::string& username);
+      const std::string& username) noexcept;
 
   /**
    * @brief Gets the messages received by a user.
@@ -125,14 +125,14 @@ class Client {
    * @return A vector of received messages.
    */
   [[nodiscard]] std::vector<std::string> getReceivedMessages(
-      const std::string& username);
+      const std::string& username) noexcept;
 
   /**
    * @brief Gets the pair of a user.
    * @param username The username of the user.
    * @return A vector containing the pair of the user.
    */
-  [[nodiscard]] std::vector<std::string> getPair(const std::string& username);
+  [[nodiscard]] std::vector<std::string> getPair(const std::string& username) noexcept;
 
  private:
   std::string serverAddr_;  ///< The address of the server.
@@ -147,7 +147,7 @@ class Client {
    * successfully, false otherwise.
    */
   bool sendRequestAndReceiveReply_(zmq::message_t& request,
-                                   zmq::message_t& reply);
+                                   zmq::message_t& reply) noexcept;
 };
 
 #endif  // CLIENT_HPP
