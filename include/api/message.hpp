@@ -101,13 +101,6 @@ class Message {
   [[nodiscard]] std::string getMessage() const noexcept;
   [[nodiscard]] std::vector<std::string> getVector() const noexcept;
 
- /**
- * @brief Compares the current message timestamp with another message's timestamp.
- * @param other The other message to compare with.
- * @return True if the current message was sent before the other message.
- */
- [[nodiscard]] bool isBefore(const Message& other) const;
-
  private:
   MessageType type_;        ///< The type of the message
   nlohmann::json content_;  ///< The content of the message in JSON format
