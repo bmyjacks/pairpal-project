@@ -15,6 +15,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y libltdl-dev
+
       - uses: rui314/setup-mold@v1
 
       - uses: lukka/get-cmake@latest
