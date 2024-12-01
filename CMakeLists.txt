@@ -23,6 +23,8 @@ add_library(api STATIC
         src/api/client.cpp
         src/api/server.cpp
         src/api/message.cpp
+        src/api/message.cpp
+        src/api/server.cpp
 )
 target_include_directories(api PUBLIC include)
 target_link_libraries(api PUBLIC pair nlohmann_json::nlohmann_json cppzmq cppzmq-static)
@@ -30,7 +32,9 @@ target_link_libraries(api PUBLIC pair nlohmann_json::nlohmann_json cppzmq cppzmq
 # Chat library
 add_library(chat STATIC
         src/chat/message.cpp
-        src/chat/dialog.cpp)
+        src/chat/dialog.cpp
+        src/api/message.cpp
+        src/api/server.cpp)
 target_include_directories(chat PUBLIC include)
 
 # Pair library
@@ -85,17 +89,23 @@ target_link_libraries(frontend PUBLIC api Qt5::Widgets Qt5::Core Qt5::Gui)
 
 # Define backend
 add_executable(backend
-        src/backend.cpp)
+        src/backend.cpp
+        src/api/message.cpp
+        src/api/server.cpp)
 target_link_libraries(backend PUBLIC storage chat pair api)
 
 # Tests
 # API
 ## Client test
-add_executable(test-client test/api/test-client.cpp)
+add_executable(test-client test/api/test-client.cpp
+        src/api/message.cpp
+        src/api/server.cpp)
 target_link_libraries(test-client PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-client COMMAND test-client)
 ## Message test
-add_executable(test-message test/api/test-message.cpp)
+add_executable(test-message test/api/test-message.cpp
+        src/api/message.cpp
+        src/api/server.cpp)
 target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
 ## Server test
@@ -110,6 +120,8 @@ add_test(NAME s-test COMMAND s-test)
 
 
 # Pair
-add_executable(test-pair test/pair/test-pair.cpp)
+add_executable(test-pair test/pair/test-pair.cpp
+        src/api/message.cpp
+        src/api/server.cpp)
 target_link_libraries(test-pair PRIVATE pair GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-pair COMMAND test-pair)
