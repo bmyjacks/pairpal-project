@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.29)
-project(pairpal LANGUAGES CXX)
+#project(pairpal LANGUAGES CXX) // Some one bring a CC file, so we cannot use this line
+project(pairpal)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -7,30 +8,29 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(cppzmq CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
+find_package(Qt5 REQUIRED COMPONENTS Core Gui LinguistTools Widgets)
 
 # Configure third-party libraries
 set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
 enable_testing()
 
 # API library
 add_library(api STATIC
-        include/api/client.hpp
         src/api/client.cpp
-        include/api/message.hpp
-        include/api/server.hpp
         src/api/server.cpp
         src/api/message.cpp
         src/api/message.cpp
         src/api/server.cpp
 )
 target_include_directories(api PUBLIC include)
-target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json cppzmq cppzmq-static)
+target_link_libraries(api PUBLIC pair nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
 # Chat library
 add_library(chat STATIC
-        include/chat/dialog.hpp
-        include/chat/message.hpp
         src/chat/message.cpp
         src/chat/dialog.cpp
         src/api/message.cpp
@@ -39,29 +39,52 @@ target_include_directories(chat PUBLIC include)
 
 # Pair library
 add_library(pair STATIC
-        include/pair/pair.hpp
-        src/pair/pair.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
+        src/pair/pair.cpp)
 target_include_directories(pair PUBLIC include)
 target_link_libraries(pair PUBLIC storage)
 
 # Storage library
 add_library(storage STATIC
-        include/storage/storage.hpp
         src/storage/storage.cpp
         include/storage/user.hpp
         src/storage/user.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c
+        test/Storage_test/s-test.cpp)
 target_include_directories(storage PUBLIC include)
 
-# UI library
-add_library(ui STATIC
-        include/ui/ui.hpp
-        src/ui/ui.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
+# Add UI forms
+set(UI_SOURCES
+        src/frontend/dialog.ui
+        src/frontend/eat.ui
+        src/frontend/pairpal.ui
+        src/frontend/play.ui
+        src/frontend/registerpage.ui
+        src/frontend/self.ui
+        src/frontend/sport.ui
+        src/frontend/study.ui)
+# Add translation files
+set(TRANSLATIONS
+        src/frontend/page1_zh_CN.ts)
+
+qt5_add_translation(QM_FILES ${TRANSLATIONS})
+
+# Define frontend
+add_executable(frontend
+        src/frontend/main.cpp
+        src/frontend/dialog.cpp
+        src/frontend/eat.cpp
+        src/frontend/pairpal.cpp
+        src/frontend/play.cpp
+        src/frontend/registerpage.cpp
+        src/frontend/self.cpp
+        src/frontend/sport.cpp
+        src/frontend/study.cpp
+        ${UI_SOURCES}
+        ${QM_FILES}
+)
+target_include_directories(frontend PUBLIC include)
+target_link_libraries(frontend PUBLIC api Qt5::Widgets Qt5::Core Qt5::Gui)
 
 
 # Define backend
@@ -70,16 +93,6 @@ add_executable(backend
         src/api/message.cpp
         src/api/server.cpp)
 target_link_libraries(backend PUBLIC storage chat pair api)
-
-# Define frontend
-add_executable(frontend
-        src/frontend.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
-
-# Link libraries to the frontend executable
-target_link_libraries(frontend PUBLIC api ui)
-
 
 # Tests
 # API
@@ -95,6 +108,16 @@ add_executable(test-message test/api/test-message.cpp
         src/api/server.cpp)
 target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
+## Server test
+add_executable(test-server test/api/test-server.cpp)
+target_link_libraries(test-server PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_test(NAME test-server COMMAND test-server)
+
+# Storage
+add_executable(s-test test/Storage_test/s-test.cpp)
+target_link_libraries(s-test storage)
+add_test(NAME s-test COMMAND s-test)
+
 
 # Pair
 add_executable(test-pair test/pair/test-pair.cpp

@@ -7,17 +7,20 @@
 #include <zmq.hpp>
 
 #include "api/message.hpp"
+#include "pair/pair.hpp"
 
-Server::Server(std::string listenAddr)
+Server::Server(std::string listenAddr) noexcept
     : listenAddr_(std::move(listenAddr)),
       context_(1),
       socket_(context_, zmq::socket_type::rep),
-      running_(false) {}
-Server::~Server() = default;
+      running_(false) {
+  pair_.setStorage(storage_);
+}
+Server::~Server() noexcept = default;
 
-std::string Server::getListenAddr() const { return listenAddr_; }
+std::string Server::getListenAddr() const noexcept { return listenAddr_; }
 
-bool Server::start() {
+bool Server::start() noexcept {
   try {
     running_ = true;
     socket_.bind(listenAddr_);
@@ -33,7 +36,7 @@ bool Server::start() {
   return true;
 }
 
-void Server::run_() {
+void Server::run_() noexcept {
   while (running_) {
     try {
       zmq::message_t request;
@@ -55,12 +58,16 @@ void Server::run_() {
   }
 }
 
-bool Server::stop() {
+bool Server::stop() noexcept {
   try {
     running_ = false;
-    serverThread_.join();
+
+    if (serverThread_.joinable()) {
+      serverThread_.join();
+    }
 
     socket_.unbind(listenAddr_);
+    socket_.close();
     context_.close();
   } catch (const zmq::error_t& e) {
     std::cerr << "Error stopping server: " << e.what() << std::endl;
@@ -69,207 +76,164 @@ bool Server::stop() {
   return true;
 }
 
-bool Server::restart() {
-  if (!stop()) {
-    return false;
-  }
-
-  return start();
-}
-
-zmq::message_t Server::handleRequest_(const zmq::message_t& request) {
+zmq::message_t Server::handleRequest_(const zmq::message_t& request) noexcept {
   const Message requestMessage(request.to_string());
   const MessageType requestType = requestMessage.getType();
-  const nlohmann::json requestContent = requestMessage.getContent();
 
-  const Message successMessage(MessageType::SUCCESS, "");
-  const Message failureMessage(MessageType::FAILURE, "");
+  const Message successMessage(MessageType::SUCCESS);
+  const Message failureMessage(MessageType::FAILURE);
 
   zmq::message_t replySuccess(successMessage.toString());
   zmq::message_t replyFailure(failureMessage.toString());
 
-  if (requestType == MessageType::ADD_USER) {
-    const std::string username = requestContent["username"];
-    const std::string password = requestContent["password"];
-
-    if (addUser_(username, password)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::ADD_USER &&
+      addUser_(requestMessage.getUsername(), requestMessage.getPassword())) {
+    return replySuccess;
   }
 
-  if (requestType == MessageType::REMOVE_USER) {
-    const std::string username = requestContent["username"];
-    if (removeUser_(username)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::REMOVE_USER &&
+      removeUser_(requestMessage.getUsername())) {
+    return replySuccess;
   }
 
-  if (requestType == MessageType::IS_EXIST_USER) {
-    const std::string username = requestContent["username"];
-    if (isExistUser_(username)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::IS_EXIST_USER &&
+      isExistUser_(requestMessage.getUsername())) {
+    return replySuccess;
   }
 
   if (requestType == MessageType::LIST_ALL_USERS) {
     const std::vector<std::string> users = listAllUsers();
-    nlohmann::json content;
-    content["vector"] = users;
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    Message response(MessageType::SUCCESS);
+    response.setVector(users);
+
+    return std::move(*response.toZmqMessage());
   }
 
-  if (requestType == MessageType::AUTHENTICATE_USER) {
-    const std::string username = requestContent["username"];
-    const std::string password = requestContent["password"];
-
-    if (authenticateUser_(username, password)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::AUTHENTICATE_USER &&
+      authenticateUser_(requestMessage.getUsername(),
+                        requestMessage.getPassword())) {
+    return replySuccess;
   }
 
-  if (requestType == MessageType::ADD_USER_TAG) {
-    const std::string username = requestContent["username"];
-    const std::string tag = requestContent["tag"];
-
-    if (addUserTag_(username, tag)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::ADD_USER_TAG &&
+      addUserTag_(requestMessage.getUsername(), requestMessage.getTag())) {
+    return replySuccess;
   }
 
-  if (requestType == MessageType::REMOVE_USER_TAG) {
-    const std::string username = requestContent["username"];
-    const std::string tag = requestContent["tag"];
-
-    if (removeUserTag_(username, tag)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::REMOVE_USER_TAG &&
+      removeUserTag_(requestMessage.getUsername(), requestMessage.getTag())) {
+    return replySuccess;
   }
 
   if (requestType == MessageType::GET_USER_TAGS) {
-    const std::string username = requestContent["username"];
-    const std::vector<std::string> tags = getUserTags_(username);
-    nlohmann::json content;
-    content["vector"] = tags;
+    const auto tags = getUserTags_(requestMessage.getUsername());
+    Message response(MessageType::SUCCESS);
+    response.setVector(tags);
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    return std::move(*response.toZmqMessage());
   }
 
-  if (requestType == MessageType::SEND_MESSAGE) {
-    const std::string from = requestContent["from"];
-    const std::string to = requestContent["to"];
-    const std::string message = requestContent["message"];
-
-    if (sendMessage_(from, to, message)) {
-      return replySuccess;
-    } else {
-      return replyFailure;
-    }
+  if (requestType == MessageType::SEND_MESSAGE &&
+      sendMessage_(requestMessage.getFrom(), requestMessage.getTo(),
+                   requestMessage.getMessage())) {
+    return replySuccess;
   }
 
   if (requestType == MessageType::GET_SENT_MESSAGES) {
-    const std::string username = requestContent["username"];
-    const std::vector<std::string> messages = getSentMessages_(username);
-    nlohmann::json content;
-    content["vector"] = messages;
+    const auto messages = getSentMessages_(requestMessage.getUsername());
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    Message response(MessageType::SUCCESS);
+    response.setVector(messages);
+
+    return std::move(*response.toZmqMessage());
   }
 
   if (requestType == MessageType::GET_RECEIVED_MESSAGES) {
-    const std::string username = requestContent["username"];
-    const std::vector<std::string> messages = getReceivedMessages_(username);
-    nlohmann::json content;
-    content["vector"] = messages;
+    const auto messages = getReceivedMessages_(requestMessage.getUsername());
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    Message response(MessageType::SUCCESS);
+    response.setVector(messages);
+
+    return std::move(*response.toZmqMessage());
   }
 
   if (requestType == MessageType::GET_PAIR) {
-    const std::string username = requestContent["username"];
-    const std::vector<std::string> pair = getPair_(username);
-    nlohmann::json content;
-    content["vector"] = pair;
+    const auto messages = getPair_(requestMessage.getUsername());
 
-    return zmq::message_t(Message(MessageType::SUCCESS, content).toString());
+    Message response(MessageType::SUCCESS);
+    response.setVector(messages);
+
+    return std::move(*response.toZmqMessage());
   }
 
   return replyFailure;
 }
 
 bool Server::addUser_(const std::string& username,
-                      const std::string& password) {
+                      const std::string& password) noexcept {
   // Add user to the database
   return true;
 }
 
-bool Server::removeUser_(const std::string& username) {
+bool Server::removeUser_(const std::string& username) noexcept {
   // Remove user from the database
   return true;
 }
 
-bool Server::isExistUser_(const std::string& username) {
+bool Server::isExistUser_(const std::string& username) noexcept {
   // Check if user exists
   return true;
 }
 
-std::vector<std::string> Server::listAllUsers() {
+std::vector<std::string> Server::listAllUsers() noexcept {
   // List all users
   return {};
 }
 
 bool Server::authenticateUser_(const std::string& username,
-                               const std::string& password) {
+                               const std::string& password) noexcept {
   // Authenticate user
   return true;
 }
 
-bool Server::addUserTag_(const std::string& username, const std::string& tag) {
+bool Server::addUserTag_(const std::string& username,
+                         const std::string& tag) noexcept {
   // Add tag to user
   return true;
 }
 
 bool Server::removeUserTag_(const std::string& username,
-                            const std::string& tag) {
+                            const std::string& tag) noexcept {
   // Remove tag from user
   return true;
 }
 
-std::vector<std::string> Server::getUserTags_(const std::string& username) {
+std::vector<std::string> Server::getUserTags_(
+    const std::string& username) noexcept {
   // Get all tags of user
   return {};
 }
 
 bool Server::sendMessage_(const std::string& from, const std::string& to,
-                          const std::string& message) {
+                          const std::string& message) noexcept {
   // Send message to user
   return true;
 }
 
-std::vector<std::string> Server::getSentMessages_(const std::string& username) {
+std::vector<std::string> Server::getSentMessages_(
+    const std::string& username) noexcept {
   // Get all sent messages of user
   return {};
 }
 
 std::vector<std::string> Server::getReceivedMessages_(
-    const std::string& username) {
+    const std::string& username) noexcept {
   // Get all received message of user
   return {};
 }
 
-std::vector<std::string> Server::getPair_(const std::string& username) {
-  // Get all pairs of user
-  return {};
+std::vector<std::string> Server::getPair_(
+    const std::string& username) noexcept {
+  return pair_.getPair(username);
 }
