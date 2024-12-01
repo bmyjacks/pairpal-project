@@ -172,47 +172,45 @@ zmq::message_t Server::handleRequest_(const zmq::message_t& request) noexcept {
 
 bool Server::addUser_(const std::string& username,
                       const std::string& password) noexcept {
-  // Add user to the database
-  return true;
+  return storage_.addUser(username, password);
 }
 
 bool Server::removeUser_(const std::string& username) noexcept {
-  // Remove user from the database
-  return true;
+  return storage_.removeUser(username);
 }
 
 bool Server::isExistUser_(const std::string& username) noexcept {
-  // Check if user exists
-  return true;
+  return storage_.isUserExist(username);
 }
 
 std::vector<std::string> Server::listAllUsers() noexcept {
-  // List all users
-  return {};
+  std::vector<std::string> users;
+
+  for (const auto& [id, username, password, tags] : storage_.getUsers()) {
+    users.push_back(username);
+  }
+
+  return users;
 }
 
 bool Server::authenticateUser_(const std::string& username,
                                const std::string& password) noexcept {
-  // Authenticate user
-  return true;
+  return storage_.authenticateUser(username, password);
 }
 
 bool Server::addUserTag_(const std::string& username,
                          const std::string& tag) noexcept {
-  // Add tag to user
-  return true;
+  return storage_.addTag(username, tag);
 }
 
 bool Server::removeUserTag_(const std::string& username,
                             const std::string& tag) noexcept {
-  // Remove tag from user
-  return true;
+  return storage_.removeTag(username, tag);
 }
 
 std::vector<std::string> Server::getUserTags_(
     const std::string& username) noexcept {
-  // Get all tags of user
-  return {};
+  return storage_.getTags(username);
 }
 
 bool Server::sendMessage_(const std::string& from, const std::string& to,
