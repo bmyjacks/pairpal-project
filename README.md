@@ -6,6 +6,8 @@
 This is the project for our CSC3002 course. We are going to implement a matching system for students to find their
 partners for various activities.
 
+We intentionally keep everyone's code not to be re-formatted to show the difference in coding style.
+
 Documentation is available at [here](https://bmyjacks.github.io/pairpal-project/).
 
 ## Components
