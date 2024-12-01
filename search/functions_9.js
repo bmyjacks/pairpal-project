@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['sendmessage_0',['sendMessage',['../classClient.html#a9664c963c03c0e5e722dc2f4982dfcad',1,'Client::sendMessage()'],['../classDialog.html#a5f14ce86974a0ab006d0339e84743017',1,'Dialog::sendMessage()']]],
+  ['sendmessage_0',['sendMessage',['../classClient.html#a9664c963c03c0e5e722dc2f4982dfcad',1,'Client::sendMessage()'],['../classDialog.html#a248d7add8306af2af30b17c6ec51a764',1,'Dialog::sendMessage()']]],
   ['server_1',['Server',['../classServer.html#a7e67af9bf5f63acf9cd142ea74174fd7',1,'Server']]],
   ['setstorage_2',['setStorage',['../classPair.html#a7b06830c4f33f39c021387eaaa59fa72',1,'Pair']]],
   ['start_3',['start',['../classClient.html#a14173b789de96f06cb00ba78dfdf70d5',1,'Client::start()'],['../classServer.html#ab31cd7c625f4b5f065031fa74666c84f',1,'Server::start()']]],

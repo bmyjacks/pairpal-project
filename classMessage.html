@@ -171,12 +171,15 @@ std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getMessage</b>
 <tr class="memitem:a9012b4cba15a7171bee99581fe288a8d" id="r_a9012b4cba15a7171bee99581fe288a8d"><td class="memItemLeft" align="right" valign="top"><a id="a9012b4cba15a7171bee99581fe288a8d" name="a9012b4cba15a7171bee99581fe288a8d"></a>
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getVector</b> () const noexcept</td></tr>
 <tr class="separator:a9012b4cba15a7171bee99581fe288a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29e28a4a6775d22b6e3179bd97a2bc9a" id="r_a29e28a4a6775d22b6e3179bd97a2bc9a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29e28a4a6775d22b6e3179bd97a2bc9a">isBefore</a> (const <a class="el" href="classMessage.html">Message</a> &amp;other) const</td></tr>
+<tr class="memdesc:a29e28a4a6775d22b6e3179bd97a2bc9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares the current message timestamp with another message's timestamp.  <br /></td></tr>
+<tr class="separator:a29e28a4a6775d22b6e3179bd97a2bc9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee23e01429bde0f9a59752836fcdf24b" id="r_aee23e01429bde0f9a59752836fcdf24b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee23e01429bde0f9a59752836fcdf24b">Message</a> (std::string from, std::string to, std::string message)</td></tr>
-<tr class="memdesc:aee23e01429bde0f9a59752836fcdf24b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> object.  <br /></td></tr>
+<tr class="memdesc:aee23e01429bde0f9a59752836fcdf24b"><td class="mdescLeft">&#160;</td><td class="mdescRight">construct a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> object  <br /></td></tr>
 <tr class="separator:aee23e01429bde0f9a59752836fcdf24b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f7275462831f787a861271687bcad67" id="r_a3f7275462831f787a861271687bcad67"><td class="memItemLeft" align="right" valign="top"><a id="a3f7275462831f787a861271687bcad67" name="a3f7275462831f787a861271687bcad67"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~Message</b> ()</td></tr>
-<tr class="memdesc:a3f7275462831f787a861271687bcad67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> object. <br /></td></tr>
+<tr class="memdesc:a3f7275462831f787a861271687bcad67"><td class="mdescLeft">&#160;</td><td class="mdescRight">destroy the <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> object <br /></td></tr>
 <tr class="separator:a3f7275462831f787a861271687bcad67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a731c019d211f7f78dbb718eaa34dc6a7" id="r_a731c019d211f7f78dbb718eaa34dc6a7"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a731c019d211f7f78dbb718eaa34dc6a7">getFromUser</a> () const</td></tr>
 <tr class="memdesc:a731c019d211f7f78dbb718eaa34dc6a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the username of the sender.  <br /></td></tr>
@@ -326,12 +329,12 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
       </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> object. </p>
+<p>construct a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> object </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">from</td><td>The username of the sender. </td></tr>
-    <tr><td class="paramname">to</td><td>The username of the receiver. </td></tr>
-    <tr><td class="paramname">message</td><td>The content of the message. </td></tr>
+    <tr><td class="paramname">from</td><td>the username of the sender </td></tr>
+    <tr><td class="paramname">to</td><td>the username of the receiver </td></tr>
+    <tr><td class="paramname">message</td><td>the content of the message </td></tr>
   </table>
   </dd>
 </dl>
@@ -504,6 +507,40 @@ std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bott
 
 <p>Gets the type of the message. </p>
 <dl class="section return"><dt>Returns</dt><dd>The type of the message. </dd></dl>
+
+</div>
+</div>
+<a id="a29e28a4a6775d22b6e3179bd97a2bc9a" name="a29e28a4a6775d22b6e3179bd97a2bc9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29e28a4a6775d22b6e3179bd97a2bc9a">&#9670;&#160;</a></span>isBefore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Message::isBefore </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classMessage.html">Message</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares the current message timestamp with another message's timestamp. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>The other message to compare with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the current message was sent before the other message. </dd></dl>
 
 </div>
 </div>

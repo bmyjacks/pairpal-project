@@ -155,17 +155,20 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  [[nodiscard]] std::<span class="keywordtype">string</span> getMessage() const noexcept;</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  [[nodiscard]] std::vector&lt;std::<span class="keywordtype">string</span>&gt; getVector() const noexcept;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> private:</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  MessageType type_;        </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  nlohmann::json content_;  </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>};</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classMessage.html#a29e28a4a6775d22b6e3179bd97a2bc9a">  109</a></span> [[nodiscard]] <span class="keywordtype">bool</span> <a class="code hl_function" href="classMessage.html#a29e28a4a6775d22b6e3179bd97a2bc9a">isBefore</a>(const <a class="code hl_class" href="classMessage.html">Message</a>&amp; other) const;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> private:</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  MessageType type_;        </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  nlohmann::json content_;  </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>};</div>
 </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="preprocessor">#endif  </span><span class="comment">// MESSAGE_HPP</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor">#endif  </span><span class="comment">// MESSAGE_HPP</span></div>
 <div class="ttc" id="aclassMessage_html"><div class="ttname"><a href="classMessage.html">Message</a></div><div class="ttdoc">Class representing a message with a type and content.</div><div class="ttdef"><b>Definition</b> message.hpp:33</div></div>
 <div class="ttc" id="aclassMessage_html_a0077fbdd6c0c3e0fac8911e31d522209"><div class="ttname"><a href="classMessage.html#a0077fbdd6c0c3e0fac8911e31d522209">Message::getContent</a></div><div class="ttdeci">nlohmann::json getContent() const noexcept</div><div class="ttdoc">Gets the content of the message.</div></div>
 <div class="ttc" id="aclassMessage_html_a0a62d45fbce703e98a38a5c71b76522b"><div class="ttname"><a href="classMessage.html#a0a62d45fbce703e98a38a5c71b76522b">Message::toString</a></div><div class="ttdeci">std::string toString() const noexcept</div><div class="ttdoc">Converts the message to a string.</div></div>
 <div class="ttc" id="aclassMessage_html_a237177283a0de787a5294d7e2f3345ba"><div class="ttname"><a href="classMessage.html#a237177283a0de787a5294d7e2f3345ba">Message::toJson</a></div><div class="ttdeci">nlohmann::json toJson() const noexcept</div><div class="ttdoc">Converts the message to a JSON object.</div></div>
+<div class="ttc" id="aclassMessage_html_a29e28a4a6775d22b6e3179bd97a2bc9a"><div class="ttname"><a href="classMessage.html#a29e28a4a6775d22b6e3179bd97a2bc9a">Message::isBefore</a></div><div class="ttdeci">bool isBefore(const Message &amp;other) const</div><div class="ttdoc">Compares the current message timestamp with another message's timestamp.</div></div>
 <div class="ttc" id="aclassMessage_html_a3f7275462831f787a861271687bcad67"><div class="ttname"><a href="classMessage.html#a3f7275462831f787a861271687bcad67">Message::~Message</a></div><div class="ttdeci">~Message()</div><div class="ttdoc">Destructor for the Message class.</div></div>
 <div class="ttc" id="aclassMessage_html_a661ae95a992ef2a7691e82d6b6a327a3"><div class="ttname"><a href="classMessage.html#a661ae95a992ef2a7691e82d6b6a327a3">Message::Message</a></div><div class="ttdeci">Message(const MessageType &amp;type, nlohmann::json content) noexcept</div><div class="ttdoc">Constructs a Message with a specified type and content.</div></div>
 <div class="ttc" id="aclassMessage_html_a6d204b57cab527a372e7b170c32e7157"><div class="ttname"><a href="classMessage.html#a6d204b57cab527a372e7b170c32e7157">Message::Message</a></div><div class="ttdeci">Message(const std::string &amp;str) noexcept</div><div class="ttdoc">Constructs a Message from a string.</div></div>
