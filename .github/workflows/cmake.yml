@@ -1,12 +1,10 @@
-name: CMake debug build
+name: CMake release build
 
 on:
   pull_request:
     branches: [ "master" ]
 
 env:
-  CC: clang-18
-  CXX: clang++-18
   BUILD_TYPE: Release
 
 jobs:
@@ -18,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y libltdl-dev
+          sudo apt install -y '^libxcb.*-dev' libx11-xcb-dev libgl1-mesa-dev libxrender-dev libxi-dev  libxkbcommon-dev libxkbcommon-x11-dev libltdl-dev 
 
       - uses: rui314/setup-mold@v1
 
