@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['sendmessage_0',['sendMessage',['../classClient.html#a90b5d8f57ad8ad53b5b9528b6234c17a',1,'Client::sendMessage()'],['../classDialog.html#a5f14ce86974a0ab006d0339e84743017',1,'Dialog::sendMessage()']]],
-  ['server_1',['Server',['../classServer.html#a1db4d4c7ae2e0cc8deaf798d3bb5d5a2',1,'Server']]],
+  ['sendmessage_0',['sendMessage',['../classClient.html#a9664c963c03c0e5e722dc2f4982dfcad',1,'Client::sendMessage()'],['../classDialog.html#a5f14ce86974a0ab006d0339e84743017',1,'Dialog::sendMessage()']]],
+  ['server_1',['Server',['../classServer.html#a7e67af9bf5f63acf9cd142ea74174fd7',1,'Server']]],
   ['setstorage_2',['setStorage',['../classPair.html#a7b06830c4f33f39c021387eaaa59fa72',1,'Pair']]],
-  ['start_3',['start',['../classClient.html#a22c9e494cf31c96b07f7936c45b012a9',1,'Client::start()'],['../classServer.html#acec935535d1d5b58d95cf24678eac014',1,'Server::start()']]],
-  ['stop_4',['stop',['../classClient.html#aff0cc682a116a86d1b8af86e1981fa05',1,'Client::stop()'],['../classServer.html#a5c649cfe98a783c1d653bd239b48afc3',1,'Server::stop()']]],
+  ['start_3',['start',['../classClient.html#a14173b789de96f06cb00ba78dfdf70d5',1,'Client::start()'],['../classServer.html#ab31cd7c625f4b5f065031fa74666c84f',1,'Server::start()']]],
+  ['stop_4',['stop',['../classClient.html#a63e5c3eb40f005e503afcca2283b98c7',1,'Client::stop()'],['../classServer.html#af717fe078aa3f00fbbf414f415e4b479',1,'Server::stop()']]],
   ['storage_5',['Storage',['../classStorage.html#a80ef6af5e4c9fd4424ae16e808d05291',1,'Storage']]]
 ];

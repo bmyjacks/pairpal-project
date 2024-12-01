@@ -98,31 +98,79 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a5b8affc767d9b6f46e7248fb2fdeef05" id="r_a5b8affc767d9b6f46e7248fb2fdeef05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b8affc767d9b6f46e7248fb2fdeef05">Message</a> (MessageType type, nlohmann::json content)</td></tr>
-<tr class="memdesc:a5b8affc767d9b6f46e7248fb2fdeef05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> with a specified type and content.  <br /></td></tr>
-<tr class="separator:a5b8affc767d9b6f46e7248fb2fdeef05"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37f0fee664f52372db2abbed42914841" id="r_a37f0fee664f52372db2abbed42914841"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37f0fee664f52372db2abbed42914841">Message</a> (const nlohmann::json &amp;json)</td></tr>
-<tr class="memdesc:a37f0fee664f52372db2abbed42914841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> from a JSON object.  <br /></td></tr>
-<tr class="separator:a37f0fee664f52372db2abbed42914841"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2642d98b4568bbabe30d0200ab0d9482" id="r_a2642d98b4568bbabe30d0200ab0d9482"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2642d98b4568bbabe30d0200ab0d9482">Message</a> (const std::string &amp;str)</td></tr>
-<tr class="memdesc:a2642d98b4568bbabe30d0200ab0d9482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> from a string.  <br /></td></tr>
-<tr class="separator:a2642d98b4568bbabe30d0200ab0d9482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a661ae95a992ef2a7691e82d6b6a327a3" id="r_a661ae95a992ef2a7691e82d6b6a327a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a661ae95a992ef2a7691e82d6b6a327a3">Message</a> (const MessageType &amp;type, nlohmann::json content) noexcept</td></tr>
+<tr class="memdesc:a661ae95a992ef2a7691e82d6b6a327a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> with a specified type and content.  <br /></td></tr>
+<tr class="separator:a661ae95a992ef2a7691e82d6b6a327a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf77715de2b1bc3235a02deb81227b71" id="r_acf77715de2b1bc3235a02deb81227b71"><td class="memItemLeft" align="right" valign="top"><a id="acf77715de2b1bc3235a02deb81227b71" name="acf77715de2b1bc3235a02deb81227b71"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Message</b> (const MessageType &amp;type) noexcept</td></tr>
+<tr class="separator:acf77715de2b1bc3235a02deb81227b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac865c1a8e2df740266e41fa8a133384e" id="r_ac865c1a8e2df740266e41fa8a133384e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac865c1a8e2df740266e41fa8a133384e">Message</a> (const nlohmann::json &amp;json) noexcept</td></tr>
+<tr class="memdesc:ac865c1a8e2df740266e41fa8a133384e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> from a JSON object.  <br /></td></tr>
+<tr class="separator:ac865c1a8e2df740266e41fa8a133384e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d204b57cab527a372e7b170c32e7157" id="r_a6d204b57cab527a372e7b170c32e7157"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d204b57cab527a372e7b170c32e7157">Message</a> (const std::string &amp;str) noexcept</td></tr>
+<tr class="memdesc:a6d204b57cab527a372e7b170c32e7157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> from a string.  <br /></td></tr>
+<tr class="separator:a6d204b57cab527a372e7b170c32e7157"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f7275462831f787a861271687bcad67" id="r_a3f7275462831f787a861271687bcad67"><td class="memItemLeft" align="right" valign="top"><a id="a3f7275462831f787a861271687bcad67" name="a3f7275462831f787a861271687bcad67"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>~Message</b> ()</td></tr>
 <tr class="memdesc:a3f7275462831f787a861271687bcad67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> class. <br /></td></tr>
 <tr class="separator:a3f7275462831f787a861271687bcad67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a995db3fb8b9b0d1af2819f481d81d0e3" id="r_a995db3fb8b9b0d1af2819f481d81d0e3"><td class="memItemLeft" align="right" valign="top">MessageType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a995db3fb8b9b0d1af2819f481d81d0e3">getType</a> () const</td></tr>
-<tr class="memdesc:a995db3fb8b9b0d1af2819f481d81d0e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type of the message.  <br /></td></tr>
-<tr class="separator:a995db3fb8b9b0d1af2819f481d81d0e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32aa54cbe9d9efbf37de5cc70e083a4d" id="r_a32aa54cbe9d9efbf37de5cc70e083a4d"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32aa54cbe9d9efbf37de5cc70e083a4d">getContent</a> () const</td></tr>
-<tr class="memdesc:a32aa54cbe9d9efbf37de5cc70e083a4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the content of the message.  <br /></td></tr>
-<tr class="separator:a32aa54cbe9d9efbf37de5cc70e083a4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac0af9286dad057337ace0c0c04709a4" id="r_aac0af9286dad057337ace0c0c04709a4"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac0af9286dad057337ace0c0c04709a4">toJson</a> () const</td></tr>
-<tr class="memdesc:aac0af9286dad057337ace0c0c04709a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the message to a JSON object.  <br /></td></tr>
-<tr class="separator:aac0af9286dad057337ace0c0c04709a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10bea40e0b83887335eaaf45b6cfd32c" id="r_a10bea40e0b83887335eaaf45b6cfd32c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10bea40e0b83887335eaaf45b6cfd32c">toString</a> () const</td></tr>
-<tr class="memdesc:a10bea40e0b83887335eaaf45b6cfd32c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the message to a string.  <br /></td></tr>
-<tr class="separator:a10bea40e0b83887335eaaf45b6cfd32c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af277692989a6783d58f029e65c536328" id="r_af277692989a6783d58f029e65c536328"><td class="memItemLeft" align="right" valign="top">MessageType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af277692989a6783d58f029e65c536328">getType</a> () const noexcept</td></tr>
+<tr class="memdesc:af277692989a6783d58f029e65c536328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type of the message.  <br /></td></tr>
+<tr class="separator:af277692989a6783d58f029e65c536328"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0077fbdd6c0c3e0fac8911e31d522209" id="r_a0077fbdd6c0c3e0fac8911e31d522209"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0077fbdd6c0c3e0fac8911e31d522209">getContent</a> () const noexcept</td></tr>
+<tr class="memdesc:a0077fbdd6c0c3e0fac8911e31d522209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the content of the message.  <br /></td></tr>
+<tr class="separator:a0077fbdd6c0c3e0fac8911e31d522209"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a237177283a0de787a5294d7e2f3345ba" id="r_a237177283a0de787a5294d7e2f3345ba"><td class="memItemLeft" align="right" valign="top">nlohmann::json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a237177283a0de787a5294d7e2f3345ba">toJson</a> () const noexcept</td></tr>
+<tr class="memdesc:a237177283a0de787a5294d7e2f3345ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the message to a JSON object.  <br /></td></tr>
+<tr class="separator:a237177283a0de787a5294d7e2f3345ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a62d45fbce703e98a38a5c71b76522b" id="r_a0a62d45fbce703e98a38a5c71b76522b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a62d45fbce703e98a38a5c71b76522b">toString</a> () const noexcept</td></tr>
+<tr class="memdesc:a0a62d45fbce703e98a38a5c71b76522b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the message to a string.  <br /></td></tr>
+<tr class="separator:a0a62d45fbce703e98a38a5c71b76522b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa45d61f175c19ca011704dd98ca55683" id="r_aa45d61f175c19ca011704dd98ca55683"><td class="memItemLeft" align="right" valign="top"><a id="aa45d61f175c19ca011704dd98ca55683" name="aa45d61f175c19ca011704dd98ca55683"></a>
+std::unique_ptr&lt; zmq::message_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>toZmqMessage</b> () const noexcept</td></tr>
+<tr class="separator:aa45d61f175c19ca011704dd98ca55683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbc0d0a5d033e886968153c141852d71" id="r_afbc0d0a5d033e886968153c141852d71"><td class="memItemLeft" align="right" valign="top"><a id="afbc0d0a5d033e886968153c141852d71" name="afbc0d0a5d033e886968153c141852d71"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setUsername</b> (const std::string &amp;username) noexcept</td></tr>
+<tr class="separator:afbc0d0a5d033e886968153c141852d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa84578072dc90f367e4a6c439045008e" id="r_aa84578072dc90f367e4a6c439045008e"><td class="memItemLeft" align="right" valign="top"><a id="aa84578072dc90f367e4a6c439045008e" name="aa84578072dc90f367e4a6c439045008e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setPassword</b> (const std::string &amp;password) noexcept</td></tr>
+<tr class="separator:aa84578072dc90f367e4a6c439045008e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00ce93517f9548b0706a3ce5e907d4f9" id="r_a00ce93517f9548b0706a3ce5e907d4f9"><td class="memItemLeft" align="right" valign="top"><a id="a00ce93517f9548b0706a3ce5e907d4f9" name="a00ce93517f9548b0706a3ce5e907d4f9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setTag</b> (const std::string &amp;tag) noexcept</td></tr>
+<tr class="separator:a00ce93517f9548b0706a3ce5e907d4f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76efc0af3dee46faa94d34c890435cf1" id="r_a76efc0af3dee46faa94d34c890435cf1"><td class="memItemLeft" align="right" valign="top"><a id="a76efc0af3dee46faa94d34c890435cf1" name="a76efc0af3dee46faa94d34c890435cf1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setFrom</b> (const std::string &amp;from) noexcept</td></tr>
+<tr class="separator:a76efc0af3dee46faa94d34c890435cf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f4dd730affb6a45f767c6ec6baa95fd" id="r_a4f4dd730affb6a45f767c6ec6baa95fd"><td class="memItemLeft" align="right" valign="top"><a id="a4f4dd730affb6a45f767c6ec6baa95fd" name="a4f4dd730affb6a45f767c6ec6baa95fd"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setTo</b> (const std::string &amp;to) noexcept</td></tr>
+<tr class="separator:a4f4dd730affb6a45f767c6ec6baa95fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8514f7ca4311efdea09b1fb6a97e9cab" id="r_a8514f7ca4311efdea09b1fb6a97e9cab"><td class="memItemLeft" align="right" valign="top"><a id="a8514f7ca4311efdea09b1fb6a97e9cab" name="a8514f7ca4311efdea09b1fb6a97e9cab"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setMessage</b> (const std::string &amp;message) noexcept</td></tr>
+<tr class="separator:a8514f7ca4311efdea09b1fb6a97e9cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98e3c8f4241bc5cfca1d1b3e529dd071" id="r_a98e3c8f4241bc5cfca1d1b3e529dd071"><td class="memItemLeft" align="right" valign="top"><a id="a98e3c8f4241bc5cfca1d1b3e529dd071" name="a98e3c8f4241bc5cfca1d1b3e529dd071"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setVector</b> (const std::vector&lt; std::string &gt; &amp;vector) noexcept</td></tr>
+<tr class="separator:a98e3c8f4241bc5cfca1d1b3e529dd071"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28f3bebc6e6894e564a711c5e3023938" id="r_a28f3bebc6e6894e564a711c5e3023938"><td class="memItemLeft" align="right" valign="top"><a id="a28f3bebc6e6894e564a711c5e3023938" name="a28f3bebc6e6894e564a711c5e3023938"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getUsername</b> () const noexcept</td></tr>
+<tr class="separator:a28f3bebc6e6894e564a711c5e3023938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef3f731a1e83242888c8f2f82f038b80" id="r_aef3f731a1e83242888c8f2f82f038b80"><td class="memItemLeft" align="right" valign="top"><a id="aef3f731a1e83242888c8f2f82f038b80" name="aef3f731a1e83242888c8f2f82f038b80"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getPassword</b> () const noexcept</td></tr>
+<tr class="separator:aef3f731a1e83242888c8f2f82f038b80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba6263831d9df3fd56a3a6e49e0b84a3" id="r_aba6263831d9df3fd56a3a6e49e0b84a3"><td class="memItemLeft" align="right" valign="top"><a id="aba6263831d9df3fd56a3a6e49e0b84a3" name="aba6263831d9df3fd56a3a6e49e0b84a3"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getTag</b> () const noexcept</td></tr>
+<tr class="separator:aba6263831d9df3fd56a3a6e49e0b84a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c002f8ed2222bd2fbb7a5df2efdc71e" id="r_a6c002f8ed2222bd2fbb7a5df2efdc71e"><td class="memItemLeft" align="right" valign="top"><a id="a6c002f8ed2222bd2fbb7a5df2efdc71e" name="a6c002f8ed2222bd2fbb7a5df2efdc71e"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getFrom</b> () const noexcept</td></tr>
+<tr class="separator:a6c002f8ed2222bd2fbb7a5df2efdc71e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af90c6e92864cf7ee70d7fbfcd22467dc" id="r_af90c6e92864cf7ee70d7fbfcd22467dc"><td class="memItemLeft" align="right" valign="top"><a id="af90c6e92864cf7ee70d7fbfcd22467dc" name="af90c6e92864cf7ee70d7fbfcd22467dc"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getTo</b> () const noexcept</td></tr>
+<tr class="separator:af90c6e92864cf7ee70d7fbfcd22467dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f530fe84ec07706ca5d255efddf2694" id="r_a2f530fe84ec07706ca5d255efddf2694"><td class="memItemLeft" align="right" valign="top"><a id="a2f530fe84ec07706ca5d255efddf2694" name="a2f530fe84ec07706ca5d255efddf2694"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getMessage</b> () const noexcept</td></tr>
+<tr class="separator:a2f530fe84ec07706ca5d255efddf2694"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9012b4cba15a7171bee99581fe288a8d" id="r_a9012b4cba15a7171bee99581fe288a8d"><td class="memItemLeft" align="right" valign="top"><a id="a9012b4cba15a7171bee99581fe288a8d" name="a9012b4cba15a7171bee99581fe288a8d"></a>
+std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getVector</b> () const noexcept</td></tr>
+<tr class="separator:a9012b4cba15a7171bee99581fe288a8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee23e01429bde0f9a59752836fcdf24b" id="r_aee23e01429bde0f9a59752836fcdf24b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee23e01429bde0f9a59752836fcdf24b">Message</a> (std::string from, std::string to, std::string message)</td></tr>
 <tr class="memdesc:aee23e01429bde0f9a59752836fcdf24b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classMessage.html" title="Class representing a message with a type and content.">Message</a> object.  <br /></td></tr>
 <tr class="separator:aee23e01429bde0f9a59752836fcdf24b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,8 +198,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p>Class representing a message with a type and content. </p>
 <p>Represents a message exchanged between two users. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a5b8affc767d9b6f46e7248fb2fdeef05" name="a5b8affc767d9b6f46e7248fb2fdeef05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5b8affc767d9b6f46e7248fb2fdeef05">&#9670;&#160;</a></span>Message() <span class="overload">[1/4]</span></h2>
+<a id="a661ae95a992ef2a7691e82d6b6a327a3" name="a661ae95a992ef2a7691e82d6b6a327a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a661ae95a992ef2a7691e82d6b6a327a3">&#9670;&#160;</a></span>Message() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,7 +210,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Message::Message </td>
           <td>(</td>
-          <td class="paramtype">MessageType</td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+          <td class="paramtype">const MessageType &amp;</td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -172,7 +220,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -188,8 +236,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a37f0fee664f52372db2abbed42914841" name="a37f0fee664f52372db2abbed42914841"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37f0fee664f52372db2abbed42914841">&#9670;&#160;</a></span>Message() <span class="overload">[2/4]</span></h2>
+<a id="ac865c1a8e2df740266e41fa8a133384e" name="ac865c1a8e2df740266e41fa8a133384e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac865c1a8e2df740266e41fa8a133384e">&#9670;&#160;</a></span>Message() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +254,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -221,8 +269,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2642d98b4568bbabe30d0200ab0d9482" name="a2642d98b4568bbabe30d0200ab0d9482"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2642d98b4568bbabe30d0200ab0d9482">&#9670;&#160;</a></span>Message() <span class="overload">[3/4]</span></h2>
+<a id="a6d204b57cab527a372e7b170c32e7157" name="a6d204b57cab527a372e7b170c32e7157"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d204b57cab527a372e7b170c32e7157">&#9670;&#160;</a></span>Message() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -239,7 +287,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+<span class="mlabels"><span class="mlabel">explicit</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -291,8 +339,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a32aa54cbe9d9efbf37de5cc70e083a4d" name="a32aa54cbe9d9efbf37de5cc70e083a4d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32aa54cbe9d9efbf37de5cc70e083a4d">&#9670;&#160;</a></span>getContent()</h2>
+<a id="a0077fbdd6c0c3e0fac8911e31d522209" name="a0077fbdd6c0c3e0fac8911e31d522209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0077fbdd6c0c3e0fac8911e31d522209">&#9670;&#160;</a></span>getContent()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -309,7 +357,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel">nodiscard</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -431,8 +479,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a995db3fb8b9b0d1af2819f481d81d0e3" name="a995db3fb8b9b0d1af2819f481d81d0e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a995db3fb8b9b0d1af2819f481d81d0e3">&#9670;&#160;</a></span>getType()</h2>
+<a id="af277692989a6783d58f029e65c536328" name="af277692989a6783d58f029e65c536328"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af277692989a6783d58f029e65c536328">&#9670;&#160;</a></span>getType()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -449,7 +497,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel">nodiscard</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -459,8 +507,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aac0af9286dad057337ace0c0c04709a4" name="aac0af9286dad057337ace0c0c04709a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac0af9286dad057337ace0c0c04709a4">&#9670;&#160;</a></span>toJson()</h2>
+<a id="a237177283a0de787a5294d7e2f3345ba" name="a237177283a0de787a5294d7e2f3345ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a237177283a0de787a5294d7e2f3345ba">&#9670;&#160;</a></span>toJson()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -477,7 +525,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel">nodiscard</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -510,13 +558,13 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Converts the message to a string. </p>
-<dl class="section return"><dt>Returns</dt><dd>The string representation of the message. </dd></dl>
+<p>Converts the message to a string representation. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string representation of the message. </dd></dl>
 
 </div>
 </div>
-<a id="a10bea40e0b83887335eaaf45b6cfd32c" name="a10bea40e0b83887335eaaf45b6cfd32c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10bea40e0b83887335eaaf45b6cfd32c">&#9670;&#160;</a></span>toString() <span class="overload">[2/2]</span></h2>
+<a id="a0a62d45fbce703e98a38a5c71b76522b" name="a0a62d45fbce703e98a38a5c71b76522b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a62d45fbce703e98a38a5c71b76522b">&#9670;&#160;</a></span>toString() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -533,13 +581,13 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel">nodiscard</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Converts the message to a string representation. </p>
-<dl class="section return"><dt>Returns</dt><dd>A string representation of the message. </dd></dl>
+<p>Converts the message to a string. </p>
+<dl class="section return"><dt>Returns</dt><dd>The string representation of the message. </dd></dl>
 
 </div>
 </div>
