@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.29)
-project(pairpal LANGUAGES CXX)
+#project(pairpal LANGUAGES CXX) // Some one bring a CC file, so we cannot use this line
+project(pairpal)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -8,7 +9,6 @@ find_package(nlohmann_json CONFIG REQUIRED)
 find_package(cppzmq CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Gui LinguistTools Widgets)
-find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
 # Configure third-party libraries
 set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
@@ -86,7 +86,6 @@ target_link_libraries(frontend PUBLIC api Qt5::Widgets Qt5::Core Qt5::Gui)
 # Define backend
 add_executable(backend
         src/backend.cpp)
-
 target_link_libraries(backend PUBLIC storage chat pair api)
 
 # Tests
@@ -104,6 +103,7 @@ add_executable(test-server test/api/test-server.cpp)
 target_link_libraries(test-server PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-server COMMAND test-server)
 
+# Storage
 add_executable(s-test test/Storage_test/s-test.cpp)
 target_link_libraries(s-test storage)
 add_test(NAME s-test COMMAND s-test)
