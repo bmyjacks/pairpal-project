@@ -11,15 +11,15 @@
 class Message {
  public:
   /**
-   * @brief Constructs a Message object.
-   * @param from The username of the sender.
-   * @param to The username of the receiver.
-   * @param message The content of the message.
+   * @brief construct a Message object
+   * @param from the username of the sender
+   * @param to the username of the receiver
+   * @param message the content of the message
    */
   Message(std::string from, std::string to, std::string message);
 
   /**
-   * @brief Destroys the Message object.
+   * @brief destroy the Message object
    */
   ~Message();
 
