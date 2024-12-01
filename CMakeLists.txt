@@ -8,6 +8,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 find_package(cppzmq CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Gui LinguistTools Widgets)
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
 # Configure third-party libraries
 set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
@@ -94,6 +95,10 @@ add_test(NAME test-client COMMAND test-client)
 add_executable(test-message test/api/test-message.cpp)
 target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
+## Server test
+add_executable(test-server test/api/test-server.cpp)
+target_link_libraries(test-server PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_test(NAME test-server COMMAND test-server)
 
 # Pair
 add_executable(test-pair test/pair/test-pair.cpp)
