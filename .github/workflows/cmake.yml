@@ -2,7 +2,7 @@ name: CMake release build
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 env:
   BUILD_TYPE: Release
@@ -16,13 +16,13 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y '^libxcb.*-dev' libx11-xcb-dev libgl1-mesa-dev libxrender-dev libxi-dev  libxkbcommon-dev libxkbcommon-x11-dev libltdl-dev  libsystemd-dev libxtst-dev
+          sudo apt install -y '^libxcb.*-dev' libx11-xcb-dev libgl1-mesa-dev libxrender-dev libxi-dev  libxkbcommon-dev libxkbcommon-x11-dev libltdl-dev libsystemd-dev libxtst-dev
 
       - uses: rui314/setup-mold@v1
 
       - uses: lukka/get-cmake@latest
 
-      - name: Setup a new (or from cache) vcpkg (and does not build any package)
+      - name: Setup a new (or from cache) vcpkg
         uses: lukka/run-vcpkg@v11
         with:
           runVcpkgInstall: true
