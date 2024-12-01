@@ -1,27 +1,35 @@
 {
-  "name" : "pairpal",
-  "version-string" : "1.0.0",
-  "builtin-baseline" : "068d45478f5536589e19f83344749379724b3225",
-  "dependencies" : [ {
-    "name" : "gtest",
-    "version>=" : "1.15.2"
-  }, {
-    "name" : "nlohmann-json",
-    "version>=" : "3.11.3#1"
-  }, {
-    "name" : "vcpkg-cmake-config",
-    "version>=" : "2024-05-23"
-  }, {
-    "name" : "vcpkg-cmake",
-    "version>=" : "2024-04-23"
-  }, {
-    "name" : "cppzmq",
-    "version>=" : "4.10.0"
-  }, {
-    "name" : "qt5",
-    "version>=" : "5.15.15"
-  }, {
-    "name" : "sqlite3",
-    "version>=" : "3.47.1"
-  } ]
+  "name": "pairpal",
+  "version-string": "1.0.0",
+  "builtin-baseline": "cd124b84feb0c02a24a2d90981e8358fdee0e077",
+  "dependencies": [
+    {
+      "name": "gtest",
+      "version>=": "1.15.2"
+    },
+    {
+      "name": "nlohmann-json",
+      "version>=": "3.11.3#1"
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "version>=": "2024-05-23"
+    },
+    {
+      "name": "vcpkg-cmake",
+      "version>=": "2024-04-23"
+    },
+    {
+      "name": "cppzmq",
+      "version>=": "4.10.0"
+    },
+    {
+      "name": "qt5",
+      "version>=": "5.15.15"
+    },
+    {
+      "name": "sqlite3",
+      "version>=": "3.47.1"
+    }
+  ]
 }
