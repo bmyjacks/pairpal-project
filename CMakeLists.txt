@@ -42,7 +42,11 @@ target_link_libraries(pair PUBLIC storage)
 # Storage library
 add_library(storage STATIC
         src/storage/storage.cpp
-        src/storage/user.cpp)
+        include/storage/user.hpp
+        src/storage/user.cpp
+        include/storage/sqlite3.h
+        src/storage/sqlite3.c
+        test/Storage_test/s-test.cpp)
 target_include_directories(storage PUBLIC include)
 
 # Add UI forms
@@ -82,8 +86,8 @@ target_link_libraries(frontend PUBLIC api Qt5::Widgets Qt5::Core Qt5::Gui)
 # Define backend
 add_executable(backend
         src/backend.cpp)
-target_link_libraries(backend PUBLIC storage chat pair api)
 
+target_link_libraries(backend PUBLIC storage chat pair api)
 
 # Tests
 # API
@@ -99,6 +103,11 @@ add_test(NAME test-message COMMAND test-message)
 add_executable(test-server test/api/test-server.cpp)
 target_link_libraries(test-server PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-server COMMAND test-server)
+
+add_executable(s-test test/Storage_test/s-test.cpp)
+target_link_libraries(s-test storage)
+add_test(NAME s-test COMMAND s-test)
+
 
 # Pair
 add_executable(test-pair test/pair/test-pair.cpp)
