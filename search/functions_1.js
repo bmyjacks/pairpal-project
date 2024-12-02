@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['client_0',['Client',['../classClient.html#a6a5ade51613d7a5bf449e1b0e9fb2dae',1,'Client']]]
+  ['chat_0',['Chat',['../classChat.html#a4427e061b727c06cccca9626cc0cf9c8',1,'Chat']]],
+  ['client_1',['Client',['../classClient.html#a6a5ade51613d7a5bf449e1b0e9fb2dae',1,'Client']]]
 ];
