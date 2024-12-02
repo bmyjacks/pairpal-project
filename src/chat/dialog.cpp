@@ -2,6 +2,7 @@
 #include <utility>
 #include <iostream>
 #include <stdexcept>
+#include <iomanip>
 
 /**
  * @brief Constructs a Dialog object

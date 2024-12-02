@@ -24,15 +24,15 @@ add_library(api STATIC
         src/api/server.cpp
         src/api/message.cpp
         src/api/message.cpp
-        src/api/server.cpp
-)
+        src/api/server.cpp)
 target_include_directories(api PUBLIC include)
 target_link_libraries(api PUBLIC pair nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
 # Chat library
 add_library(chat STATIC
-        src/chat/message.cpp
-        src/chat/dialog.cpp)
+        src/chat/chat.cpp
+        src/chat/dialog.cpp
+        src/chat/message.cpp)
 target_include_directories(chat PUBLIC include)
 
 # Pair library
@@ -44,11 +44,8 @@ target_link_libraries(pair PUBLIC storage)
 # Storage library
 add_library(storage STATIC
         src/storage/storage.cpp
-        include/storage/user.hpp
         src/storage/user.cpp
-        include/storage/sqlite3.h
-        src/storage/sqlite3.c
-        test/Storage_test/s-test.cpp)
+        src/storage/sqlite3.c)
 target_include_directories(storage PUBLIC include)
 
 # Add UI forms
