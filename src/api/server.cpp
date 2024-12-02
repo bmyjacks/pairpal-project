@@ -25,11 +25,15 @@ bool Server::start() noexcept {
     running_ = true;
     socket_.bind(listenAddr_);
   } catch (const zmq::error_t& e) {
-    std::cerr << "Error starting server: " << e.what() << std::endl;
+    std::cerr << std::format("[ERROR] {} Error starting server: {}",
+                             std::chrono::system_clock::now(), e.what())
+              << std::endl;
     return false;
   }
 
-  std::cout << std::format("Server started on {}", listenAddr_) << std::endl;
+  std::cout << std::format("[INFO] {} started on {}",
+                           std::chrono::system_clock::now(), listenAddr_)
+            << std::endl;
 
   serverThread_ = std::thread(&Server::run_, this);
 
@@ -44,14 +48,22 @@ void Server::run_() noexcept {
           socket_.recv(request, zmq::recv_flags::dontwait);
 
       if (result.has_value()) {
-        std::cout << "Received request" << request.to_string() << std::endl;
+        std::cout << std::format("[INFO] {} Received request {}",
+                                 std::chrono::system_clock::now(),
+                                 request.to_string())
+                  << std::endl;
 
         auto reply = handleRequest_(request);
         socket_.send(reply, zmq::send_flags::none);
-        std::cout << "Send back" << reply.to_string() << std::endl;
+        std::cout << std::format("[INFO] {} Sent reply {}",
+                                 std::chrono::system_clock::now(),
+                                 reply.to_string())
+                  << std::endl;
       }
     } catch (const zmq::error_t& e) {
-      std::cerr << "Error receiving message: " << e.what() << std::endl;
+      std::cerr << std::format("[ERROR] {} Error receiving message: {}",
+                               std::chrono::system_clock::now(), e.what())
+                << std::endl;
     }
 
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -70,7 +82,9 @@ bool Server::stop() noexcept {
     socket_.close();
     context_.close();
   } catch (const zmq::error_t& e) {
-    std::cerr << "Error stopping server: " << e.what() << std::endl;
+    std::cerr << std::format("[ERROR] {} Error stopping server: {}",
+                             std::chrono::system_clock::now(), e.what())
+              << std::endl;
     return false;
   }
   return true;
