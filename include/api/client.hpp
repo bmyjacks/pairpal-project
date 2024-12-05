@@ -26,19 +26,19 @@ class Client {
    * @brief Starts the client.
    * @return True if the client started successfully, false otherwise.
    */
-  bool start() noexcept;
+  auto start() noexcept -> bool;
 
   /**
    * @brief Stops the client.
    * @return True if the client stopped successfully, false otherwise.
    */
-  bool stop() noexcept;
+  auto stop() noexcept -> bool;
 
   /**
    * @brief Restarts the client.
    * @return True if the client restarted successfully, false otherwise.
    */
-  bool restart() noexcept;
+  auto restart() noexcept -> bool;
 
   /**
    * @brief Adds a user to the system.
@@ -46,27 +46,28 @@ class Client {
    * @param password The password of the user.
    * @return True if the user was added successfully, false otherwise.
    */
-  bool addUser(const std::string& username, const std::string& password) noexcept;
+  auto addUser(const std::string& username,
+               const std::string& password) noexcept -> bool;
 
   /**
    * @brief Removes a user from the system.
    * @param username The username of the user to remove.
    * @return True if the user was removed successfully, false otherwise.
    */
-  bool removeUser(const std::string& username) noexcept;
+  auto removeUser(const std::string& username) noexcept -> bool;
 
   /**
    * @brief Checks if a user exists in the system.
    * @param username The username to check.
    * @return True if the user exists, false otherwise.
    */
-  bool isExistUser(const std::string& username) noexcept;
+  auto isExistUser(const std::string& username) noexcept -> bool;
 
   /**
    * @brief Gets a list of all users.
    * @return A vector of usernames.
    */
-  [[nodiscard]] std::vector<std::string> listAllUsers() noexcept;
+  [[nodiscard]] auto listAllUsers() -> std::vector<std::string>;
 
   /**
    * @brief Authenticates a user.
@@ -74,8 +75,8 @@ class Client {
    * @param password The password of the user.
    * @return True if the authentication was successful, false otherwise.
    */
-  bool authenticateUser(const std::string& username,
-                        const std::string& password) noexcept;
+  auto authenticateUser(const std::string& username,
+                        const std::string& password) noexcept -> bool;
 
   /**
    * @brief Adds a tag to a user.
@@ -83,7 +84,8 @@ class Client {
    * @param tag The tag to add.
    * @return True if the tag was added successfully, false otherwise.
    */
-  bool addUserTag(const std::string& username, const std::string& tag) noexcept;
+  auto addUserTag(const std::string& username, const std::string& tag) noexcept
+      -> bool;
 
   /**
    * @brief Removes a tag from a user.
@@ -91,15 +93,16 @@ class Client {
    * @param tag The tag to remove.
    * @return True if the tag was removed successfully, false otherwise.
    */
-  bool removeUserTag(const std::string& username, const std::string& tag) noexcept;
+  auto removeUserTag(const std::string& username,
+                     const std::string& tag) noexcept -> bool;
 
   /**
    * @brief Gets the tags of a user.
    * @param username The username of the user.
    * @return A vector of tags.
    */
-  [[nodiscard]] std::vector<std::string> getUserTags(
-      const std::string& username) noexcept;
+  [[nodiscard]] auto getUserTags(const std::string& username)
+      -> std::vector<std::string>;
 
   /**
    * @brief Sends a message from one user to another.
@@ -108,31 +111,32 @@ class Client {
    * @param message The message to send.
    * @return True if the message was sent successfully, false otherwise.
    */
-  bool sendMessage(const std::string& from, const std::string& to,
-                   const std::string& message) noexcept;
+  auto sendMessage(const std::string& from, const std::string& to,
+                   const std::string& message) noexcept -> bool;
 
   /**
    * @brief Gets the messages sent by a user.
    * @param username The username of the user.
    * @return A vector of sent messages.
    */
-  [[nodiscard]] std::vector<std::string> getSentMessages(
-      const std::string& username) noexcept;
+  [[nodiscard]] auto getSentMessages(const std::string& username)
+      -> std::vector<std::string>;
 
   /**
    * @brief Gets the messages received by a user.
    * @param username The username of the user.
    * @return A vector of received messages.
    */
-  [[nodiscard]] std::vector<std::string> getReceivedMessages(
-      const std::string& username) noexcept;
+  [[nodiscard]] auto getReceivedMessages(const std::string& username)
+      -> std::vector<std::string>;
 
   /**
    * @brief Gets the pair of a user.
    * @param username The username of the user.
    * @return A vector containing the pair of the user.
    */
-  [[nodiscard]] std::vector<std::string> getPair(const std::string& username) noexcept;
+  [[nodiscard]] auto getPair(const std::string& username)
+      -> std::vector<std::string>;
 
  private:
   std::string serverAddr_;  ///< The address of the server.
@@ -146,8 +150,8 @@ class Client {
    * @return True if the request was sent and the reply was received
    * successfully, false otherwise.
    */
-  bool sendRequestAndReceiveReply_(zmq::message_t& request,
-                                   zmq::message_t& reply) noexcept;
+  auto sendRequestAndReceiveReply_(zmq::message_t& request,
+                                   zmq::message_t& reply) noexcept -> bool;
 };
 
 #endif  // CLIENT_HPP
