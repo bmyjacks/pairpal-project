@@ -2,8 +2,13 @@
 #define CHAT_HPP
 
 #include <vector>
+#include <map>
+#include <string>
+#include <memory>
 
 #include "chat/message.hpp"
+#include "storage/message_store.hpp"
+#include "api/message.hpp"
 
 /**
  * @class Chat
@@ -47,6 +52,11 @@ class Chat {
    */
   [[nodiscard]] std::vector<Message> getReceivedMessages(
       const std::string &username) const;
+
+ private:
+  std::unique_ptr<Message_store> messageStore_;
+  std::map<std::string, User> users_;
+  std::map<std::pair<std::string, std::string>, Dialog> dialogs_;
 };
 
 #endif  // CHAT_HPP

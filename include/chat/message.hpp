@@ -53,6 +53,13 @@ class Message {
    */
   [[nodiscard]] std::chrono::system_clock::time_point getTimestamp() const;
 
+
+  /**
+   * @brief Converts the timestamp to a string representation.
+   * @return A string representation of the timestamp.
+   */
+  [[nodiscard]] std::string getFormatTimestamp() const;
+
 private:
   std::string from;   // Sender's username
   std::string to;     // Receiver's username

@@ -59,3 +59,13 @@ std::string Message::toString() const {
 std::chrono::system_clock::time_point Message::getTimestamp() const {
     return timestamp;
 }
+/**
+ * @brief Converts the timestamp to a string.
+ * @return A string representation of the timestamp.
+ */
+std::string Message::getFormatTimestamp() const {
+    auto time = std::chrono::system_clock::to_time_t(timestamp);
+    std::ostringstream oss;
+    oss << std::put_time(std::localtime(&time), "%Y-%m-%d %H:%M:%S");
+    return oss.str();
+}
