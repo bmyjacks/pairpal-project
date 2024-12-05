@@ -104,15 +104,15 @@ $(function(){ initResizable(false); });
 <div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classServer.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="classServer.html">Server</a> {</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classServer.html#a7e67af9bf5f63acf9cd142ea74174fd7">   21</a></span>  <span class="keyword">explicit</span> <a class="code hl_function" href="classServer.html#a7e67af9bf5f63acf9cd142ea74174fd7">Server</a>(std::string listenAddr) <span class="keyword">noexcept</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="classServer.html#a1db4d4c7ae2e0cc8deaf798d3bb5d5a2">   21</a></span>  <span class="keyword">explicit</span> <a class="code hl_function" href="classServer.html#a1db4d4c7ae2e0cc8deaf798d3bb5d5a2">Server</a>(std::string listenAddr);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classServer.html#abeb09d22ed809693222e0a6958d72195">   26</a></span>  <span class="keyword">virtual</span> <a class="code hl_function" href="classServer.html#abeb09d22ed809693222e0a6958d72195">~Server</a>() noexcept;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classServer.html#a263268c249dbe6f49627fd50d496a37f">   26</a></span>  <span class="keyword">virtual</span> <a class="code hl_function" href="classServer.html#a263268c249dbe6f49627fd50d496a37f">~Server</a>();</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classServer.html#ab31cd7c625f4b5f065031fa74666c84f">   32</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classServer.html#ab31cd7c625f4b5f065031fa74666c84f">start</a>() noexcept;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classServer.html#ab37b57fc0528649d72b27f6fb98d8c4f">   32</a></span>  <span class="keyword">auto</span> <a class="code hl_function" href="classServer.html#ab37b57fc0528649d72b27f6fb98d8c4f">start</a>() -&gt; bool;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classServer.html#af717fe078aa3f00fbbf414f415e4b479">   38</a></span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classServer.html#af717fe078aa3f00fbbf414f415e4b479">stop</a>() noexcept;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classServer.html#a83dfbea612201e222039fe632951055b">   38</a></span>  <span class="keyword">auto</span> <a class="code hl_function" href="classServer.html#a83dfbea612201e222039fe632951055b">stop</a>() -&gt; bool;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classServer.html#a6a2d49674e08137aa366f3daab10af14">   44</a></span>  [[nodiscard]] std::<span class="keywordtype">string</span> <a class="code hl_function" href="classServer.html#a6a2d49674e08137aa366f3daab10af14">getListenAddr</a>() const noexcept;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classServer.html#a9b386e5664cce50ee37ec011cdc738cd">   44</a></span>  [[nodiscard]] <span class="keyword">auto</span> <a class="code hl_function" href="classServer.html#a9b386e5664cce50ee37ec011cdc738cd">getListenAddr</a>() const -&gt; std::<span class="keywordtype">string</span>;</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> private:</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  std::<span class="keywordtype">string</span> listenAddr_;  </div>
@@ -125,54 +125,54 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <a class="code hl_class" href="classPair.html">Pair</a> pair_;        </div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <a class="code hl_class" href="classStorage.html">Storage</a> storage_;  </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">void</span> run_() noexcept;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">void</span> run_();</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  [[nodiscard]] zmq::message_t handleRequest_(</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      const zmq::message_t&amp; request) noexcept;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  [[nodiscard]] auto handleRequest_(const zmq::message_t&amp; request)</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      -&gt; zmq::message_t;</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  virtual <span class="keywordtype">bool</span> addUser_(const std::<span class="keywordtype">string</span>&amp; username,</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                        const std::<span class="keywordtype">string</span>&amp; password) noexcept;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  virtual auto addUser_(const std::<span class="keywordtype">string</span>&amp; username,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                        const std::<span class="keywordtype">string</span>&amp; password) -&gt; <span class="keywordtype">bool</span>;</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  virtual <span class="keywordtype">bool</span> removeUser_(const std::<span class="keywordtype">string</span>&amp; username) noexcept;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  virtual auto removeUser_(const std::<span class="keywordtype">string</span>&amp; username) -&gt; <span class="keywordtype">bool</span>;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  [[nodiscard]] virtual <span class="keywordtype">bool</span> isExistUser_(const std::<span class="keywordtype">string</span>&amp; username) noexcept;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  [[nodiscard]] virtual auto isExistUser_(const std::<span class="keywordtype">string</span>&amp; username) -&gt; <span class="keywordtype">bool</span>;</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  [[nodiscard]] virtual std::vector&lt;std::<span class="keywordtype">string</span>&gt; listAllUsers() noexcept;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  [[nodiscard]] virtual auto listAllUsers() -&gt; std::vector&lt;std::<span class="keywordtype">string</span>&gt;;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  virtual <span class="keywordtype">bool</span> authenticateUser_(const std::<span class="keywordtype">string</span>&amp; username,</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                                 const std::<span class="keywordtype">string</span>&amp; password) noexcept;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  virtual auto authenticateUser_(const std::<span class="keywordtype">string</span>&amp; username,</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                                 const std::<span class="keywordtype">string</span>&amp; password) -&gt; <span class="keywordtype">bool</span>;</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  virtual <span class="keywordtype">bool</span> addUserTag_(const std::<span class="keywordtype">string</span>&amp; username,</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                           const std::<span class="keywordtype">string</span>&amp; tag) noexcept;</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  virtual auto addUserTag_(const std::<span class="keywordtype">string</span>&amp; username, const std::<span class="keywordtype">string</span>&amp; tag)</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>      -&gt; <span class="keywordtype">bool</span>;</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  virtual <span class="keywordtype">bool</span> removeUserTag_(const std::<span class="keywordtype">string</span>&amp; username,</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                              const std::<span class="keywordtype">string</span>&amp; tag) noexcept;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  virtual auto removeUserTag_(const std::<span class="keywordtype">string</span>&amp; username,</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                              const std::<span class="keywordtype">string</span>&amp; tag) -&gt; <span class="keywordtype">bool</span>;</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  [[nodiscard]] virtual std::vector&lt;std::<span class="keywordtype">string</span>&gt; getUserTags_(</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>      const std::<span class="keywordtype">string</span>&amp; username) noexcept;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  [[nodiscard]] virtual auto getUserTags_(const std::<span class="keywordtype">string</span>&amp; username)</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>      -&gt; std::vector&lt;std::<span class="keywordtype">string</span>&gt;;</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  virtual <span class="keywordtype">bool</span> sendMessage_(const std::<span class="keywordtype">string</span>&amp; from, const std::<span class="keywordtype">string</span>&amp; to,</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                            const std::<span class="keywordtype">string</span>&amp; message) noexcept;</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  virtual auto sendMessage_(const std::<span class="keywordtype">string</span>&amp; from, const std::<span class="keywordtype">string</span>&amp; to,</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                            const std::<span class="keywordtype">string</span>&amp; message) -&gt; <span class="keywordtype">bool</span>;</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  [[nodiscard]] virtual std::vector&lt;std::<span class="keywordtype">string</span>&gt; getSentMessages_(</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>      const std::<span class="keywordtype">string</span>&amp; username) noexcept;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  [[nodiscard]] virtual auto getSentMessages_(const std::<span class="keywordtype">string</span>&amp; username)</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>      -&gt; std::vector&lt;std::<span class="keywordtype">string</span>&gt;;</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  [[nodiscard]] virtual std::vector&lt;std::<span class="keywordtype">string</span>&gt; getReceivedMessages_(</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>      const std::<span class="keywordtype">string</span>&amp; username) noexcept;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  [[nodiscard]] virtual auto getReceivedMessages_(const std::<span class="keywordtype">string</span>&amp; username)</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>      -&gt; std::vector&lt;std::<span class="keywordtype">string</span>&gt;;</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  [[nodiscard]] virtual std::vector&lt;std::<span class="keywordtype">string</span>&gt; getPair_(</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>      const std::<span class="keywordtype">string</span>&amp; username) noexcept;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  [[nodiscard]] virtual auto getPair_(const std::<span class="keywordtype">string</span>&amp; username)</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>      -&gt; std::vector&lt;std::<span class="keywordtype">string</span>&gt;;</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>};</div>
 </div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#endif  </span><span class="comment">// SERVER_HPP</span></div>
 <div class="ttc" id="aclassPair_html"><div class="ttname"><a href="classPair.html">Pair</a></div><div class="ttdoc">A class to manage user pairs and their similarities.</div><div class="ttdef"><b>Definition</b> pair.hpp:13</div></div>
 <div class="ttc" id="aclassServer_html"><div class="ttname"><a href="classServer.html">Server</a></div><div class="ttdoc">Represents a server that can be started, stopped, and restarted.</div><div class="ttdef"><b>Definition</b> server.hpp:15</div></div>
-<div class="ttc" id="aclassServer_html_a6a2d49674e08137aa366f3daab10af14"><div class="ttname"><a href="classServer.html#a6a2d49674e08137aa366f3daab10af14">Server::getListenAddr</a></div><div class="ttdeci">std::string getListenAddr() const noexcept</div><div class="ttdoc">Gets the address the server is listening on.</div></div>
-<div class="ttc" id="aclassServer_html_a7e67af9bf5f63acf9cd142ea74174fd7"><div class="ttname"><a href="classServer.html#a7e67af9bf5f63acf9cd142ea74174fd7">Server::Server</a></div><div class="ttdeci">Server(std::string listenAddr) noexcept</div><div class="ttdoc">Constructs a Server object.</div></div>
-<div class="ttc" id="aclassServer_html_ab31cd7c625f4b5f065031fa74666c84f"><div class="ttname"><a href="classServer.html#ab31cd7c625f4b5f065031fa74666c84f">Server::start</a></div><div class="ttdeci">bool start() noexcept</div><div class="ttdoc">Starts the server on the specified port.</div></div>
-<div class="ttc" id="aclassServer_html_abeb09d22ed809693222e0a6958d72195"><div class="ttname"><a href="classServer.html#abeb09d22ed809693222e0a6958d72195">Server::~Server</a></div><div class="ttdeci">virtual ~Server() noexcept</div><div class="ttdoc">Destroys the Server object.</div></div>
-<div class="ttc" id="aclassServer_html_af717fe078aa3f00fbbf414f415e4b479"><div class="ttname"><a href="classServer.html#af717fe078aa3f00fbbf414f415e4b479">Server::stop</a></div><div class="ttdeci">bool stop() noexcept</div><div class="ttdoc">Stops the server.</div></div>
+<div class="ttc" id="aclassServer_html_a1db4d4c7ae2e0cc8deaf798d3bb5d5a2"><div class="ttname"><a href="classServer.html#a1db4d4c7ae2e0cc8deaf798d3bb5d5a2">Server::Server</a></div><div class="ttdeci">Server(std::string listenAddr)</div><div class="ttdoc">Constructs a Server object.</div></div>
+<div class="ttc" id="aclassServer_html_a263268c249dbe6f49627fd50d496a37f"><div class="ttname"><a href="classServer.html#a263268c249dbe6f49627fd50d496a37f">Server::~Server</a></div><div class="ttdeci">virtual ~Server()</div><div class="ttdoc">Destroys the Server object.</div></div>
+<div class="ttc" id="aclassServer_html_a83dfbea612201e222039fe632951055b"><div class="ttname"><a href="classServer.html#a83dfbea612201e222039fe632951055b">Server::stop</a></div><div class="ttdeci">auto stop() -&gt; bool</div><div class="ttdoc">Stops the server.</div></div>
+<div class="ttc" id="aclassServer_html_a9b386e5664cce50ee37ec011cdc738cd"><div class="ttname"><a href="classServer.html#a9b386e5664cce50ee37ec011cdc738cd">Server::getListenAddr</a></div><div class="ttdeci">auto getListenAddr() const -&gt; std::string</div><div class="ttdoc">Gets the address the server is listening on.</div></div>
+<div class="ttc" id="aclassServer_html_ab37b57fc0528649d72b27f6fb98d8c4f"><div class="ttname"><a href="classServer.html#ab37b57fc0528649d72b27f6fb98d8c4f">Server::start</a></div><div class="ttdeci">auto start() -&gt; bool</div><div class="ttdoc">Starts the server on the specified port.</div></div>
 <div class="ttc" id="aclassStorage_html"><div class="ttname"><a href="classStorage.html">Storage</a></div><div class="ttdoc">A class to manage user data.</div><div class="ttdef"><b>Definition</b> storage.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
