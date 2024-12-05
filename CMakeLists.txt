@@ -92,20 +92,16 @@ target_link_libraries(backend PUBLIC storage chat pair api)
 # Tests
 # API
 ## Client test
-add_executable(test-client test/api/test-client.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
-target_link_libraries(test-client PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_executable(test-client test/api/test-client.cpp)
+target_link_libraries(test-client PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-client COMMAND test-client)
 ## Message test
-add_executable(test-message test/api/test-message.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
-target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_executable(test-message test/api/test-message.cpp)
+target_link_libraries(test-message PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
 ## Server test
 add_executable(test-server test/api/test-server.cpp)
-target_link_libraries(test-server PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+target_link_libraries(test-server PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-server COMMAND test-server)
 
 # Storage
@@ -115,8 +111,6 @@ add_test(NAME s-test COMMAND s-test)
 
 
 # Pair
-add_executable(test-pair test/pair/test-pair.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
-target_link_libraries(test-pair PRIVATE pair GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_executable(test-pair test/pair/test-pair.cpp)
+target_link_libraries(test-pair PUBLIC pair GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-pair COMMAND test-pair)
