@@ -1,79 +1,67 @@
+#include <gmock/gmock-matchers.h>
 #include <gtest/gtest.h>
 
 #include "api/message.hpp"
 
-TEST(MessageTest, TestConstructorFromTypeAndContentSimple) {
-  const Message message(MessageType::ADD_USER, "content");
+TEST(MessageTest, TestConstructorFromType) {
+  const Message message(MessageType::ADD_USER);
   ASSERT_EQ(message.getType(), MessageType::ADD_USER);
-  ASSERT_EQ(message.getContent(), "content");
 }
 
-TEST(MessageTest, TestConstructorFromTypeAndContentComplex) {
-  nlohmann::json content;
-  content["key"] = "value";
-  const Message message(MessageType::ADD_USER, content);
-  ASSERT_EQ(message.getType(), MessageType::ADD_USER);
-  ASSERT_EQ(message.getContent(), content);
+TEST(MessageTest, TestConstructorFromString) {
+  const Message message(MessageType::ADD_USER);
+  const Message message2(message.toString());
+
+  EXPECT_EQ(message.getType(), message2.getType());
 }
 
-TEST(MessageTest, TestConstructorFromJsonSimple) {
-  nlohmann::json json;
-  json["type"] = MessageType::ADD_USER;
-  json["content"] = "content";
-  const Message message(json);
-  ASSERT_EQ(message.getType(), MessageType::ADD_USER);
-  ASSERT_EQ(message.getContent(), "content");
+TEST(MessageTest, TestSetGetUsername) {
+  Message message(MessageType::ADD_USER);
+  message.setUsername("test");
+
+  EXPECT_EQ(message.getUsername(), "test");
 }
 
-TEST(MessageTest, TestConstructorFromJsonComplex) {
-  nlohmann::json content;
-  content["key"] = "value";
-  nlohmann::json json;
-  json["type"] = MessageType::ADD_USER;
-  json["content"] = content;
-  Message message(json);
-  ASSERT_EQ(message.getType(), MessageType::ADD_USER);
-  ASSERT_EQ(message.getContent(), content);
+TEST(MessageTest, TestSetGetPassword) {
+  Message message(MessageType::ADD_USER);
+  message.setPassword("password");
+
+  EXPECT_EQ(message.getPassword(), "password");
 }
 
-TEST(MessageTest, TestToJsonSimple) {
-  const Message message(MessageType::ADD_USER, "content");
-  nlohmann::json json = message.toJson();
-  ASSERT_EQ(json["type"], MessageType::ADD_USER);
-  ASSERT_EQ(json["content"], "content");
+TEST(MessageTest, TestSetGetTag) {
+  Message message(MessageType::ADD_USER);
+  message.setTag("tag");
+
+  EXPECT_EQ(message.getTag(), "tag");
 }
 
-TEST(MessageTest, TestToJsonComplex) {
-  nlohmann::json content;
-  content["key"] = "value";
-  const Message message(MessageType::ADD_USER, content);
-  nlohmann::json json = message.toJson();
-  ASSERT_EQ(json["type"], MessageType::ADD_USER);
-  ASSERT_EQ(json["content"], content);
+TEST(MessageTest, TestSetGetFrom) {
+  Message message(MessageType::SEND_MESSAGE);
+  message.setFrom("user");
+
+  EXPECT_EQ(message.getFrom(), "user");
 }
 
-TEST(MessageTest, TestStringSimple) {
-  constexpr auto type = MessageType::ADD_USER;
-  const std::string content = "content";
+TEST(MessageTest, TestSetGetTo) {
+  Message message(MessageType::SEND_MESSAGE);
+  message.setTo("user");
 
-  const Message original(type, content);
-
-  const Message message(original.toString());
-
-  ASSERT_EQ(message.getType(), type);
-  ASSERT_EQ(message.getContent(), content);
+  EXPECT_EQ(message.getTo(), "user");
 }
 
-TEST(MessageTest, TestStringComplex) {
-  constexpr auto type = MessageType::ADD_USER;
-  nlohmann::json content;
-  content["key"] = "value";
-  const Message original(type, content);
+TEST(MessageTest, TestSetGetMessage) {
+  Message message(MessageType::SEND_MESSAGE);
+  message.setMessage("message");
 
-  const Message message(original.toString());
+  EXPECT_EQ(message.getMessage(), "message");
+}
 
-  ASSERT_EQ(message.getType(), type);
-  ASSERT_EQ(message.getContent(), content);
+TEST(MessageTest, TestSetGetVector) {
+  Message message(MessageType::LIST_ALL_USERS);
+  message.setVector({"user1", "user2"});
+
+  EXPECT_THAT(message.getVector(), testing::ElementsAre("user1", "user2"));
 }
 
 int main(int argc, char** argv) {
