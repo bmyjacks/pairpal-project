@@ -8,7 +8,7 @@
 
 #include "chat/message.hpp"
 #include "storage/message_store.hpp"
-#include "api/message.hpp"
+
 
 /**
  * @class Chat
