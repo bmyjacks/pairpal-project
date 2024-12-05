@@ -8,7 +8,7 @@ Pair::~Pair() = default;
 
 void Pair::setStorage(const Storage &storage) { storage_ = storage; }
 
-std::vector<std::string> Pair::getPair(const std::string &username) {
+auto Pair::getPair(const std::string &username) -> std::vector<std::string> {
   const auto allUsernames = getAllUsernames_();
 
   std::vector<std::pair<std::string, float>> similarities;
@@ -36,14 +36,15 @@ std::vector<std::string> Pair::getPair(const std::string &username) {
   return result;
 }
 
-std::vector<std::string> Pair::getAllUsernames_() { return {}; }
+auto Pair::getAllUsernames_() -> std::vector<std::string> { return {}; }
 
-std::vector<std::string> Pair::getUserTags_(const std::string &username) {
+auto Pair::getUserTags_(const std::string &username)
+    -> std::vector<std::string> {
   return {};
 }
 
-float Pair::getSimilarity_(const std::string &username1,
-                           const std::string &username2) {
+auto Pair::getSimilarity_(const std::string &username1,
+                          const std::string &username2) -> float {
   const auto user1Tags = getUserTags_(username1);
   const auto user2Tags = getUserTags_(username2);
 

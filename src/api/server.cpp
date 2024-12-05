@@ -9,68 +9,68 @@
 #include "api/message.hpp"
 #include "pair/pair.hpp"
 
-Server::Server(std::string listenAddr) noexcept
+Server::Server(std::string listenAddr)
     : listenAddr_(std::move(listenAddr)),
       context_(1),
       socket_(context_, zmq::socket_type::rep),
       running_(false) {
   pair_.setStorage(storage_);
 }
-Server::~Server() noexcept = default;
+Server::~Server() = default;
 
-std::string Server::getListenAddr() const noexcept { return listenAddr_; }
+auto Server::getListenAddr() const -> std::string { return listenAddr_; }
 
-bool Server::start() noexcept {
+auto Server::start() -> bool {
   try {
     running_ = true;
     socket_.bind(listenAddr_);
   } catch (const zmq::error_t& e) {
     std::cerr << std::format("[ERROR] {} Error starting server: {}",
                              std::chrono::system_clock::now(), e.what())
-              << std::endl;
+              << '\n';
     return false;
   }
 
   std::cout << std::format("[INFO] {} started on {}",
                            std::chrono::system_clock::now(), listenAddr_)
-            << std::endl;
+            << '\n';
 
   serverThread_ = std::thread(&Server::run_, this);
 
   return true;
 }
 
-void Server::run_() noexcept {
+void Server::run_() {
   while (running_) {
     try {
       zmq::message_t request;
-      zmq::recv_result_t result =
+      const zmq::recv_result_t result =
           socket_.recv(request, zmq::recv_flags::dontwait);
 
       if (result.has_value()) {
         std::cout << std::format("[INFO] {} Received request {}",
                                  std::chrono::system_clock::now(),
                                  request.to_string())
-                  << std::endl;
+                  << '\n';
 
         auto reply = handleRequest_(request);
         socket_.send(reply, zmq::send_flags::none);
         std::cout << std::format("[INFO] {} Sent reply {}",
                                  std::chrono::system_clock::now(),
                                  reply.to_string())
-                  << std::endl;
+                  << '\n';
       }
     } catch (const zmq::error_t& e) {
       std::cerr << std::format("[ERROR] {} Error receiving message: {}",
                                std::chrono::system_clock::now(), e.what())
-                << std::endl;
+                << '\n';
     }
 
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
   }
 }
 
-bool Server::stop() noexcept {
+auto Server::stop() -> bool {
   try {
     running_ = false;
 
@@ -84,13 +84,13 @@ bool Server::stop() noexcept {
   } catch (const zmq::error_t& e) {
     std::cerr << std::format("[ERROR] {} Error stopping server: {}",
                              std::chrono::system_clock::now(), e.what())
-              << std::endl;
+              << '\n';
     return false;
   }
   return true;
 }
 
-zmq::message_t Server::handleRequest_(const zmq::message_t& request) noexcept {
+auto Server::handleRequest_(const zmq::message_t& request) -> zmq::message_t {
   const Message requestMessage(request.to_string());
   const MessageType requestType = requestMessage.getType();
 
@@ -184,20 +184,20 @@ zmq::message_t Server::handleRequest_(const zmq::message_t& request) noexcept {
   return replyFailure;
 }
 
-bool Server::addUser_(const std::string& username,
-                      const std::string& password) noexcept {
+auto Server::addUser_(const std::string& username, const std::string& password)
+    -> bool {
   return storage_.addUser(username, password);
 }
 
-bool Server::removeUser_(const std::string& username) noexcept {
+auto Server::removeUser_(const std::string& username) -> bool {
   return storage_.removeUser(username);
 }
 
-bool Server::isExistUser_(const std::string& username) noexcept {
+auto Server::isExistUser_(const std::string& username) -> bool {
   return storage_.isUserExist(username);
 }
 
-std::vector<std::string> Server::listAllUsers() noexcept {
+auto Server::listAllUsers() -> std::vector<std::string> {
   std::vector<std::string> users;
 
   for (const auto& [id, username, password, tags] : storage_.getUsers()) {
@@ -207,45 +207,44 @@ std::vector<std::string> Server::listAllUsers() noexcept {
   return users;
 }
 
-bool Server::authenticateUser_(const std::string& username,
-                               const std::string& password) noexcept {
+auto Server::authenticateUser_(const std::string& username,
+                               const std::string& password) -> bool {
   return storage_.authenticateUser(username, password);
 }
 
-bool Server::addUserTag_(const std::string& username,
-                         const std::string& tag) noexcept {
+auto Server::addUserTag_(const std::string& username, const std::string& tag)
+    -> bool {
   return storage_.addTag(username, tag);
 }
 
-bool Server::removeUserTag_(const std::string& username,
-                            const std::string& tag) noexcept {
+auto Server::removeUserTag_(const std::string& username, const std::string& tag)
+    -> bool {
   return storage_.removeTag(username, tag);
 }
 
-std::vector<std::string> Server::getUserTags_(
-    const std::string& username) noexcept {
+auto Server::getUserTags_(const std::string& username)
+    -> std::vector<std::string> {
   return storage_.getTags(username);
 }
 
-bool Server::sendMessage_(const std::string& from, const std::string& to,
-                          const std::string& message) noexcept {
+auto Server::sendMessage_(const std::string& from, const std::string& to,
+                          const std::string& message) -> bool {
   // Send message to user
   return true;
 }
 
-std::vector<std::string> Server::getSentMessages_(
-    const std::string& username) noexcept {
+auto Server::getSentMessages_(const std::string& username)
+    -> std::vector<std::string> {
   // Get all sent messages of user
   return {};
 }
 
-std::vector<std::string> Server::getReceivedMessages_(
-    const std::string& username) noexcept {
+auto Server::getReceivedMessages_(const std::string& username)
+    -> std::vector<std::string> {
   // Get all received message of user
   return {};
 }
 
-std::vector<std::string> Server::getPair_(
-    const std::string& username) noexcept {
+auto Server::getPair_(const std::string& username) -> std::vector<std::string> {
   return pair_.getPair(username);
 }

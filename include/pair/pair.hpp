@@ -33,7 +33,8 @@ class Pair {
    * @param username The username for which to get the pair.
    * @return A vector of paired usernames.
    */
-  [[nodiscard]] std::vector<std::string> getPair(const std::string &username);
+  [[nodiscard]] auto getPair(const std::string &username)
+      -> std::vector<std::string>;
 
  private:
   friend class MockPair;  ///< Allows MockPair to access private members.
@@ -44,15 +45,15 @@ class Pair {
    * @brief Gets all usernames.
    * @return A vector of all usernames.
    */
-  [[nodiscard]] virtual std::vector<std::string> getAllUsernames_();
+  [[nodiscard]] virtual auto getAllUsernames_() -> std::vector<std::string>;
 
   /**
    * @brief Gets the tags for a given username.
    * @param username The username for which to get the tags.
    * @return A vector of tags for the given username.
    */
-  [[nodiscard]] virtual std::vector<std::string> getUserTags_(
-      const std::string &username);
+  [[nodiscard]] virtual auto getUserTags_(const std::string &username)
+      -> std::vector<std::string>;
 
   /**
    * @brief Calculates the similarity between two usernames.
@@ -60,8 +61,9 @@ class Pair {
    * @param username2 The second username.
    * @return The similarity score between the two usernames.
    */
-  [[nodiscard]] virtual float getSimilarity_(const std::string &username1,
-                                             const std::string &username2);
+  [[nodiscard]] virtual auto getSimilarity_(const std::string &username1,
+                                            const std::string &username2)
+      -> float;
 };
 
 #endif  // PAIR_HPP
