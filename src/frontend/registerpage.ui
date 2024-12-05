@@ -75,7 +75,7 @@ QPushButton:pressed
      <string>昵称：</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="name">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -103,7 +103,7 @@ QPushButton:pressed
      <string>性别：</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="gender">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -607,7 +607,7 @@ QPushButton:pressed
      <string>新用户注册</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="grade">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -657,7 +657,7 @@ QPushButton:pressed
      </property>
     </item>
    </widget>
-   <widget class="QComboBox" name="comboBox_2">
+   <widget class="QComboBox" name="school">
     <property name="geometry">
      <rect>
       <x>290</x>
@@ -702,7 +702,7 @@ QPushButton:pressed
      </property>
     </item>
    </widget>
-   <widget class="QComboBox" name="comboBox_3">
+   <widget class="QComboBox" name="college">
     <property name="geometry">
      <rect>
       <x>480</x>
@@ -770,7 +770,7 @@ QPushButton:pressed
      <string>密码：</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="password">
     <property name="geometry">
      <rect>
       <x>290</x>

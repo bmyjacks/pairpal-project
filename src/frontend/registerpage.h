@@ -7,18 +7,22 @@ namespace Ui {
 class Registerpage;
 }
 
-class Registerpage : public QDialog {
-  Q_OBJECT
+class Registerpage : public QDialog
+{
+    Q_OBJECT
 
- public:
-  explicit Registerpage(QWidget *parent = nullptr);
-  ~Registerpage();
+public:
+    explicit Registerpage(QWidget *parent = nullptr);
+    void onButtonClicked();
+    ~Registerpage();
 
- signals:
-  void back();
+signals:
+    void back();
 
- private:
-  Ui::Registerpage *ui;
+
+
+private:
+    Ui::Registerpage *ui;
 };
 
-#endif  // REGISTERPAGE_H
+#endif // REGISTERPAGE_H

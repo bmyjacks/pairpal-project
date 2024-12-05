@@ -50,10 +50,14 @@ target_include_directories(storage PUBLIC include)
 
 # Add UI forms
 set(UI_SOURCES
+        src/frontend/chat.ui
         src/frontend/dialog.ui
         src/frontend/eat.ui
+        src/frontend/list.ui
+        src/frontend/messagelist.ui
         src/frontend/pairpal.ui
         src/frontend/play.ui
+        src/frontend/qq03.ui
         src/frontend/registerpage.ui
         src/frontend/self.ui
         src/frontend/sport.ui
@@ -66,11 +70,14 @@ qt5_add_translation(QM_FILES ${TRANSLATIONS})
 
 # Define frontend
 add_executable(frontend
-        src/frontend/main.cpp
+        src/frontend/chat.cpp
         src/frontend/dialog.cpp
         src/frontend/eat.cpp
+        src/frontend/list.cpp
+        src/frontend/main.cpp
         src/frontend/pairpal.cpp
         src/frontend/play.cpp
+        src/frontend/qq03.cpp
         src/frontend/registerpage.cpp
         src/frontend/self.cpp
         src/frontend/sport.cpp

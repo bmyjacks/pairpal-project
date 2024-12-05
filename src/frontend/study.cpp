@@ -1,15 +1,19 @@
 #include "study.h"
-
-#include <QPushButton>
-
 #include "ui_study.h"
-study::study(QWidget *parent) : QWidget(parent), ui(new Ui::study) {
-  ui->setupUi(this);
-  connect(ui->back1, &QPushButton::clicked, [=]() {
-    // 发一个信号
-    emit this->back();
-  });
+#include <QPushButton>
+study::study(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::study)
+{
+    ui->setupUi(this);
+    connect(ui->back1,&QPushButton::clicked,[=](){
+           //发一个信号
+        emit this->back();
+
+           });
 }
 
-study::~study() { delete ui;
+study::~study()
+{
+    delete ui;
 }
