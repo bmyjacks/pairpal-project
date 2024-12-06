@@ -111,6 +111,10 @@ target_link_libraries(test-server PUBLIC api GTest::gtest GTest::gtest_main GTes
 add_test(NAME test-server COMMAND test-server)
 
 # Storage
+add_executable(test-storage test/storage/test-storage.cpp)
+target_link_libraries(test-storage PUBLIC storage GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_test(NAME test-storage COMMAND test-storage)
+
 add_executable(s-test test/Storage_test/s-test.cpp)
 target_link_libraries(s-test storage)
 add_test(NAME s-test COMMAND s-test)
