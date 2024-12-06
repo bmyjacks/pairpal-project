@@ -57,7 +57,6 @@ set(UI_SOURCES
         src/frontend/messagelist.ui
         src/frontend/pairpal.ui
         src/frontend/play.ui
-        src/frontend/qq03.ui
         src/frontend/registerpage.ui
         src/frontend/self.ui
         src/frontend/sport.ui
@@ -77,7 +76,6 @@ add_executable(frontend
         src/frontend/main.cpp
         src/frontend/pairpal.cpp
         src/frontend/play.cpp
-        src/frontend/qq03.cpp
         src/frontend/registerpage.cpp
         src/frontend/self.cpp
         src/frontend/sport.cpp
