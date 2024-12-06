@@ -3,6 +3,7 @@
 #include "registerpage.h"//头文件
 #include "pairpal.h"
 #include <QPushButton>
+#include "ui.h"
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Dialog)
@@ -38,7 +39,12 @@ Dialog::~Dialog()
 
 void Dialog::on_btnLogin_clicked()
 {
-    if(ui->txtUserName->text()==tr("dabao")&&ui->txtPassWord->text()==tr("123456"))
+    // 获取输入的用户名和密码
+        QString name = ui->txtUserName->text();
+        QString password = ui->txtPassWord->text();
+
+    //目前是固定的姓名和密码 要调用adduser函数里的姓名和密码传入
+    if(UI::authenticateUser(name.toStdString(), password.toStdString()))
     {
 
         this->hide();//隐藏

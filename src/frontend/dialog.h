@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include "registerpage.h"//yemianer
 #include "pairpal.h"//zhuyemian
+#include "self.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -22,9 +23,11 @@ public:
     pairpal *ppage3=NULL;//保存主页面
 private slots:
     void on_btnLogin_clicked();
+//    void logout();
 
 
 private:
+//    void resetSessionData()；
     Ui::Dialog *ui;
 };
 #endif // DIALOG_H
