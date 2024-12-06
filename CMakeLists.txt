@@ -82,6 +82,7 @@ add_executable(frontend
         src/frontend/self.cpp
         src/frontend/sport.cpp
         src/frontend/study.cpp
+        src/frontend/ui.cpp
         ${UI_SOURCES}
         ${QM_FILES}
 )
