@@ -80,7 +80,7 @@ QPushButton:pressed
      </property>
     </widget>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="studytime">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -126,7 +126,7 @@ QPushButton:pressed
      <string>地点</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="studyplace">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -154,7 +154,7 @@ QPushButton:pressed
      <string>学习项目</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="studypair">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -185,7 +185,7 @@ QPushButton:pressed
      <string> (x年x月x日xx am./pm.)</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="studyitem">
     <property name="geometry">
      <rect>
       <x>160</x>

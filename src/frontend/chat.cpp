@@ -3,6 +3,7 @@
 #include <QPushButton>
 #include <QDebug>
 #include <QKeyEvent>
+#include "ui.h" 
 chat::chat(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::chat)
@@ -17,6 +18,7 @@ chat::chat(QWidget *parent) :
     messageList = findChild<QTextBrowser *>("messageList"); // 显示消息列表
     inputField = findChild<QTextEdit *>("inputField");      // 输入框
     sendButton = findChild<QPushButton *>("sendButton");    // 发送按钮
+    lb_name = findChild<QLabel *>("lb_name"); // 查找 lb_name
 
     // 检查控件是否找到
     if (!messageList || !inputField || !sendButton) {
@@ -37,23 +39,37 @@ chat::~chat()
 {
     delete ui;
 }
+
+void chat::setChatName(const QString &name)
+{
+    lb_name->setText(name);
+}
+
 void chat::onSendButtonClicked()
 {
-    // 获取输入框的文本
-    QString message = inputField->toPlainText().trimmed(); // QTextEdit 使用 toPlainText
+    QString message = inputField->toPlainText().trimmed();
 
     if (!message.isEmpty()) {
-        // 将消息添加到消息显示区域（QTextBrowser）
-        messageList->append("我: " + message);
+        // 发送消息
+        QString recipient = lb_name->text(); // 假设 lb_name 是接收者
+        if (UI::sendMessage(UI::currentUsername.toStdString(), recipient.toStdString(), message.toStdString())) {
+            // 将消息添加到消息显示区域
+            messageList->append("我: " + message);
 
-        // 清空输入框
-        inputField->clear();
+            // 清空输入框
+            inputField->clear();
 
-//        // 模拟接收一条消息
-//        messageList->append("对方: 收到 -> " + message);
+            // 模拟接收一条消息
+            std::vector<std::string> receivedMessages = UI::getReceivedMessages(recipient.toStdString());
+            for (const auto& recvMsg : receivedMessages) {
+                messageList->append("对方: " + QString::fromStdString(recvMsg));
+            }
 
-        // 自动滚动到最新消息
-        messageList->moveCursor(QTextCursor::End);
+            // 自动滚动到最新消息
+            messageList->moveCursor(QTextCursor::End);
+        } else {
+            qDebug() << "Failed to send message!";
+        }
     }
 }
 

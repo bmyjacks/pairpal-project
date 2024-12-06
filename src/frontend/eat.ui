@@ -80,7 +80,7 @@ QPushButton:pressed
      </property>
     </widget>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="eattime">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -126,7 +126,7 @@ QPushButton:pressed
      <string>地点</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="eatplace">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -154,7 +154,7 @@ QPushButton:pressed
      <string>食物种类</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="eatitem">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -219,7 +219,7 @@ QPushButton:pressed
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="eatpair">
     <property name="geometry">
      <rect>
       <x>260</x>

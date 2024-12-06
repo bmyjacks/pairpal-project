@@ -16,11 +16,11 @@ SOURCES += \
     dialog.cpp \
     pairpal.cpp \
     play.cpp \
-    qq03.cpp \
     registerpage.cpp \
     self.cpp \
     sport.cpp \
-    study.cpp
+    study.cpp \
+    ui.cpp
 
 HEADERS += \
     chat.h \
@@ -29,11 +29,11 @@ HEADERS += \
     list.h \
     pairpal.h \
     play.h \
-    qq03.h \
     registerpage.h \
     self.h \
     sport.h \
-    study.h
+    study.h \
+    ui.h
 
 FORMS += \
     chat.ui \
@@ -42,7 +42,6 @@ FORMS += \
     list.ui \
     pairpal.ui \
     play.ui \
-    qq03.ui \
     registerpage.ui \
     self.ui \
     sport.ui \
