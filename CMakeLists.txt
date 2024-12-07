@@ -84,7 +84,7 @@ add_executable(frontend
         ${UI_SOURCES}
         ${QM_FILES}
 )
-target_include_directories(frontend PUBLIC include)
+target_include_directories(frontend PUBLIC include src/frontend)
 target_link_libraries(frontend PUBLIC api Qt5::Widgets Qt5::Core Qt5::Gui)
 
 
