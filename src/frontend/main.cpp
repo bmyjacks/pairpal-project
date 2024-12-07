@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    UI::UI();
+    UI();
     QApplication a(argc, argv);
     Dialog w;//zhuchuangkou
     w.show();

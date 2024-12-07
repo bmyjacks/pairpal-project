@@ -7,8 +7,8 @@
 #include "api/client.hpp"
 
 class UI {
-private:
   static Client client_;
+
  public:
   UI();
 
