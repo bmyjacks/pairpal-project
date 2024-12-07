@@ -10,20 +10,43 @@ Client::Client(std::string serverAddr)
       context_(1),
       socket_(context_, zmq::socket_type::req) {}
 
+Client::Client(const Client& other)
+    : serverAddr_(other.serverAddr_),
+      context_(1),
+      socket_(context_, zmq::socket_type::req) {}
+
+Client::Client(Client&& other) noexcept
+    : serverAddr_(std::move(other.serverAddr_)),
+      context_(std::move(other.context_)),
+      socket_(std::move(other.socket_)) {}
+
 auto Client::operator=(const Client& other) -> Client& {
   if (this == &other) {
-    return *this;  // Handle self-assignment
+    return *this;
   }
 
-  // Release any resources held by the current object
   socket_.close();
   context_.close();
 
-  // Copy the resources from the source object
   serverAddr_ = other.serverAddr_;
   context_ = zmq::context_t(1);
   socket_ = zmq::socket_t(context_, zmq::socket_type::req);
   socket_.connect(serverAddr_);
+
+  return *this;
+}
+
+auto Client::operator=(Client&& other) noexcept -> Client& {
+  if (this == &other) {
+    return *this;
+  }
+
+  socket_.close();
+  context_.close();
+
+  serverAddr_ = std::move(other.serverAddr_);
+  context_ = std::move(other.context_);
+  socket_ = std::move(other.socket_);
 
   return *this;
 }
