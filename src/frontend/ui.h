@@ -4,11 +4,16 @@
 #include <string>
 #include <vector>
 
+#include "api/client.hpp"
+
 class UI {
+private:
+  static Client client_;
  public:
   UI();
+
   static bool addUser(const std::string& username, const std::string& password);
-    // 添加一个静态变量来存储当前用户名
+  // 添加一个静态变量来存储当前用户名
   static std::string currentUsername;
 
   static bool removeUser(const std::string& username);

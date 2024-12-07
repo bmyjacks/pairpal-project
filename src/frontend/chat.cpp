@@ -52,7 +52,7 @@ void chat::onSendButtonClicked()
     if (!message.isEmpty()) {
         // 发送消息
         QString recipient = lb_name->text(); // 假设 lb_name 是接收者
-        if (UI::sendMessage(UI::currentUsername.toStdString(), recipient.toStdString(), message.toStdString())) {
+        if (UI::sendMessage(UI::currentUsername, recipient.toStdString(), message.toStdString())) {
             // 将消息添加到消息显示区域
             messageList->append("我: " + message);
 

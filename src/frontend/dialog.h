@@ -3,9 +3,12 @@
 
 #include <QDialog>
 #include <QMessageBox>
-#include "registerpage.h"//yemianer
-#include "pairpal.h"//zhuyemian
-#include "self.h"
+// #include "registerpage.h"//yemianer
+// #include "pairpal.h"//zhuyemian
+// #include "self.h"
+class Registerpage;  // 前向声明
+class pairpal;
+class self;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }

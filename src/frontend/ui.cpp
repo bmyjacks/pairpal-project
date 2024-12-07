@@ -1,5 +1,9 @@
 #include "ui.h"
 
+std::string UI::currentUsername;
+
+UI::UI() { client_ = Client("tcp://localhost:5555"); }
+
 bool UI::addUser(const std::string& username, const std::string& password) {
   currentUsername = username;
   return true;

@@ -2,7 +2,10 @@
 #define REGISTERPAGE_H
 
 #include <QDialog>
-#include "self.h"
+// #include "self.h"
+
+class self;  // 前向声明
+
 namespace Ui {
 class Registerpage;
 }
