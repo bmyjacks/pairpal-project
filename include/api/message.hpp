@@ -103,7 +103,7 @@ class Message {
 
  private:
   MessageType type_;        ///< The type of the message
-  nlohmann::json content_{};  ///< The content of the message in JSON format
+  nlohmann::json content_;  ///< The content of the message in JSON format
 
 };
 
