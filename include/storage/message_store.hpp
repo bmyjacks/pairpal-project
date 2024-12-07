@@ -4,15 +4,17 @@
 #include <tuple>
 #include <string>
 #include <map>
-
-class message_store {
+#include <sqlite3.h>
+class Message_store {
 public:
-    message_store();
-    ~message_store();
-    bool addMessage(const std::string& fromUser, const std::string& toUser, const std::string& message);
-    std::vector<std::tuple<int, std::string, std::string, std::string, std::string>> Message_store::getMessages();
+    Message_store();
+    ~Message_store();
+    bool addMessage(const std::string& fromUser, const std::string& toUser, const std::string& messageconst, std::string& timeStamp);
+    std::vector<std::tuple<int, std::string, std::string, std::string, std::string>> getMessages();
     //可以加个撤回
 
-};
 
+private:
+    sqlite3* db;
+};
 #endif // MESSAGE_STORE_HPP

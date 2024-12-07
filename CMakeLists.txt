@@ -32,7 +32,8 @@ target_link_libraries(api PUBLIC pair nlohmann_json::nlohmann_json cppzmq cppzmq
 add_library(chat STATIC
         src/chat/chat.cpp
         src/chat/dialog.cpp
-        src/chat/message.cpp)
+        src/chat/message.cpp
+        src/storage/message_store.cpp)
 target_include_directories(chat PUBLIC include)
 
 # Pair library
@@ -45,7 +46,8 @@ target_link_libraries(pair PUBLIC storage)
 add_library(storage STATIC
         src/storage/storage.cpp
         src/storage/user.cpp
-        src/storage/sqlite3.c)
+        src/storage/sqlite3.c
+        src/storage/message_store.cpp)
 target_include_directories(storage PUBLIC include)
 
 # Add UI forms
@@ -100,7 +102,8 @@ add_test(NAME test-client COMMAND test-client)
 ## Message test
 add_executable(test-message test/api/test-message.cpp
         src/api/message.cpp
-        src/api/server.cpp)
+        src/api/server.cpp
+        src/storage/message_store.cpp)
 target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
 ## Server test
@@ -113,6 +116,11 @@ add_executable(s-test test/Storage_test/s-test.cpp)
 target_link_libraries(s-test storage)
 add_test(NAME s-test COMMAND s-test)
 
+# Chat
+add_executable(chat-test test/Chat_test/chat-test.cpp
+        src/storage/message_store.cpp)
+target_link_libraries(chat-test chat)
+add_test(NAME chat-test COMMAND chat-test)
 
 # Pair
 add_executable(test-pair test/pair/test-pair.cpp

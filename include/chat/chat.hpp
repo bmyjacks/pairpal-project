@@ -12,7 +12,7 @@
 
 /**
  * @class Chat
- * @brief A class to handle chat functionalities including sending and
+ * @brief A class to handle Chat_test functionalities including sending and
  * retrieving messages.
  */
 class Chat {
