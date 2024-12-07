@@ -97,6 +97,8 @@ TEST(ClientTest, TestStart) {
   EXPECT_TRUE(client.start());
 }
 
+TEST(ClientTest, TestCopy) { Client client = Client("tcp://localhost:57880"); }
+
 TEST(ClientTest, TestAddUserTrue) {
   MockServer server("tcp://localhost:57880");
   server.startReturnTrue();

@@ -17,6 +17,12 @@ class Client {
    */
   explicit Client(std::string serverAddr);
 
+  Client(const Client& other);
+  Client(Client&& other) noexcept;
+
+  auto operator=(const Client& other) -> Client&;
+  auto operator=(Client&& other) noexcept -> Client&;
+
   /**
    * @brief Destructor for the Client class.
    */
