@@ -18,6 +18,32 @@ class Client {
   explicit Client(std::string serverAddr);
 
   /**
+   * @brief Copy constructor for the Client class.
+   * @param other The other Client object to copy from.
+   */
+  Client(const Client& other);
+
+  /**
+   * @brief Move constructor for the Client class.
+   * @param other The other Client object to move from.
+   */
+  Client(Client&& other) noexcept;
+
+  /**
+   * @brief Copy assignment operator for the Client class.
+   * @param other The other Client object to copy from.
+   * @return A reference to the assigned Client object.
+   */
+  auto operator=(const Client& other) -> Client&;
+
+  /**
+   * @brief Move assignment operator for the Client class.
+   * @param other The other Client object to move from.
+   * @return A reference to the assigned Client object.
+   */
+  auto operator=(Client&& other) noexcept -> Client&;
+
+  /**
    * @brief Destructor for the Client class.
    */
   ~Client();
