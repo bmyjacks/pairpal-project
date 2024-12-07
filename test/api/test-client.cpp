@@ -12,9 +12,8 @@
 class MockServer {
  public:
   explicit MockServer(const std::string& address)
-      : context_(1), socket_(context_, zmq::socket_type::rep) {
+      : context_(1), socket_(context_, zmq::socket_type::rep), running_(false) {
     socket_.bind(address);
-    running_ = false;
   }
 
   void startReturnTrue() {
@@ -95,6 +94,12 @@ class MockServer {
 TEST(ClientTest, TestStart) {
   Client client("tcp://localhost:57880");
   EXPECT_TRUE(client.start());
+}
+
+TEST(ClientTest, TestCopyConstructor) {
+  const Client client("tcp://localhost:57880");
+  Client client2 = client;
+  EXPECT_TRUE(client2.start());
 }
 
 TEST(ClientTest, TestAddUserTrue) {
