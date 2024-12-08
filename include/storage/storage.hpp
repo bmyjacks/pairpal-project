@@ -83,7 +83,7 @@ std::vector<std::tuple<int,std::string,std::string,std::vector<std::string>>> ge
  * @return the bool value if successfully remove the tag
  */
   bool removeTag(std::string username, std::string tag);
-  void reset();
+  static void reset();
 };
 
 #endif  // STORAGE_HPP

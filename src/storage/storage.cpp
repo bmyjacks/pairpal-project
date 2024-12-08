@@ -336,3 +336,4 @@ void Storage::reset() {
   else {
     std::cerr << "Error deleting database" << std::endl;
   }
+}

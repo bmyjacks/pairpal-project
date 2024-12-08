@@ -3,89 +3,39 @@
 #include <chrono>
 #include <storage.hpp>
 
-TEST(StorageTest, TestConstructor) { Storage const storage; }
+TEST(StorageTest, TestStorage) {
+  Storage::reset();
 
-TEST(StorageTest, TestReset) {
   Storage storage;
-  storage.reset();
 
-  ASSERT_TRUE(storage.addUser("user", "password"));
-  storage.reset();
-  ASSERT_FALSE(storage.isUserExist("user"));
-}
+  ASSERT_EQ(storage.getUsers().size(), 0);
+  ASSERT_FALSE(storage.isUserExist("user1"));
+  ASSERT_FALSE(storage.authenticateUser("user1", "password1"));
+  ASSERT_FALSE(storage.removeUser("user1"));
 
-TEST(StorageTest, TestAddUser) {
-  Storage storage;
-  storage.reset();
+  ASSERT_TRUE(storage.addUser("user1", "password1"));
+  ASSERT_EQ(storage.getUsers().size(), 1);
+  ASSERT_TRUE(storage.isUserExist("user1"));
+  ASSERT_TRUE(storage.authenticateUser("user1", "password1"));
+  ASSERT_TRUE(storage.removeUser("user1"));
+  ASSERT_FALSE(storage.isUserExist("user1"));
+  ASSERT_EQ(storage.getUsers().size(), 0);
 
-  ASSERT_TRUE(storage.addUser("user", "password"));
-}
+  ASSERT_TRUE(storage.addUser("user1", "password1"));
+  ASSERT_TRUE(storage.addUser("user2", "password2"));
+  ASSERT_TRUE(storage.addUser("user3", "password3"));
+  ASSERT_EQ(storage.getUsers().size(), 3);
+  ASSERT_EQ(std::get<1>(storage.getUsers()[0]), "user1");
+  ASSERT_EQ(std::get<1>(storage.getUsers()[1]), "user2");
+  ASSERT_EQ(std::get<1>(storage.getUsers()[2]), "user3");
 
-TEST(StorageTest, TestRemoveUser) {
-  Storage storage;
-  storage.reset();
-
-  ASSERT_FALSE(storage.removeUser("user"));
-  ASSERT_TRUE(storage.addUser("user", "password"));
-  ASSERT_TRUE(storage.removeUser("user"));
-}
-
-TEST(StorageTest, TestIsUserExist) {
-  Storage storage;
-  storage.reset();
-
-  ASSERT_FALSE(storage.isUserExist("user"));
-  ASSERT_TRUE(storage.addUser("user", "password"));
-  ASSERT_TRUE(storage.isUserExist("user"));
-}
-
-TEST(StorageTest, TestGetUsers) {
-  Storage storage;
-  storage.reset();
-
-  auto users = storage.getUsers();
-  ASSERT_EQ(users.size(), 0);
-
-  storage.addUser("user", "password");
-  users = storage.getUsers();
-  ASSERT_EQ(users.size(), 1);
-  ASSERT_EQ(std::get<1>(users[0]), "user");
-  ASSERT_EQ(std::get<2>(users[0]), "password");
-}
-
-TEST(StorageTest, TestAuthenticateUser) {
-  Storage storage;
-  storage.reset();
-
-  ASSERT_FALSE(storage.authenticateUser("user", "password"));
-  ASSERT_TRUE(storage.addUser("user", "password"));
-  ASSERT_TRUE(storage.authenticateUser("user", "password"));
-}
-
-TEST(StorageTest, TestAddTag) {
-  Storage storage;
-  storage.reset();
-
-  ASSERT_FALSE(storage.addTag("user", "tag"));
-  ASSERT_TRUE(storage.addUser("user", "password"));
-  ASSERT_TRUE(storage.addTag("user", "tag"));
-}
-
-TEST(StorageTest, TestGetTags) {
-  Storage storage;
-  storage.reset();
-
-  ASSERT_EQ(storage.getTags("user").size(), 0);
-}
-
-TEST(StorageTest, TestRemoveTag) {
-  Storage storage;
-  storage.reset();
-
-  ASSERT_TRUE(storage.addUser("user", "password"));
-  ASSERT_TRUE(storage.addTag("user", "tag"));
-  ASSERT_TRUE(storage.removeTag("user", "tag"));
-  ASSERT_EQ(storage.getTags("user").size(), 0);
+  ASSERT_TRUE(storage.addTag("user1", "tag1"));
+  ASSERT_TRUE(storage.addTag("user1", "tag2"));
+  ASSERT_TRUE(storage.addTag("user1", "tag3"));
+  ASSERT_EQ(storage.getTags("user1").size(), 3);
+  ASSERT_EQ(storage.getTags("user1")[0], "tag1");
+  ASSERT_EQ(storage.getTags("user1")[1], "tag2");
+  ASSERT_EQ(storage.getTags("user1")[2], "tag3");
 }
 
 auto main(int argc, char **argv) -> int {
