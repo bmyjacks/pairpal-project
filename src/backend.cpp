@@ -1,8 +1,7 @@
 #include <chrono>
+#include <server.hpp>
 
-#include "api/server.hpp"
-
-[[noreturn]] int main() {
+[[noreturn]] auto main() -> int {
   Server server("tcp://localhost:30200");
   server.start();
 

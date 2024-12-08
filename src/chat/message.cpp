@@ -1,4 +1,4 @@
-#include "chat/message.hpp"
+#include "message.hpp"
 #include <chrono>
 #include <string>
 

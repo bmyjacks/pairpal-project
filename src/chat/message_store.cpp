@@ -1,6 +1,6 @@
-#include "storage/message_store.hpp"
+#include "message_store.hpp"
 #include <iostream>
-#include "storage/sqlite3.h"
+#include <sqlite3.h>
 #include <vector>
 #include <tuple>
 #include <string>

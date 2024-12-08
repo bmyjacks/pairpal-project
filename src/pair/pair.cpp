@@ -1,4 +1,4 @@
-#include "pair/pair.hpp"
+#include "pair.hpp"
 
 #include <algorithm>
 #include <unordered_set>

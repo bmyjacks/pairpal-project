@@ -16,14 +16,16 @@ self::self(QWidget *parent) :
        emit this->back();
 
            });
-
-    this->ppage20=new Dialog;//实例学习匹配
-    connect(ui->back13,&QPushButton::clicked,[=](){
-        //切换窗口
-        this->hide();//隐藏
-        this->ppage20->show();
-
+    connect(ui->back13, &QPushButton::clicked, [=]() {
+        emit closeAll();  // 发出关闭所有页面的信号
     });
+//    this->ppage20=new Dialog;//实例学习匹配
+//    connect(ui->back13,&QPushButton::clicked,[=](){
+//        //切换窗口
+//        this->hide();//隐藏
+//        this->ppage20->show();
+
+//    });
 }
 
 self::~self()

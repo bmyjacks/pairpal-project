@@ -6,9 +6,9 @@
 #include <string>
 #include <memory>
 
-#include "chat/message.hpp"
-#include "storage/message_store.hpp"
-#include "chat/dialog.hpp"
+#include "message.hpp"
+#include "message_store.hpp"
+#include "dialog.hpp"
 
 /**
  * @class Chat

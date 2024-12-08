@@ -26,6 +26,7 @@ public slots:
                         const QString& college, const QStringList& tags);
 signals:
     void back();
+    void closeAll();
 private:
     Ui::self *ui;
 };

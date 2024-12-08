@@ -6,8 +6,8 @@
 #include "eat.h"
 #include "self.h"
 #include "list.h"
-#
 #include <QPushButton>
+
 pairpal::pairpal(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::pairpal)
@@ -73,9 +73,12 @@ pairpal::pairpal(QWidget *parent) :
 
     });
 
-    connect(this->ppage8,&self::back,[=](){
-        this->ppage8->hide();
-        this->show();
+    // connect(this->ppage8,&self::back,[=](){
+    //     this->ppage8->hide();
+    //     this->show();
+    // });
+    connect(this->ppage8, &self::closeAll, [=]() {
+        QApplication::quit();  // 关闭应用程序
     });
 
 
