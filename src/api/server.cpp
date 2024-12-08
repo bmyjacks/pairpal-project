@@ -65,7 +65,7 @@ void Server::run_() {
                 << '\n';
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
 }
 
@@ -228,7 +228,6 @@ auto Server::getUserTags_(const std::string& username)
 
 auto Server::sendMessage_(const std::string& from, const std::string& to,
                           const std::string& message) -> bool {
-  // Send message to user
   return chat_.sendMessage(from, to, message);
 }
 

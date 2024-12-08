@@ -2,24 +2,18 @@
 
 #include <nlohmann/json.hpp>
 
-NetworkMessage::NetworkMessage(const NetworkMessageType& type,
-                               nlohmann::json content)
-    : type_(type), content_(std::move(content)) {}
-
 NetworkMessage::NetworkMessage(const NetworkMessageType& type) : type_(type) {}
 
-NetworkMessage::NetworkMessage(const nlohmann::json& json)
-    : type_(static_cast<NetworkMessageType>(json["type"].get<int>())),
-      content_(json["content"]) {}
+NetworkMessage::NetworkMessage(const std::string& str) {
+  nlohmann::json json = nlohmann::json::parse(str);
 
-NetworkMessage::NetworkMessage(const std::string& str)
-    : NetworkMessage(nlohmann::json::parse(str)) {}
+  type_ = json["type"].get<NetworkMessageType>();
+  content_ = json["content"];
+}
 
 NetworkMessage::~NetworkMessage() = default;
 
 auto NetworkMessage::getType() const -> NetworkMessageType { return type_; }
-
-auto NetworkMessage::getContent() const -> nlohmann::json { return content_; }
 
 auto NetworkMessage::toJson() const -> nlohmann::json {
   nlohmann::json json;

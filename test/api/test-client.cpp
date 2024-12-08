@@ -20,14 +20,11 @@ class MockServer {
     serverThread_ = std::thread([this]() {
       while (running_) {
         zmq::message_t request;
-        zmq::recv_result_t result =
-            socket_.recv(request, zmq::recv_flags::dontwait);
+        const auto result = socket_.recv(request, zmq::recv_flags::dontwait);
 
         if (result.has_value()) {
-          NetworkMessage message(NetworkMessageType::SUCCESS, "");
-          const std::string serializedMessage = message.toString();
-          zmq::message_t reply(serializedMessage);
-          socket_.send(reply, zmq::send_flags::none);
+          const NetworkMessage message(NetworkMessageType::SUCCESS);
+          socket_.send(*message.toZmqMessage(), zmq::send_flags::none);
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -40,17 +37,14 @@ class MockServer {
     serverThread_ = std::thread([this]() {
       while (running_) {
         zmq::message_t request;
-        zmq::recv_result_t result =
+        const zmq::recv_result_t result =
             socket_.recv(request, zmq::recv_flags::dontwait);
 
         if (result.has_value()) {
-          nlohmann::json content;
-          content["vector"] = std::vector<std::string>{"item1", "item2"};
+          NetworkMessage message(NetworkMessageType::SUCCESS);
+          message.setVector({"item1", "item2"});
 
-          NetworkMessage message(NetworkMessageType::SUCCESS, content);
-          const std::string serializedMessage = message.toString();
-          zmq::message_t reply(serializedMessage);
-          socket_.send(reply, zmq::send_flags::none);
+          socket_.send(*message.toZmqMessage(), zmq::send_flags::none);
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -63,14 +57,12 @@ class MockServer {
     serverThread_ = std::thread([this]() {
       while (running_) {
         zmq::message_t request;
-        zmq::recv_result_t result =
+        const zmq::recv_result_t result =
             socket_.recv(request, zmq::recv_flags::dontwait);
 
         if (result.has_value()) {
-          NetworkMessage message(NetworkMessageType::FAILURE, "");
-          const std::string serializedMessage = message.toString();
-          zmq::message_t reply(serializedMessage);
-          socket_.send(reply, zmq::send_flags::none);
+          const NetworkMessage message(NetworkMessageType::FAILURE);
+          socket_.send(*message.toZmqMessage(), zmq::send_flags::none);
         }
 
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
@@ -409,7 +401,7 @@ TEST(ClientTest, TestGetPairFalse) {
   server.stop();
 }
 
-int main(int argc, char** argv) {
+auto main(int argc, char** argv) -> int {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

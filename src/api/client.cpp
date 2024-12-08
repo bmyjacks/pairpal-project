@@ -144,7 +144,7 @@ auto Client::listAllUsers() -> std::vector<std::string> {
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
     if (const NetworkMessage replyMessage(reply.to_string());
         replyMessage.getType() == NetworkMessageType::SUCCESS) {
-      return replyMessage.getContent()["vector"];
+      return replyMessage.getVector();
     }
   }
   return {};
@@ -201,7 +201,7 @@ auto Client::getUserTags(const std::string& username)
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
     if (const NetworkMessage replyMessage(reply.to_string());
         replyMessage.getType() == NetworkMessageType::SUCCESS) {
-      return replyMessage.getContent()["vector"];
+      return replyMessage.getVector();
     }
   }
   return {};
@@ -231,7 +231,7 @@ auto Client::getSentMessages(const std::string& username)
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
     if (const NetworkMessage replyMessage(reply.to_string());
         replyMessage.getType() == NetworkMessageType::SUCCESS) {
-      return replyMessage.getContent()["vector"];
+      return replyMessage.getVector();
     }
   }
   return {};
@@ -246,7 +246,7 @@ auto Client::getReceivedMessages(const std::string& username)
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
     if (const NetworkMessage replyMessage(reply.to_string());
         replyMessage.getType() == NetworkMessageType::SUCCESS) {
-      return replyMessage.getContent()["vector"];
+      return replyMessage.getVector();
     }
   }
   return {};
@@ -260,7 +260,7 @@ auto Client::getPair(const std::string& username) -> std::vector<std::string> {
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
     if (const NetworkMessage replyMessage(reply.to_string());
         replyMessage.getType() == NetworkMessageType::SUCCESS) {
-      return replyMessage.getContent()["vector"];
+      return replyMessage.getVector();
     }
   }
   return {};
