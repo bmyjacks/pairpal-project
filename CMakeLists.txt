@@ -108,9 +108,9 @@ target_link_libraries(backend PUBLIC api)
 add_executable(test-client test/api/test-client.cpp)
 target_link_libraries(test-client PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-client COMMAND test-client)
-## Message test
-add_executable(test-message test/api/test-message.cpp)
-target_link_libraries(test-message PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+## NetworkMessage test
+add_executable(test-network_message test/api/test-network_message.cpp)
+target_link_libraries(test-network_message PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
 ## Server test
 add_executable(test-server test/api/test-server.cpp)

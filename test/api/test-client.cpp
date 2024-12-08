@@ -3,11 +3,10 @@
 
 #include <atomic>
 #include <chrono>
+#include <client.hpp>
+#include <network_message.hpp>
 #include <thread>
 #include <zmq.hpp>
-
-#include "api/client.hpp"
-#include "api/message.hpp"
 
 class MockServer {
  public:
@@ -25,7 +24,7 @@ class MockServer {
             socket_.recv(request, zmq::recv_flags::dontwait);
 
         if (result.has_value()) {
-          Message message(MessageType::SUCCESS, "");
+          NetworkMessage message(NetworkMessageType::SUCCESS, "");
           const std::string serializedMessage = message.toString();
           zmq::message_t reply(serializedMessage);
           socket_.send(reply, zmq::send_flags::none);
@@ -48,7 +47,7 @@ class MockServer {
           nlohmann::json content;
           content["vector"] = std::vector<std::string>{"item1", "item2"};
 
-          Message message(MessageType::SUCCESS, content);
+          NetworkMessage message(NetworkMessageType::SUCCESS, content);
           const std::string serializedMessage = message.toString();
           zmq::message_t reply(serializedMessage);
           socket_.send(reply, zmq::send_flags::none);
@@ -68,7 +67,7 @@ class MockServer {
             socket_.recv(request, zmq::recv_flags::dontwait);
 
         if (result.has_value()) {
-          Message message(MessageType::FAILURE, "");
+          NetworkMessage message(NetworkMessageType::FAILURE, "");
           const std::string serializedMessage = message.toString();
           zmq::message_t reply(serializedMessage);
           socket_.send(reply, zmq::send_flags::none);
