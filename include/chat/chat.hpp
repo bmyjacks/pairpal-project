@@ -8,11 +8,11 @@
 
 #include "chat/message.hpp"
 #include "storage/message_store.hpp"
-
+#include "chat/dialog.hpp"
 
 /**
  * @class Chat
- * @brief A class to handle chat functionalities including sending and
+ * @brief A class to handle Chat_test functionalities including sending and
  * retrieving messages.
  */
 class Chat {
@@ -55,7 +55,7 @@ class Chat {
 
  private:
   std::unique_ptr<Message_store> messageStore_;
-  std::map<std::string, User> users_;
+  //std::map<std::string, User> users_;
   std::map<std::pair<std::string, std::string>, Dialog> dialogs_;
 };
 

@@ -15,6 +15,9 @@ private:
  std::vector<Message> messages;  // store the messages
  std::vector<std::string> users; // store the users
 public:
+
+ Dialog();
+
  /**
   * @brief Constructs a Dialog object.
   * @param from The username of the sender.
