@@ -122,15 +122,10 @@ add_executable(test-storage test/storage/test-storage.cpp)
 target_link_libraries(test-storage PUBLIC storage GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-storage COMMAND test-storage)
 
-add_executable(s-test test/Storage_test/s-test.cpp)
-target_link_libraries(s-test storage)
-add_test(NAME s-test COMMAND s-test)
-
 # Chat
-add_executable(chat-test test/Chat_test/chat-test.cpp
-        src/chat/message_store.cpp)
-target_link_libraries(chat-test chat)
-add_test(NAME chat-test COMMAND chat-test)
+add_executable(test-chat test/chat/test-chat.cpp)
+target_link_libraries(test-chat PUBLIC chat GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_test(NAME test-chat COMMAND test-chat)
 
 # Pair
 add_executable(test-pair test/pair/test-pair.cpp)
