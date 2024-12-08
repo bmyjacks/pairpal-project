@@ -5,72 +5,71 @@
 #include <nlohmann/json.hpp>
 #include <zmq.hpp>
 
-namespace api {
-
 /**
- * @enum MessageType
+ * @enum NetworkMessageType
  * @brief Enum representing different types of messages.
  */
-enum class MessageType : uint8_t {
-  SUCCESS,                ///< Message type for successful operations
-  FAILURE,                ///< Message type for failed operations
-  UNKNOWN,                ///< Unknown message type
-  ADD_USER,               ///< Message type for adding a user
-  REMOVE_USER,            ///< Message type for removing a user
-  IS_EXIST_USER,          ///< Message type for checking if a user exists
-  LIST_ALL_USERS,         ///< Message type for getting a user
-  AUTHENTICATE_USER,      ///< Message type for authenticating a user
-  ADD_USER_TAG,           ///< Message type for adding a tag to a user
-  REMOVE_USER_TAG,        ///< Message type for removing a tag from a user
-  GET_USER_TAGS,          ///< Message type for getting tags of a user
-  SEND_MESSAGE,           ///< Message type for sending a message
-  GET_SENT_MESSAGES,      ///< Message type for getting all sent messages
-  GET_RECEIVED_MESSAGES,  ///< Message type for getting all received messages
-  GET_PAIR                ///< Message type for getting the pair of a user
+enum class NetworkMessageType : uint8_t {
+  SUCCESS,            ///< NetworkMessage type for successful operations
+  FAILURE,            ///< NetworkMessage type for failed operations
+  UNKNOWN,            ///< Unknown message type
+  ADD_USER,           ///< NetworkMessage type for adding a user
+  REMOVE_USER,        ///< NetworkMessage type for removing a user
+  IS_EXIST_USER,      ///< NetworkMessage type for checking if a user exists
+  LIST_ALL_USERS,     ///< NetworkMessage type for getting a user
+  AUTHENTICATE_USER,  ///< NetworkMessage type for authenticating a user
+  ADD_USER_TAG,       ///< NetworkMessage type for adding a tag to a user
+  REMOVE_USER_TAG,    ///< NetworkMessage type for removing a tag from a user
+  GET_USER_TAGS,      ///< NetworkMessage type for getting tags of a user
+  SEND_MESSAGE,       ///< NetworkMessage type for sending a message
+  GET_SENT_MESSAGES,  ///< NetworkMessage type for getting all sent messages
+  GET_RECEIVED_MESSAGES,  ///< NetworkMessage type for getting all received
+                          ///< messages
+  GET_PAIR  ///< NetworkMessage type for getting the pair of a user
 };
 
 /**
- * @class Message
+ * @class NetworkMessage
  * @brief Class representing a message with a type and content.
  */
-class Message {
+class NetworkMessage {
  public:
   /**
-   * @brief Constructs a Message with a specified type and content.
+   * @brief Constructs a NetworkMessage with a specified type and content.
    * @param type The type of the message.
    * @param content The content of the message in JSON format.
    */
-  [[deprecated]] explicit Message(const MessageType& type,
-                                  nlohmann::json content);
+  [[deprecated]] explicit NetworkMessage(const NetworkMessageType& type,
+                                         nlohmann::json content);
 
   /**
-   * @brief Constructs a Message with a specified type.
+   * @brief Constructs a NetworkMessage with a specified type.
    * @param type The type of the message.
    */
-  explicit Message(const MessageType& type);
+  explicit NetworkMessage(const NetworkMessageType& type);
 
   /**
-   * @brief Constructs a Message from a JSON object.
+   * @brief Constructs a NetworkMessage from a JSON object.
    * @param json The JSON object containing the message data.
    */
-  [[deprecated]] explicit Message(const nlohmann::json& json);
+  [[deprecated]] explicit NetworkMessage(const nlohmann::json& json);
 
   /**
-   * @brief Constructs a Message from a string.
+   * @brief Constructs a NetworkMessage from a string.
    * @param str The string containing the message data.
    */
-  explicit Message(const std::string& str);
+  explicit NetworkMessage(const std::string& str);
 
   /**
-   * @brief Destructor for the Message class.
+   * @brief Destructor for the NetworkMessage class.
    */
-  ~Message();
+  ~NetworkMessage();
 
   /**
    * @brief Gets the type of the message.
    * @return The type of the message.
    */
-  [[nodiscard]] auto getType() const -> MessageType;
+  [[nodiscard]] auto getType() const -> NetworkMessageType;
 
   /**
    * @brief Gets the content of the message.
@@ -160,13 +159,13 @@ class Message {
    * @brief Sets the message content.
    * @param message The message content to set.
    */
-  void setMessage(const std::string& message);
+  void setNetworkMessage(const std::string& message);
 
   /**
    * @brief Gets the message content.
    * @return The message content.
    */
-  [[nodiscard]] auto getMessage() const -> std::string;
+  [[nodiscard]] auto getNetworkMessage() const -> std::string;
 
   /**
    * @brief Sets a vector of strings associated with the message.
@@ -181,10 +180,8 @@ class Message {
   [[nodiscard]] auto getVector() const -> std::vector<std::string>;
 
  private:
-  MessageType type_;        ///< The type of the message
-  nlohmann::json content_;  ///< The content of the message in JSON format
+  NetworkMessageType type_;  ///< The type of the message
+  nlohmann::json content_;   ///< The content of the message in JSON format
 };
-
-}  // namespace api
 
 #endif  // MESSAGE_HPP

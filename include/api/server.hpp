@@ -8,7 +8,6 @@
 #include "pair/pair.hpp"
 #include "storage/storage.hpp"
 
-namespace api {
 /**
  * @class Server
  * @brief Represents a server that can be started, stopped, and restarted.
@@ -166,7 +165,5 @@ class Server {
   [[nodiscard]] virtual auto getPair_(const std::string& username)
       -> std::vector<std::string>;
 };
-
-}  // namespace api
 
 #endif  // SERVER_HPP

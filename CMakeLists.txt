@@ -22,7 +22,7 @@ enable_testing()
 add_library(api STATIC
         src/api/client.cpp
         src/api/server.cpp
-        src/api/message.cpp)
+        src/api/network_message.cpp)
 target_include_directories(api PUBLIC include)
 target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
@@ -89,7 +89,7 @@ target_link_libraries(frontend PUBLIC api Qt5::Widgets Qt5::Core Qt5::Gui)
 # Define backend
 add_executable(backend
         src/backend.cpp
-        src/api/message.cpp
+        src/api/network_message.cpp
         src/api/server.cpp)
 target_link_libraries(backend PUBLIC storage chat pair api)
 

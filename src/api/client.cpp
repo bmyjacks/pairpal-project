@@ -5,7 +5,6 @@
 
 #include "api/message.hpp"
 
-namespace api {
 Client::Client(std::string serverAddr)
     : serverAddr_(std::move(serverAddr)),
       context_(1),
@@ -266,5 +265,3 @@ auto Client::getPair(const std::string& username) -> std::vector<std::string> {
   }
   return {};
 }
-
-}  // namespace api
