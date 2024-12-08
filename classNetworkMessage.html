@@ -98,15 +98,9 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a74a3544faa8de741c87f222807e9224d" id="r_a74a3544faa8de741c87f222807e9224d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a74a3544faa8de741c87f222807e9224d">NetworkMessage</a> (const NetworkMessageType &amp;type, nlohmann::json content)</td></tr>
-<tr class="memdesc:a74a3544faa8de741c87f222807e9224d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classNetworkMessage.html" title="Class representing a message with a type and content.">NetworkMessage</a> with a specified type and content.  <br /></td></tr>
-<tr class="separator:a74a3544faa8de741c87f222807e9224d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a035b8ffe86c222e6895f7f095b6e9e42" id="r_a035b8ffe86c222e6895f7f095b6e9e42"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a035b8ffe86c222e6895f7f095b6e9e42">NetworkMessage</a> (const NetworkMessageType &amp;type)</td></tr>
 <tr class="memdesc:a035b8ffe86c222e6895f7f095b6e9e42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classNetworkMessage.html" title="Class representing a message with a type and content.">NetworkMessage</a> with a specified type.  <br /></td></tr>
 <tr class="separator:a035b8ffe86c222e6895f7f095b6e9e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3885c3974c743abbba43f7b47068e2f7" id="r_a3885c3974c743abbba43f7b47068e2f7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3885c3974c743abbba43f7b47068e2f7">NetworkMessage</a> (const nlohmann::json &amp;json)</td></tr>
-<tr class="memdesc:a3885c3974c743abbba43f7b47068e2f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classNetworkMessage.html" title="Class representing a message with a type and content.">NetworkMessage</a> from a JSON object.  <br /></td></tr>
-<tr class="separator:a3885c3974c743abbba43f7b47068e2f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0ee1956bf8a6892cc075dd34ed4b6af" id="r_ac0ee1956bf8a6892cc075dd34ed4b6af"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0ee1956bf8a6892cc075dd34ed4b6af">NetworkMessage</a> (const std::string &amp;str)</td></tr>
 <tr class="memdesc:ac0ee1956bf8a6892cc075dd34ed4b6af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classNetworkMessage.html" title="Class representing a message with a type and content.">NetworkMessage</a> from a string.  <br /></td></tr>
 <tr class="separator:ac0ee1956bf8a6892cc075dd34ed4b6af"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -117,9 +111,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8ae6de15ce9be63d4e0af12191eb64dd" id="r_a8ae6de15ce9be63d4e0af12191eb64dd"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ae6de15ce9be63d4e0af12191eb64dd">getType</a> () const -&gt; NetworkMessageType</td></tr>
 <tr class="memdesc:a8ae6de15ce9be63d4e0af12191eb64dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type of the message.  <br /></td></tr>
 <tr class="separator:a8ae6de15ce9be63d4e0af12191eb64dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa77a5ecfcbc3479cbfcc540fe91aa7b4" id="r_aa77a5ecfcbc3479cbfcc540fe91aa7b4"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa77a5ecfcbc3479cbfcc540fe91aa7b4">getContent</a> () const -&gt; nlohmann::json</td></tr>
-<tr class="memdesc:aa77a5ecfcbc3479cbfcc540fe91aa7b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the content of the message.  <br /></td></tr>
-<tr class="separator:aa77a5ecfcbc3479cbfcc540fe91aa7b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa17fb9dfaaffaa3d54367958f49a0c43" id="r_aa17fb9dfaaffaa3d54367958f49a0c43"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa17fb9dfaaffaa3d54367958f49a0c43">toJson</a> () const -&gt; nlohmann::json</td></tr>
 <tr class="memdesc:aa17fb9dfaaffaa3d54367958f49a0c43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the message to a JSON object.  <br /></td></tr>
 <tr class="separator:aa17fb9dfaaffaa3d54367958f49a0c43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,46 +166,8 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class representing a message with a type and content. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a74a3544faa8de741c87f222807e9224d" name="a74a3544faa8de741c87f222807e9224d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74a3544faa8de741c87f222807e9224d">&#9670;&#160;</a></span>NetworkMessage() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NetworkMessage::NetworkMessage </td>
-          <td>(</td>
-          <td class="paramtype">const NetworkMessageType &amp;</td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">nlohmann::json</td>          <td class="paramname"><span class="paramname"><em>content</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs a <a class="el" href="classNetworkMessage.html" title="Class representing a message with a type and content.">NetworkMessage</a> with a specified type and content. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type</td><td>The type of the message. </td></tr>
-    <tr><td class="paramname">content</td><td>The content of the message in JSON format. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a035b8ffe86c222e6895f7f095b6e9e42" name="a035b8ffe86c222e6895f7f095b6e9e42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a035b8ffe86c222e6895f7f095b6e9e42">&#9670;&#160;</a></span>NetworkMessage() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a035b8ffe86c222e6895f7f095b6e9e42">&#9670;&#160;</a></span>NetworkMessage() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -246,41 +199,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3885c3974c743abbba43f7b47068e2f7" name="a3885c3974c743abbba43f7b47068e2f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3885c3974c743abbba43f7b47068e2f7">&#9670;&#160;</a></span>NetworkMessage() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">NetworkMessage::NetworkMessage </td>
-          <td>(</td>
-          <td class="paramtype">const nlohmann::json &amp;</td>          <td class="paramname"><span class="paramname"><em>json</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs a <a class="el" href="classNetworkMessage.html" title="Class representing a message with a type and content.">NetworkMessage</a> from a JSON object. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">json</td><td>The JSON object containing the message data. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="ac0ee1956bf8a6892cc075dd34ed4b6af" name="ac0ee1956bf8a6892cc075dd34ed4b6af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0ee1956bf8a6892cc075dd34ed4b6af">&#9670;&#160;</a></span>NetworkMessage() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0ee1956bf8a6892cc075dd34ed4b6af">&#9670;&#160;</a></span>NetworkMessage() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -313,34 +233,6 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa77a5ecfcbc3479cbfcc540fe91aa7b4" name="aa77a5ecfcbc3479cbfcc540fe91aa7b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa77a5ecfcbc3479cbfcc540fe91aa7b4">&#9670;&#160;</a></span>getContent()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto NetworkMessage::getContent </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const -&gt;  nlohmann::json</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">nodiscard</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gets the content of the message. </p>
-<dl class="section return"><dt>Returns</dt><dd>The content of the message in JSON format. </dd></dl>
-
-</div>
-</div>
 <a id="a14d3bb5f4c5341d97b325641b982b671" name="a14d3bb5f4c5341d97b325641b982b671"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a14d3bb5f4c5341d97b325641b982b671">&#9670;&#160;</a></span>getFrom()</h2>
 
