@@ -1,4 +1,4 @@
-#include "api/server.hpp"
+#include "server.hpp"
 
 #include <chrono>
 #include <iostream>
@@ -6,8 +6,7 @@
 #include <vector>
 #include <zmq.hpp>
 
-#include "api/network_message.hpp"
-#include "pair/pair.hpp"
+#include "network_message.hpp"
 
 Server::Server(std::string listenAddr)
     : listenAddr_(std::move(listenAddr)),

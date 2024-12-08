@@ -1,4 +1,4 @@
-#include "chat/dialog.hpp"
+#include "dialog.hpp"
 
 #include <iomanip>
 #include <iostream>

@@ -1,6 +1,6 @@
-#include "chat/chat.hpp"
-#include "chat/message.hpp"
-#include "chat/dialog.hpp"
+#include "chat.hpp"
+#include "message.hpp"
+#include "dialog.hpp"
 
 Chat::Chat()
     : messageStore_(std::make_unique<Message_store>())

@@ -1,9 +1,9 @@
-#include "api/client.hpp"
+#include "client.hpp"
 
 #include <iostream>
 #include <zmq.hpp>
 
-#include "api/network_message.hpp"
+#include "network_message.hpp"
 
 Client::Client(std::string serverAddr)
     : serverAddr_(std::move(serverAddr)),

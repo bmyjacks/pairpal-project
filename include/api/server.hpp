@@ -2,11 +2,10 @@
 #define SERVER_HPP
 
 #include <atomic>
+#include <pair.hpp>
+#include <storage.hpp>
 #include <thread>
 #include <zmq.hpp>
-
-#include "pair/pair.hpp"
-#include "storage/storage.hpp"
 
 /**
  * @class Server

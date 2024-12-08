@@ -1,7 +1,7 @@
-#include "storage/storage.hpp"
+#include "storage.hpp"
 #include <iostream>
 #include<ranges>
-#include <storage/sqlite3.h>
+#include <sqlite3.h>
 Storage::Storage() {
   std::cout << "Storage constructor" << std::endl;
   int exit = sqlite3_open("storage_test.db", &db);

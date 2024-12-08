@@ -1,4 +1,4 @@
-#include "api/network_message.hpp"
+#include "network_message.hpp"
 
 #include <nlohmann/json.hpp>
 

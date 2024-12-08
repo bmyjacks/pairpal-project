@@ -1,10 +1,9 @@
 #ifndef PAIR_HPP
 #define PAIR_HPP
 
+#include <storage.hpp>
 #include <string>
 #include <vector>
-
-#include "storage/storage.hpp"
 
 /**
  * @class Pair
