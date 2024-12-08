@@ -101,7 +101,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;chat/message.hpp&quot;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;storage/message_store.hpp&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;chat/dialog.hpp&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classChat.html">   18</a></span><span class="keyword">class </span><a class="code hl_class" href="classChat.html">Chat</a> {</div>
@@ -121,13 +121,13 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> <span class="keyword">private</span>:</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  std::unique_ptr&lt;Message_store&gt; messageStore_;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  std::map&lt;std::string, User&gt; users_;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="comment">//std::map&lt;std::string, User&gt; users_;</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  std::map&lt;std::pair&lt;std::string, std::string&gt;, <a class="code hl_class" href="classDialog.html">Dialog</a>&gt; dialogs_;</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>};</div>
 </div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="preprocessor">#endif  </span><span class="comment">// CHAT_HPP</span></div>
-<div class="ttc" id="aclassChat_html"><div class="ttname"><a href="classChat.html">Chat</a></div><div class="ttdoc">A class to handle chat functionalities including sending and retrieving messages.</div><div class="ttdef"><b>Definition</b> chat.hpp:18</div></div>
+<div class="ttc" id="aclassChat_html"><div class="ttname"><a href="classChat.html">Chat</a></div><div class="ttdoc">A class to handle Chat_test functionalities including sending and retrieving messages.</div><div class="ttdef"><b>Definition</b> chat.hpp:18</div></div>
 <div class="ttc" id="aclassChat_html_a4427e061b727c06cccca9626cc0cf9c8"><div class="ttname"><a href="classChat.html#a4427e061b727c06cccca9626cc0cf9c8">Chat::Chat</a></div><div class="ttdeci">Chat()</div><div class="ttdoc">Constructor for the Chat class.</div></div>
 <div class="ttc" id="aclassChat_html_a663debe1bab3f10654fd1792f9efd987"><div class="ttname"><a href="classChat.html#a663debe1bab3f10654fd1792f9efd987">Chat::getReceivedMessages</a></div><div class="ttdeci">std::vector&lt; Message &gt; getReceivedMessages(const std::string &amp;username) const</div><div class="ttdoc">Retrieves the messages received by a specific user.</div></div>
 <div class="ttc" id="aclassChat_html_a956b3ff8a51885f07757cd0efa76b262"><div class="ttname"><a href="classChat.html#a956b3ff8a51885f07757cd0efa76b262">Chat::sendMessage</a></div><div class="ttdeci">bool sendMessage(const std::string &amp;from, const std::string &amp;to, const std::string &amp;message)</div><div class="ttdoc">Sends a message from one user to another.</div></div>

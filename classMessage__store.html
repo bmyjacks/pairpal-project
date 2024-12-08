@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.12.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>pairpal: user Class Reference</title>
+<title>pairpal: Message_store Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -86,28 +86,22 @@ $(function(){ initResizable(false); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classuser-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">user Class Reference</div></div>
+<a href="classMessage__store-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Message_store Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6ddbbe92c28e30c05482dfb41dca30e7" id="r_a6ddbbe92c28e30c05482dfb41dca30e7"><td class="memItemLeft" align="right" valign="top"><a id="a6ddbbe92c28e30c05482dfb41dca30e7" name="a6ddbbe92c28e30c05482dfb41dca30e7"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>setUsername</b> (const std::string &amp;username)</td></tr>
-<tr class="separator:a6ddbbe92c28e30c05482dfb41dca30e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad8dd33afd12fe91e729603c04f468e6" id="r_aad8dd33afd12fe91e729603c04f468e6"><td class="memItemLeft" align="right" valign="top"><a id="aad8dd33afd12fe91e729603c04f468e6" name="aad8dd33afd12fe91e729603c04f468e6"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getUsername</b> () const</td></tr>
-<tr class="separator:aad8dd33afd12fe91e729603c04f468e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25840754a41eb1e57596bf37cadbc0b9" id="r_a25840754a41eb1e57596bf37cadbc0b9"><td class="memItemLeft" align="right" valign="top"><a id="a25840754a41eb1e57596bf37cadbc0b9" name="a25840754a41eb1e57596bf37cadbc0b9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>setTags</b> (const std::string &amp;tags)</td></tr>
-<tr class="separator:a25840754a41eb1e57596bf37cadbc0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5ba05e77061cc9de495dbd201e7fe8f" id="r_ac5ba05e77061cc9de495dbd201e7fe8f"><td class="memItemLeft" align="right" valign="top"><a id="ac5ba05e77061cc9de495dbd201e7fe8f" name="ac5ba05e77061cc9de495dbd201e7fe8f"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getTags</b> () const</td></tr>
-<tr class="separator:ac5ba05e77061cc9de495dbd201e7fe8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0e81612255c3a99208bd27364887221" id="r_ab0e81612255c3a99208bd27364887221"><td class="memItemLeft" align="right" valign="top"><a id="ab0e81612255c3a99208bd27364887221" name="ab0e81612255c3a99208bd27364887221"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>addMessage</b> (const std::string &amp;fromUser, const std::string &amp;toUser, const std::string &amp;messageconst, std::string &amp;timeStamp)</td></tr>
+<tr class="separator:ab0e81612255c3a99208bd27364887221"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9881f918eee0b1875de9fa9d7e42670" id="r_aa9881f918eee0b1875de9fa9d7e42670"><td class="memItemLeft" align="right" valign="top"><a id="aa9881f918eee0b1875de9fa9d7e42670" name="aa9881f918eee0b1875de9fa9d7e42670"></a>
+std::vector&lt; std::tuple&lt; int, std::string, std::string, std::string, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getMessages</b> ()</td></tr>
+<tr class="separator:aa9881f918eee0b1875de9fa9d7e42670"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>include/storage/<a class="el" href="user_8hpp_source.html">user.hpp</a></li>
+<li>include/storage/<a class="el" href="message__store_8hpp_source.html">message_store.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
