@@ -2,10 +2,9 @@
 #include <gtest/gtest.h>
 
 #include <chrono>
+#include <network_message.hpp>
+#include <server.hpp>
 #include <zmq.hpp>
-
-#include "api/message.hpp"
-#include "api/server.hpp"
 
 class MockClient {
  public:
@@ -93,7 +92,7 @@ TEST(ServerTest, TestAddUserTrue) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::ADD_USER);
+  NetworkMessage request(NetworkMessageType::ADD_USER);
   request.setUsername("user");
   request.setPassword("password");
 
@@ -102,8 +101,8 @@ TEST(ServerTest, TestAddUserTrue) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
 
   server.stop();
 }
@@ -113,7 +112,7 @@ TEST(ServerTest, TestAddUserFalse) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::ADD_USER);
+  NetworkMessage request(NetworkMessageType::ADD_USER);
   request.setUsername("user");
   request.setPassword("password");
 
@@ -122,8 +121,8 @@ TEST(ServerTest, TestAddUserFalse) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::FAILURE);
 
   server.stop();
 }
@@ -133,15 +132,15 @@ TEST(ServerTest, TestRemoveUserTrue) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::REMOVE_USER);
+  NetworkMessage request(NetworkMessageType::REMOVE_USER);
   request.setUsername("user");
 
   EXPECT_CALL(server, removeUser_("user")).WillOnce(testing::Return(true));
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
 
   server.stop();
 }
@@ -151,15 +150,15 @@ TEST(ServerTest, TestRemoveUserFalse) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::REMOVE_USER);
+  NetworkMessage request(NetworkMessageType::REMOVE_USER);
   request.setUsername("user");
 
   EXPECT_CALL(server, removeUser_("user")).WillOnce(testing::Return(false));
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::FAILURE);
 
   server.stop();
 }
@@ -169,15 +168,15 @@ TEST(ServerTest, TestIsExistUserTrue) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::IS_EXIST_USER);
+  NetworkMessage request(NetworkMessageType::IS_EXIST_USER);
   request.setUsername("user");
 
   EXPECT_CALL(server, isExistUser_("user")).WillOnce(testing::Return(true));
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
 
   server.stop();
 }
@@ -187,15 +186,15 @@ TEST(ServerTest, TestIsExistUserFalse) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::IS_EXIST_USER);
+  NetworkMessage request(NetworkMessageType::IS_EXIST_USER);
   request.setUsername("user");
 
   EXPECT_CALL(server, isExistUser_("user")).WillOnce(testing::Return(false));
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::FAILURE);
 
   server.stop();
 }
@@ -205,15 +204,15 @@ TEST(ServerTest, TestListAllUsersNonEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::LIST_ALL_USERS);
+  NetworkMessage request(NetworkMessageType::LIST_ALL_USERS);
 
   EXPECT_CALL(server, listAllUsers())
       .WillOnce(testing::Return(std::vector<std::string>{"user1", "user2"}));
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre("user1", "user2"));
 
   server.stop();
@@ -224,15 +223,15 @@ TEST(ServerTest, TestListAllUsersEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::LIST_ALL_USERS);
+  NetworkMessage request(NetworkMessageType::LIST_ALL_USERS);
 
   EXPECT_CALL(server, listAllUsers())
       .WillOnce(testing::Return(std::vector<std::string>{}));
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre());
 
   server.stop();
@@ -243,7 +242,7 @@ TEST(ServerTest, TestAuthenticateUserTrue) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::AUTHENTICATE_USER);
+  NetworkMessage request(NetworkMessageType::AUTHENTICATE_USER);
   request.setUsername("user");
   request.setPassword("password");
 
@@ -252,8 +251,8 @@ TEST(ServerTest, TestAuthenticateUserTrue) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
 
   server.stop();
 }
@@ -263,7 +262,7 @@ TEST(ServerTest, TestAuthenticateUserFalse) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::AUTHENTICATE_USER);
+  NetworkMessage request(NetworkMessageType::AUTHENTICATE_USER);
   request.setUsername("user");
   request.setPassword("password");
 
@@ -272,8 +271,8 @@ TEST(ServerTest, TestAuthenticateUserFalse) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::FAILURE);
 
   server.stop();
 }
@@ -283,7 +282,7 @@ TEST(ServerTest, TestAddUserTagTrue) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::ADD_USER_TAG);
+  NetworkMessage request(NetworkMessageType::ADD_USER_TAG);
   request.setUsername("user");
   request.setTag("tag");
 
@@ -292,8 +291,8 @@ TEST(ServerTest, TestAddUserTagTrue) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
 
   server.stop();
 }
@@ -303,7 +302,7 @@ TEST(ServerTest, TestAddUserTagFalse) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::ADD_USER_TAG);
+  NetworkMessage request(NetworkMessageType::ADD_USER_TAG);
   request.setUsername("user");
   request.setTag("tag");
 
@@ -312,8 +311,8 @@ TEST(ServerTest, TestAddUserTagFalse) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::FAILURE);
 
   server.stop();
 }
@@ -323,7 +322,7 @@ TEST(ServerTest, TestRemoveUserTagTrue) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::REMOVE_USER_TAG);
+  NetworkMessage request(NetworkMessageType::REMOVE_USER_TAG);
   request.setUsername("user");
   request.setTag("tag");
 
@@ -332,8 +331,8 @@ TEST(ServerTest, TestRemoveUserTagTrue) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
 
   server.stop();
 }
@@ -343,7 +342,7 @@ TEST(ServerTest, TestRemoveUserTagFalse) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::REMOVE_USER_TAG);
+  NetworkMessage request(NetworkMessageType::REMOVE_USER_TAG);
   request.setUsername("user");
   request.setTag("tag");
 
@@ -352,8 +351,8 @@ TEST(ServerTest, TestRemoveUserTagFalse) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::FAILURE);
 
   server.stop();
 }
@@ -363,7 +362,7 @@ TEST(ServerTest, TestGetUserTagsNonEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::GET_USER_TAGS);
+  NetworkMessage request(NetworkMessageType::GET_USER_TAGS);
   request.setUsername("user");
 
   EXPECT_CALL(server, getUserTags_("user"))
@@ -371,8 +370,8 @@ TEST(ServerTest, TestGetUserTagsNonEmpty) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre("tag1", "tag2"));
 
   server.stop();
@@ -383,7 +382,7 @@ TEST(ServerTest, TestGetUserTagsEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::GET_USER_TAGS);
+  NetworkMessage request(NetworkMessageType::GET_USER_TAGS);
   request.setUsername("user");
 
   EXPECT_CALL(server, getUserTags_("user"))
@@ -391,8 +390,8 @@ TEST(ServerTest, TestGetUserTagsEmpty) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre());
 
   server.stop();
@@ -403,7 +402,7 @@ TEST(ServerTest, TestSendMessageTrue) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::SEND_MESSAGE);
+  NetworkMessage request(NetworkMessageType::SEND_MESSAGE);
   request.setFrom("from");
   request.setTo("to");
   request.setMessage("message");
@@ -413,8 +412,8 @@ TEST(ServerTest, TestSendMessageTrue) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
 
   server.stop();
 }
@@ -424,7 +423,7 @@ TEST(ServerTest, TestSendMessageFalse) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::SEND_MESSAGE);
+  NetworkMessage request(NetworkMessageType::SEND_MESSAGE);
   request.setFrom("from");
   request.setTo("to");
   request.setMessage("message");
@@ -434,8 +433,8 @@ TEST(ServerTest, TestSendMessageFalse) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::FAILURE);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::FAILURE);
 
   server.stop();
 }
@@ -445,7 +444,7 @@ TEST(ServerTest, TestGetSentMessagesNonEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::GET_SENT_MESSAGES);
+  NetworkMessage request(NetworkMessageType::GET_SENT_MESSAGES);
   request.setUsername("user");
 
   EXPECT_CALL(server, getSentMessages_("user"))
@@ -454,8 +453,8 @@ TEST(ServerTest, TestGetSentMessagesNonEmpty) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(),
               testing::ElementsAre("message1", "message2"));
 
@@ -467,7 +466,7 @@ TEST(ServerTest, TestGetSentMessagesEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::GET_SENT_MESSAGES);
+  NetworkMessage request(NetworkMessageType::GET_SENT_MESSAGES);
   request.setUsername("user");
 
   EXPECT_CALL(server, getSentMessages_("user"))
@@ -475,8 +474,8 @@ TEST(ServerTest, TestGetSentMessagesEmpty) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre());
 
   server.stop();
@@ -487,7 +486,7 @@ TEST(ServerTest, TestGetReceivedMessagesNonEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::GET_RECEIVED_MESSAGES);
+  NetworkMessage request(NetworkMessageType::GET_RECEIVED_MESSAGES);
   request.setUsername("user");
 
   EXPECT_CALL(server, getReceivedMessages_("user"))
@@ -496,8 +495,8 @@ TEST(ServerTest, TestGetReceivedMessagesNonEmpty) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(),
               testing::ElementsAre("message1", "message2"));
 
@@ -509,7 +508,7 @@ TEST(ServerTest, TestGetReceivedMessagesEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::GET_RECEIVED_MESSAGES);
+  NetworkMessage request(NetworkMessageType::GET_RECEIVED_MESSAGES);
   request.setUsername("user");
 
   EXPECT_CALL(server, getReceivedMessages_("user"))
@@ -517,8 +516,8 @@ TEST(ServerTest, TestGetReceivedMessagesEmpty) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre());
 
   server.stop();
@@ -529,7 +528,7 @@ TEST(ServerTest, TestGetPairNonEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::GET_PAIR);
+  NetworkMessage request(NetworkMessageType::GET_PAIR);
   request.setUsername("user");
 
   EXPECT_CALL(server, getPair_("user"))
@@ -537,8 +536,8 @@ TEST(ServerTest, TestGetPairNonEmpty) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre("user1", "user2"));
 
   server.stop();
@@ -549,7 +548,7 @@ TEST(ServerTest, TestGetPairEmpty) {
   server.start();
   MockClient client(kTestAddress);
 
-  Message request(MessageType::GET_PAIR);
+  NetworkMessage request(NetworkMessageType::GET_PAIR);
   request.setUsername("user");
 
   EXPECT_CALL(server, getPair_("user"))
@@ -557,8 +556,8 @@ TEST(ServerTest, TestGetPairEmpty) {
 
   zmq::message_t reply;
   client.sendRequestAndReceiveReply_(*request.toZmqMessage(), reply);
-  const Message replyMessage(reply.to_string());
-  EXPECT_EQ(replyMessage.getType(), MessageType::SUCCESS);
+  const NetworkMessage replyMessage(reply.to_string());
+  EXPECT_EQ(replyMessage.getType(), NetworkMessageType::SUCCESS);
   EXPECT_THAT(replyMessage.getVector(), testing::ElementsAre());
 
   server.stop();

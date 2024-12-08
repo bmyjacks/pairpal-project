@@ -1,7 +1,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "pair/pair.hpp"
+#include <pair.hpp>
 
 class MockPair final : public Pair {
  public:
