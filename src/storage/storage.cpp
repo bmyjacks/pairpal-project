@@ -329,15 +329,11 @@ bool Storage::removeTag(std::string username, std::string tag) {
   sqlite3_finalize(stmt_update);
 }
 void Storage::reset() {
-  const char* sql1 = " DELETE FROM Users_list;";
-  const char* sql2 = "DELETE FROM Users_list WHERE name = 'Users_list';";
-  int rc = sqlite3_exec(db,sql1,0,0,nullptr);
-  if(rc!=SQLITE_OK) {
-    std:: cerr << "SQL1 error" << sqlite3_errmsg(db)<<std::endl;
+  const std:: string d = "storage_test.db";
+  if(std::remove(d.c_str())==0) {
+    std:: cout << "Delete successfully" << std::endl;
   }
-  rc = sqlite3_exec(db,sql2,0,0,nullptr);
-
-  if(rc!=SQLITE_OK) {
-    std:: cerr << "SQL2 error"  << sqlite3_errmsg(db)<<std::endl;
+  else {
+    std::cerr << "Error deleting database" << std::endl;
   }
 }
