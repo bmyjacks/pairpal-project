@@ -1,17 +1,14 @@
 #ifndef UI_H
 #define UI_H
 
-#include <client.hpp>
 #include <string>
 #include <vector>
 
 class UI {
  public:
-  static Client client;
-
   UI();
   static bool addUser(const std::string& username, const std::string& password);
-  // 添加一个静态变量来存储当前用户名
+    // 添加一个静态变量来存储当前用户名
   static std::string currentUsername;
 
   static bool removeUser(const std::string& username);
