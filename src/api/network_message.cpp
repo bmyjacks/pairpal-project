@@ -65,7 +65,7 @@ auto NetworkMessage::getTo() const -> std::string {
   return content_["to"].get<std::string>();
 }
 
-void NetworkMessage::setNetworkMessage(const std::string& message) {
+void NetworkMessage::setMessage(const std::string& message) {
   content_["message"] = message;
 }
 
@@ -77,6 +77,6 @@ auto NetworkMessage::getVector() const -> std::vector<std::string> {
   return content_["vec"].get<std::vector<std::string>>();
 }
 
-auto NetworkMessage::getNetworkMessage() const -> std::string {
+auto NetworkMessage::getMessage() const -> std::string {
   return content_["message"].get<std::string>();
 }

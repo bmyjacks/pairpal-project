@@ -3,7 +3,7 @@
 #include <iostream>
 #include <zmq.hpp>
 
-#include "api/message.hpp"
+#include "api/network_message.hpp"
 
 Client::Client(std::string serverAddr)
     : serverAddr_(std::move(serverAddr)),
@@ -101,49 +101,49 @@ auto Client::sendRequestAndReceiveReply_(zmq::message_t& request,
 
 auto Client::addUser(const std::string& username,
                      const std::string& password) noexcept -> bool {
-  Message msg(MessageType::ADD_USER);
+  NetworkMessage msg(NetworkMessageType::ADD_USER);
   msg.setUsername(username);
   msg.setPassword(password);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    const Message replyMessage(reply.to_string());
-    return replyMessage.getType() == MessageType::SUCCESS;
+    const NetworkMessage replyMessage(reply.to_string());
+    return replyMessage.getType() == NetworkMessageType::SUCCESS;
   }
   return false;
 }
 
 auto Client::removeUser(const std::string& username) noexcept -> bool {
-  Message msg(MessageType::REMOVE_USER);
+  NetworkMessage msg(NetworkMessageType::REMOVE_USER);
   msg.setUsername(username);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    const Message replyMessage(reply.to_string());
-    return replyMessage.getType() == MessageType::SUCCESS;
+    const NetworkMessage replyMessage(reply.to_string());
+    return replyMessage.getType() == NetworkMessageType::SUCCESS;
   }
   return false;
 }
 
 auto Client::isExistUser(const std::string& username) noexcept -> bool {
-  Message msg(MessageType::IS_EXIST_USER);
+  NetworkMessage msg(NetworkMessageType::IS_EXIST_USER);
   msg.setUsername(username);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    const Message replyMessage(reply.to_string());
-    return replyMessage.getType() == MessageType::SUCCESS;
+    const NetworkMessage replyMessage(reply.to_string());
+    return replyMessage.getType() == NetworkMessageType::SUCCESS;
   }
   return false;
 }
 
 auto Client::listAllUsers() -> std::vector<std::string> {
-  const Message msg(MessageType::LIST_ALL_USERS);
+  const NetworkMessage msg(NetworkMessageType::LIST_ALL_USERS);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    if (const Message replyMessage(reply.to_string());
-        replyMessage.getType() == MessageType::SUCCESS) {
+    if (const NetworkMessage replyMessage(reply.to_string());
+        replyMessage.getType() == NetworkMessageType::SUCCESS) {
       return replyMessage.getContent()["vector"];
     }
   }
@@ -152,55 +152,55 @@ auto Client::listAllUsers() -> std::vector<std::string> {
 
 auto Client::authenticateUser(const std::string& username,
                               const std::string& password) noexcept -> bool {
-  Message msg(MessageType::AUTHENTICATE_USER);
+  NetworkMessage msg(NetworkMessageType::AUTHENTICATE_USER);
   msg.setUsername(username);
   msg.setPassword(password);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    const Message replyMessage(reply.to_string());
-    return replyMessage.getType() == MessageType::SUCCESS;
+    const NetworkMessage replyMessage(reply.to_string());
+    return replyMessage.getType() == NetworkMessageType::SUCCESS;
   }
   return false;
 }
 
 auto Client::addUserTag(const std::string& username,
                         const std::string& tag) noexcept -> bool {
-  Message msg(MessageType::ADD_USER_TAG);
+  NetworkMessage msg(NetworkMessageType::ADD_USER_TAG);
   msg.setUsername(username);
   msg.setTag(tag);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    const Message replyMessage(reply.to_string());
-    return replyMessage.getType() == MessageType::SUCCESS;
+    const NetworkMessage replyMessage(reply.to_string());
+    return replyMessage.getType() == NetworkMessageType::SUCCESS;
   }
   return false;
 }
 
 auto Client::removeUserTag(const std::string& username,
                            const std::string& tag) noexcept -> bool {
-  Message msg(MessageType::REMOVE_USER_TAG);
+  NetworkMessage msg(NetworkMessageType::REMOVE_USER_TAG);
   msg.setUsername(username);
   msg.setTag(tag);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    const Message replyMessage(reply.to_string());
-    return replyMessage.getType() == MessageType::SUCCESS;
+    const NetworkMessage replyMessage(reply.to_string());
+    return replyMessage.getType() == NetworkMessageType::SUCCESS;
   }
   return false;
 }
 
 auto Client::getUserTags(const std::string& username)
     -> std::vector<std::string> {
-  Message msg(MessageType::GET_USER_TAGS);
+  NetworkMessage msg(NetworkMessageType::GET_USER_TAGS);
   msg.setUsername(username);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    if (const Message replyMessage(reply.to_string());
-        replyMessage.getType() == MessageType::SUCCESS) {
+    if (const NetworkMessage replyMessage(reply.to_string());
+        replyMessage.getType() == NetworkMessageType::SUCCESS) {
       return replyMessage.getContent()["vector"];
     }
   }
@@ -209,28 +209,28 @@ auto Client::getUserTags(const std::string& username)
 
 auto Client::sendMessage(const std::string& from, const std::string& to,
                          const std::string& message) noexcept -> bool {
-  Message msg(MessageType::SEND_MESSAGE);
+  NetworkMessage msg(NetworkMessageType::SEND_MESSAGE);
   msg.setFrom(from);
   msg.setTo(to);
   msg.setMessage(message);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    const Message replyMessage(reply.to_string());
-    return replyMessage.getType() == MessageType::SUCCESS;
+    const NetworkMessage replyMessage(reply.to_string());
+    return replyMessage.getType() == NetworkMessageType::SUCCESS;
   }
   return false;
 }
 
 auto Client::getSentMessages(const std::string& username)
     -> std::vector<std::string> {
-  Message msg(MessageType::GET_SENT_MESSAGES);
+  NetworkMessage msg(NetworkMessageType::GET_SENT_MESSAGES);
   msg.setUsername(username);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    if (const Message replyMessage(reply.to_string());
-        replyMessage.getType() == MessageType::SUCCESS) {
+    if (const NetworkMessage replyMessage(reply.to_string());
+        replyMessage.getType() == NetworkMessageType::SUCCESS) {
       return replyMessage.getContent()["vector"];
     }
   }
@@ -239,13 +239,13 @@ auto Client::getSentMessages(const std::string& username)
 
 auto Client::getReceivedMessages(const std::string& username)
     -> std::vector<std::string> {
-  Message msg(MessageType::GET_RECEIVED_MESSAGES);
+  NetworkMessage msg(NetworkMessageType::GET_RECEIVED_MESSAGES);
   msg.setUsername(username);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    if (const Message replyMessage(reply.to_string());
-        replyMessage.getType() == MessageType::SUCCESS) {
+    if (const NetworkMessage replyMessage(reply.to_string());
+        replyMessage.getType() == NetworkMessageType::SUCCESS) {
       return replyMessage.getContent()["vector"];
     }
   }
@@ -253,13 +253,13 @@ auto Client::getReceivedMessages(const std::string& username)
 }
 
 auto Client::getPair(const std::string& username) -> std::vector<std::string> {
-  Message msg(MessageType::GET_PAIR);
+  NetworkMessage msg(NetworkMessageType::GET_PAIR);
   msg.setUsername(username);
 
   if (zmq::message_t reply;
       sendRequestAndReceiveReply_(*msg.toZmqMessage(), reply)) {
-    if (const Message replyMessage(reply.to_string());
-        replyMessage.getType() == MessageType::SUCCESS) {
+    if (const NetworkMessage replyMessage(reply.to_string());
+        replyMessage.getType() == NetworkMessageType::SUCCESS) {
       return replyMessage.getContent()["vector"];
     }
   }

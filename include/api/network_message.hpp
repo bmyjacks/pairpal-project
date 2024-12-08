@@ -159,13 +159,13 @@ class NetworkMessage {
    * @brief Sets the message content.
    * @param message The message content to set.
    */
-  void setNetworkMessage(const std::string& message);
+  void setMessage(const std::string& message);
 
   /**
    * @brief Gets the message content.
    * @return The message content.
    */
-  [[nodiscard]] auto getNetworkMessage() const -> std::string;
+  [[nodiscard]] auto getMessage() const -> std::string;
 
   /**
    * @brief Sets a vector of strings associated with the message.

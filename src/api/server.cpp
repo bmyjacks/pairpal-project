@@ -6,7 +6,7 @@
 #include <vector>
 #include <zmq.hpp>
 
-#include "api/message.hpp"
+#include "api/network_message.hpp"
 #include "pair/pair.hpp"
 
 Server::Server(std::string listenAddr)
@@ -91,91 +91,91 @@ auto Server::stop() -> bool {
 }
 
 auto Server::handleRequest_(const zmq::message_t& request) -> zmq::message_t {
-  const Message requestMessage(request.to_string());
-  const MessageType requestType = requestMessage.getType();
+  const NetworkMessage requestMessage(request.to_string());
+  const NetworkMessageType requestType = requestMessage.getType();
 
-  const Message successMessage(MessageType::SUCCESS);
-  const Message failureMessage(MessageType::FAILURE);
+  const NetworkMessage successMessage(NetworkMessageType::SUCCESS);
+  const NetworkMessage failureMessage(NetworkMessageType::FAILURE);
 
   zmq::message_t replySuccess(successMessage.toString());
   zmq::message_t replyFailure(failureMessage.toString());
 
-  if (requestType == MessageType::ADD_USER &&
+  if (requestType == NetworkMessageType::ADD_USER &&
       addUser_(requestMessage.getUsername(), requestMessage.getPassword())) {
     return replySuccess;
   }
 
-  if (requestType == MessageType::REMOVE_USER &&
+  if (requestType == NetworkMessageType::REMOVE_USER &&
       removeUser_(requestMessage.getUsername())) {
     return replySuccess;
   }
 
-  if (requestType == MessageType::IS_EXIST_USER &&
+  if (requestType == NetworkMessageType::IS_EXIST_USER &&
       isExistUser_(requestMessage.getUsername())) {
     return replySuccess;
   }
 
-  if (requestType == MessageType::LIST_ALL_USERS) {
+  if (requestType == NetworkMessageType::LIST_ALL_USERS) {
     const std::vector<std::string> users = listAllUsers();
 
-    Message response(MessageType::SUCCESS);
+    NetworkMessage response(NetworkMessageType::SUCCESS);
     response.setVector(users);
 
     return std::move(*response.toZmqMessage());
   }
 
-  if (requestType == MessageType::AUTHENTICATE_USER &&
+  if (requestType == NetworkMessageType::AUTHENTICATE_USER &&
       authenticateUser_(requestMessage.getUsername(),
                         requestMessage.getPassword())) {
     return replySuccess;
   }
 
-  if (requestType == MessageType::ADD_USER_TAG &&
+  if (requestType == NetworkMessageType::ADD_USER_TAG &&
       addUserTag_(requestMessage.getUsername(), requestMessage.getTag())) {
     return replySuccess;
   }
 
-  if (requestType == MessageType::REMOVE_USER_TAG &&
+  if (requestType == NetworkMessageType::REMOVE_USER_TAG &&
       removeUserTag_(requestMessage.getUsername(), requestMessage.getTag())) {
     return replySuccess;
   }
 
-  if (requestType == MessageType::GET_USER_TAGS) {
+  if (requestType == NetworkMessageType::GET_USER_TAGS) {
     const auto tags = getUserTags_(requestMessage.getUsername());
-    Message response(MessageType::SUCCESS);
+    NetworkMessage response(NetworkMessageType::SUCCESS);
     response.setVector(tags);
 
     return std::move(*response.toZmqMessage());
   }
 
-  if (requestType == MessageType::SEND_MESSAGE &&
+  if (requestType == NetworkMessageType::SEND_MESSAGE &&
       sendMessage_(requestMessage.getFrom(), requestMessage.getTo(),
                    requestMessage.getMessage())) {
     return replySuccess;
   }
 
-  if (requestType == MessageType::GET_SENT_MESSAGES) {
+  if (requestType == NetworkMessageType::GET_SENT_MESSAGES) {
     const auto messages = getSentMessages_(requestMessage.getUsername());
 
-    Message response(MessageType::SUCCESS);
+    NetworkMessage response(NetworkMessageType::SUCCESS);
     response.setVector(messages);
 
     return std::move(*response.toZmqMessage());
   }
 
-  if (requestType == MessageType::GET_RECEIVED_MESSAGES) {
+  if (requestType == NetworkMessageType::GET_RECEIVED_MESSAGES) {
     const auto messages = getReceivedMessages_(requestMessage.getUsername());
 
-    Message response(MessageType::SUCCESS);
+    NetworkMessage response(NetworkMessageType::SUCCESS);
     response.setVector(messages);
 
     return std::move(*response.toZmqMessage());
   }
 
-  if (requestType == MessageType::GET_PAIR) {
+  if (requestType == NetworkMessageType::GET_PAIR) {
     const auto messages = getPair_(requestMessage.getUsername());
 
-    Message response(MessageType::SUCCESS);
+    NetworkMessage response(NetworkMessageType::SUCCESS);
     response.setVector(messages);
 
     return std::move(*response.toZmqMessage());
