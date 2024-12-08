@@ -2,32 +2,36 @@
 #define PAIRPAL_H
 
 #include <QMainWindow>
-
-#include "eat.h"
-#include "play.h"
-#include "self.h"
-#include "sport.h"
 #include "study.h"
+#include "sport.h"
+#include "play.h"
+#include "eat.h"
+#include "self.h"
+#include "list.h"
+
 
 namespace Ui {
 class pairpal;
 }
 
-class pairpal : public QMainWindow {
-  Q_OBJECT
+class pairpal : public QMainWindow
+{
+    Q_OBJECT
 
- public:
-  explicit pairpal(QWidget *parent = nullptr);
-  ~pairpal();
+public:
+    explicit pairpal(QWidget *parent = nullptr);
+    ~pairpal();
 
-  study *ppage4 = NULL;
-  sport *ppage5 = NULL;
-  play *ppage6 = NULL;
-  eat *ppage7 = NULL;
-  self *ppage8 = NULL;
+   study *ppage4=NULL;
+   sport *ppage5=NULL;
+   play *ppage6=NULL;
+   eat *ppage7=NULL;
+   self *ppage8=NULL;
+   list *ppage9=NULL;
 
- private:
-  Ui::pairpal *ui;
+
+private:
+    Ui::pairpal *ui;
 };
 
-#endif  // PAIRPAL_H
+#endif // PAIRPAL_H

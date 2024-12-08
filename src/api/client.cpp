@@ -1,6 +1,5 @@
 #include "api/client.hpp"
 
-#include <chrono>
 #include <iostream>
 #include <zmq.hpp>
 
@@ -11,30 +10,71 @@ Client::Client(std::string serverAddr)
       context_(1),
       socket_(context_, zmq::socket_type::req) {}
 
+Client::Client(const Client& other)
+    : serverAddr_(other.serverAddr_),
+      context_(1),
+      socket_(context_, zmq::socket_type::req) {}
+
+Client::Client(Client&& other) noexcept
+    : serverAddr_(std::move(other.serverAddr_)),
+      context_(std::move(other.context_)),
+      socket_(std::move(other.socket_)) {}
+
+auto Client::operator=(const Client& other) -> Client& {
+  if (this == &other) {
+    return *this;
+  }
+
+  socket_.close();
+  context_.close();
+
+  serverAddr_ = other.serverAddr_;
+  context_ = zmq::context_t(1);
+  socket_ = zmq::socket_t(context_, zmq::socket_type::req);
+  socket_.connect(serverAddr_);
+
+  return *this;
+}
+
+auto Client::operator=(Client&& other) noexcept -> Client& {
+  if (this == &other) {
+    return *this;
+  }
+
+  socket_.close();
+  context_.close();
+
+  serverAddr_ = std::move(other.serverAddr_);
+  context_ = std::move(other.context_);
+  socket_ = std::move(other.socket_);
+
+  return *this;
+}
+
 Client::~Client() = default;
 
-bool Client::start() noexcept {
+auto Client::start() noexcept -> bool {
   try {
     socket_.connect(serverAddr_);
   } catch (const zmq::error_t& e) {
-    std::cerr << "Error starting client: " << e.what() << std::endl;
+    std::cerr << "Error starting client: " << e.what() << '\n';
     return false;
   }
   return true;
 }
 
-bool Client::stop() noexcept {
+auto Client::stop() noexcept -> bool {
   try {
     socket_.disconnect(serverAddr_);
     context_.close();
   } catch (const zmq::error_t& e) {
-    std::cerr << "Error stopping client: " << e.what() << std::endl;
+    std::cerr << "Error stopping client: " << e.what() << '\n';
     return false;
   }
   return true;
 }
 
-bool Client::restart() noexcept {
+auto Client::restart() noexcept -> bool {
   if (!stop()) {
     return false;
   }
@@ -42,8 +82,9 @@ bool Client::restart() noexcept {
   return start();
 }
 
-bool Client::sendRequestAndReceiveReply_(zmq::message_t& request,
-                                         zmq::message_t& reply) noexcept {
+auto Client::sendRequestAndReceiveReply_(zmq::message_t& request,
+                                         zmq::message_t& reply) noexcept
+    -> bool {
   try {
     socket_.send(request, zmq::send_flags::none);
     if (const auto result = socket_.recv(reply, zmq::recv_flags::none);
@@ -51,15 +92,15 @@ bool Client::sendRequestAndReceiveReply_(zmq::message_t& request,
       return false;
     }
   } catch (const zmq::error_t& e) {
-    std::cerr << "Error sending&receiving message: " << e.what() << std::endl;
+    std::cerr << "Error sending&receiving message: " << e.what() << '\n';
     return false;
   }
 
   return true;
 }
 
-bool Client::addUser(const std::string& username,
-                     const std::string& password) noexcept {
+auto Client::addUser(const std::string& username,
+                     const std::string& password) noexcept -> bool {
   Message msg(MessageType::ADD_USER);
   msg.setUsername(username);
   msg.setPassword(password);
@@ -72,7 +113,7 @@ bool Client::addUser(const std::string& username,
   return false;
 }
 
-bool Client::removeUser(const std::string& username) noexcept {
+auto Client::removeUser(const std::string& username) noexcept -> bool {
   Message msg(MessageType::REMOVE_USER);
   msg.setUsername(username);
 
@@ -84,7 +125,7 @@ bool Client::removeUser(const std::string& username) noexcept {
   return false;
 }
 
-bool Client::isExistUser(const std::string& username) noexcept {
+auto Client::isExistUser(const std::string& username) noexcept -> bool {
   Message msg(MessageType::IS_EXIST_USER);
   msg.setUsername(username);
 
@@ -96,7 +137,7 @@ bool Client::isExistUser(const std::string& username) noexcept {
   return false;
 }
 
-std::vector<std::string> Client::listAllUsers() noexcept {
+auto Client::listAllUsers() -> std::vector<std::string> {
   const Message msg(MessageType::LIST_ALL_USERS);
 
   if (zmq::message_t reply;
@@ -109,8 +150,8 @@ std::vector<std::string> Client::listAllUsers() noexcept {
   return {};
 }
 
-bool Client::authenticateUser(const std::string& username,
-                              const std::string& password) noexcept {
+auto Client::authenticateUser(const std::string& username,
+                              const std::string& password) noexcept -> bool {
   Message msg(MessageType::AUTHENTICATE_USER);
   msg.setUsername(username);
   msg.setPassword(password);
@@ -123,8 +164,8 @@ bool Client::authenticateUser(const std::string& username,
   return false;
 }
 
-bool Client::addUserTag(const std::string& username,
-                        const std::string& tag) noexcept {
+auto Client::addUserTag(const std::string& username,
+                        const std::string& tag) noexcept -> bool {
   Message msg(MessageType::ADD_USER_TAG);
   msg.setUsername(username);
   msg.setTag(tag);
@@ -137,8 +178,8 @@ bool Client::addUserTag(const std::string& username,
   return false;
 }
 
-bool Client::removeUserTag(const std::string& username,
-                           const std::string& tag) noexcept {
+auto Client::removeUserTag(const std::string& username,
+                           const std::string& tag) noexcept -> bool {
   Message msg(MessageType::REMOVE_USER_TAG);
   msg.setUsername(username);
   msg.setTag(tag);
@@ -151,8 +192,8 @@ bool Client::removeUserTag(const std::string& username,
   return false;
 }
 
-std::vector<std::string> Client::getUserTags(
-    const std::string& username) noexcept {
+auto Client::getUserTags(const std::string& username)
+    -> std::vector<std::string> {
   Message msg(MessageType::GET_USER_TAGS);
   msg.setUsername(username);
 
@@ -166,8 +207,8 @@ std::vector<std::string> Client::getUserTags(
   return {};
 }
 
-bool Client::sendMessage(const std::string& from, const std::string& to,
-                         const std::string& message) noexcept {
+auto Client::sendMessage(const std::string& from, const std::string& to,
+                         const std::string& message) noexcept -> bool {
   Message msg(MessageType::SEND_MESSAGE);
   msg.setFrom(from);
   msg.setTo(to);
@@ -181,8 +222,8 @@ bool Client::sendMessage(const std::string& from, const std::string& to,
   return false;
 }
 
-std::vector<std::string> Client::getSentMessages(
-    const std::string& username) noexcept {
+auto Client::getSentMessages(const std::string& username)
+    -> std::vector<std::string> {
   Message msg(MessageType::GET_SENT_MESSAGES);
   msg.setUsername(username);
 
@@ -196,8 +237,8 @@ std::vector<std::string> Client::getSentMessages(
   return {};
 }
 
-std::vector<std::string> Client::getReceivedMessages(
-    const std::string& username) noexcept {
+auto Client::getReceivedMessages(const std::string& username)
+    -> std::vector<std::string> {
   Message msg(MessageType::GET_RECEIVED_MESSAGES);
   msg.setUsername(username);
 
@@ -211,7 +252,7 @@ std::vector<std::string> Client::getReceivedMessages(
   return {};
 }
 
-std::vector<std::string> Client::getPair(const std::string& username) noexcept {
+auto Client::getPair(const std::string& username) -> std::vector<std::string> {
   Message msg(MessageType::GET_PAIR);
   msg.setUsername(username);
 

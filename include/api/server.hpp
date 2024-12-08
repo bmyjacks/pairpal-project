@@ -18,30 +18,30 @@ class Server {
    * @brief Constructs a Server object.
    * @param listenAddr The address the server will listen on.
    */
-  explicit Server(std::string listenAddr) noexcept;
+  explicit Server(std::string listenAddr);
 
   /**
    * @brief Destroys the Server object.
    */
-  virtual ~Server() noexcept;
+  virtual ~Server();
 
   /**
    * @brief Starts the server on the specified port.
    * @return True if the server started successfully, false otherwise.
    */
-  bool start() noexcept;
+  auto start() -> bool;
 
   /**
    * @brief Stops the server.
    * @return True if the server stopped successfully, false otherwise.
    */
-  bool stop() noexcept;
+  auto stop() -> bool;
 
   /**
    * @brief Gets the address the server is listening on.
    * @return The listen address as a string.
    */
-  [[nodiscard]] std::string getListenAddr() const noexcept;
+  [[nodiscard]] auto getListenAddr() const -> std::string;
 
  private:
   std::string listenAddr_;  ///< The address the server listens on.
@@ -57,15 +57,15 @@ class Server {
   /**
    * @brief Runs the server.
    */
-  void run_() noexcept;
+  void run_();
 
   /**
    * @brief Handles incoming requests.
    * @param request The incoming request message.
    * @return The response message.
    */
-  [[nodiscard]] zmq::message_t handleRequest_(
-      const zmq::message_t& request) noexcept;
+  [[nodiscard]] auto handleRequest_(const zmq::message_t& request)
+      -> zmq::message_t;
 
   /**
    * @brief Adds a user to the server.
@@ -73,28 +73,28 @@ class Server {
    * @param password The password of the user.
    * @return True if the user was added successfully, false otherwise.
    */
-  virtual bool addUser_(const std::string& username,
-                        const std::string& password) noexcept;
+  virtual auto addUser_(const std::string& username,
+                        const std::string& password) -> bool;
 
   /**
    * @brief Removes a user from the server.
    * @param username The username of the user.
    * @return True if the user was removed successfully, false otherwise.
    */
-  virtual bool removeUser_(const std::string& username) noexcept;
+  virtual auto removeUser_(const std::string& username) -> bool;
 
   /**
    * @brief Checks if a user exists.
    * @param username The username to check.
    * @return True if the user exists, false otherwise.
    */
-  [[nodiscard]] virtual bool isExistUser_(const std::string& username) noexcept;
+  [[nodiscard]] virtual auto isExistUser_(const std::string& username) -> bool;
 
   /**
    * @brief Lists all users.
    * @return A vector of usernames.
    */
-  [[nodiscard]] virtual std::vector<std::string> listAllUsers() noexcept;
+  [[nodiscard]] virtual auto listAllUsers() -> std::vector<std::string>;
 
   /**
    * @brief Authenticates a user.
@@ -102,8 +102,8 @@ class Server {
    * @param password The password of the user.
    * @return True if the user was authenticated successfully, false otherwise.
    */
-  virtual bool authenticateUser_(const std::string& username,
-                                 const std::string& password) noexcept;
+  virtual auto authenticateUser_(const std::string& username,
+                                 const std::string& password) -> bool;
 
   /**
    * @brief Adds a tag to a user.
@@ -111,8 +111,8 @@ class Server {
    * @param tag The tag to add.
    * @return True if the tag was added successfully, false otherwise.
    */
-  virtual bool addUserTag_(const std::string& username,
-                           const std::string& tag) noexcept;
+  virtual auto addUserTag_(const std::string& username, const std::string& tag)
+      -> bool;
 
   /**
    * @brief Removes a tag from a user.
@@ -120,16 +120,16 @@ class Server {
    * @param tag The tag to remove.
    * @return True if the tag was removed successfully, false otherwise.
    */
-  virtual bool removeUserTag_(const std::string& username,
-                              const std::string& tag) noexcept;
+  virtual auto removeUserTag_(const std::string& username,
+                              const std::string& tag) -> bool;
 
   /**
    * @brief Gets the tags of a user.
    * @param username The username of the user.
    * @return A vector of tags.
    */
-  [[nodiscard]] virtual std::vector<std::string> getUserTags_(
-      const std::string& username) noexcept;
+  [[nodiscard]] virtual auto getUserTags_(const std::string& username)
+      -> std::vector<std::string>;
 
   /**
    * @brief Sends a message from one user to another.
@@ -138,32 +138,32 @@ class Server {
    * @param message The message content.
    * @return True if the message was sent successfully, false otherwise.
    */
-  virtual bool sendMessage_(const std::string& from, const std::string& to,
-                            const std::string& message) noexcept;
+  virtual auto sendMessage_(const std::string& from, const std::string& to,
+                            const std::string& message) -> bool;
 
   /**
    * @brief Gets the sent messages of a user.
    * @param username The username of the user.
    * @return A vector of messages.
    */
-  [[nodiscard]] virtual std::vector<std::string> getSentMessages_(
-      const std::string& username) noexcept;
+  [[nodiscard]] virtual auto getSentMessages_(const std::string& username)
+      -> std::vector<std::string>;
 
   /**
    * @brief Gets the received messages of a user.
    * @param username The username of the user.
    * @return A vector of messages.
    */
-  [[nodiscard]] virtual std::vector<std::string> getReceivedMessages_(
-      const std::string& username) noexcept;
+  [[nodiscard]] virtual auto getReceivedMessages_(const std::string& username)
+      -> std::vector<std::string>;
 
   /**
    * @brief Gets the pairing information of a user.
    * @param username The username of the user needs to pair.
    * @return A vector of paired usernames.
    */
-  [[nodiscard]] virtual std::vector<std::string> getPair_(
-      const std::string& username) noexcept;
+  [[nodiscard]] virtual auto getPair_(const std::string& username)
+      -> std::vector<std::string>;
 };
 
 #endif  // SERVER_HPP

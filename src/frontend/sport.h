@@ -7,18 +7,20 @@ namespace Ui {
 class sport;
 }
 
-class sport : public QWidget {
-  Q_OBJECT
+class sport : public QWidget
+{
+    Q_OBJECT
 
- public:
-  explicit sport(QWidget *parent = nullptr);
-  ~sport();
+public:
+    explicit sport(QWidget *parent = nullptr);
+    ~sport();
 
- signals:
-  void back();
+signals:
+    void back();
 
- private:
-  Ui::sport *ui;
+
+private:
+    Ui::sport *ui;
 };
 
-#endif  // SPORT_H
+#endif // SPORT_H

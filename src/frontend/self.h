@@ -2,22 +2,32 @@
 #define SELF_H
 
 #include <QWidget>
+#include <QString>
+#include <QStringList>
+#include "dialog.h"
+
+
 
 namespace Ui {
 class self;
 }
 
-class self : public QWidget {
-  Q_OBJECT
+class self : public QWidget
+{
+    Q_OBJECT
 
- public:
-  explicit self(QWidget *parent = nullptr);
-  ~self();
- signals:
-  void back();
+public:
+    explicit self(QWidget *parent = nullptr);
+    ~self();
 
- private:
-  Ui::self *ui;
+QDialog *ppage20=NULL;
+public slots:
+    void updateUserInfo(const QString& name,const QString& grade, const QString& school,
+                        const QString& college, const QStringList& tags);
+signals:
+    void back();
+private:
+    Ui::self *ui;
 };
 
-#endif  // SELF_H
+#endif // SELF_H

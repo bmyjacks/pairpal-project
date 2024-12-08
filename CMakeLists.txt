@@ -48,8 +48,11 @@ target_include_directories(storage PUBLIC include)
 
 # Add UI forms
 set(UI_SOURCES
+        src/frontend/chat.ui
         src/frontend/dialog.ui
         src/frontend/eat.ui
+        src/frontend/list.ui
+        src/frontend/messagelist.ui
         src/frontend/pairpal.ui
         src/frontend/play.ui
         src/frontend/registerpage.ui
@@ -64,19 +67,22 @@ qt5_add_translation(QM_FILES ${TRANSLATIONS})
 
 # Define frontend
 add_executable(frontend
-        src/frontend/main.cpp
+        src/frontend/chat.cpp
         src/frontend/dialog.cpp
         src/frontend/eat.cpp
+        src/frontend/list.cpp
+        src/frontend/main.cpp
         src/frontend/pairpal.cpp
         src/frontend/play.cpp
         src/frontend/registerpage.cpp
         src/frontend/self.cpp
         src/frontend/sport.cpp
         src/frontend/study.cpp
+        src/frontend/ui.cpp
         ${UI_SOURCES}
         ${QM_FILES}
 )
-target_include_directories(frontend PUBLIC include)
+target_include_directories(frontend PUBLIC include src/frontend)
 target_link_libraries(frontend PUBLIC api Qt5::Widgets Qt5::Core Qt5::Gui)
 
 
@@ -90,24 +96,23 @@ target_link_libraries(backend PUBLIC storage chat pair api)
 # Tests
 # API
 ## Client test
-add_executable(test-client test/api/test-client.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
-target_link_libraries(test-client PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_executable(test-client test/api/test-client.cpp)
+target_link_libraries(test-client PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-client COMMAND test-client)
 ## Message test
-add_executable(test-message test/api/test-message.cpp
-        src/api/message.cpp
-        src/api/server.cpp
-        src/storage/message_store.cpp)
-target_link_libraries(test-message PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_executable(test-message test/api/test-message.cpp)
+target_link_libraries(test-message PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-message COMMAND test-message)
 ## Server test
 add_executable(test-server test/api/test-server.cpp)
-target_link_libraries(test-server PRIVATE api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+target_link_libraries(test-server PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-server COMMAND test-server)
 
 # Storage
+add_executable(test-storage test/storage/test-storage.cpp)
+target_link_libraries(test-storage PUBLIC storage GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_test(NAME test-storage COMMAND test-storage)
+
 add_executable(s-test test/Storage_test/s-test.cpp)
 target_link_libraries(s-test storage)
 add_test(NAME s-test COMMAND s-test)
@@ -119,8 +124,6 @@ target_link_libraries(chat-test chat)
 add_test(NAME chat-test COMMAND chat-test)
 
 # Pair
-add_executable(test-pair test/pair/test-pair.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
-target_link_libraries(test-pair PRIVATE pair GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_executable(test-pair test/pair/test-pair.cpp)
+target_link_libraries(test-pair PUBLIC pair GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-pair COMMAND test-pair)

@@ -7,17 +7,18 @@ namespace Ui {
 class eat;
 }
 
-class eat : public QWidget {
-  Q_OBJECT
+class eat : public QWidget
+{
+    Q_OBJECT
 
- public:
-  explicit eat(QWidget *parent = nullptr);
-  ~eat();
- signals:
-  void back();
+public:
+    explicit eat(QWidget *parent = nullptr);
+    ~eat();
+signals:
+    void back();
 
- private:
-  Ui::eat *ui;
+private:
+    Ui::eat *ui;
 };
 
-#endif  // EAT_H
+#endif // EAT_H

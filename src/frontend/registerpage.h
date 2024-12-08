@@ -2,23 +2,38 @@
 #define REGISTERPAGE_H
 
 #include <QDialog>
+// #include "self.h"
+
+class self;  // 前向声明
 
 namespace Ui {
 class Registerpage;
 }
 
-class Registerpage : public QDialog {
-  Q_OBJECT
+class Registerpage : public QDialog
+{
+    Q_OBJECT
 
- public:
-  explicit Registerpage(QWidget *parent = nullptr);
-  ~Registerpage();
+public:
+    explicit Registerpage(QWidget *parent = nullptr,self* page=nullptr);
+    void onButtonClicked();
+    ~Registerpage();
+    // 将 selfPage 指针声明为类成员
+    void setSelfPage(self* page) {
+        selfPage = page;
+    }
 
- signals:
-  void back();
+signals:
+    void back();
 
- private:
-  Ui::Registerpage *ui;
+
+    void userInfoSaved(const QString& name, const QString& grade, const QString& school,
+                        const QString& college, const QStringList& tags);
+
+private:
+    self* selfPage;  // 指向 Self 页面类的指针
+
+    Ui::Registerpage *ui;
 };
 
-#endif  // REGISTERPAGE_H
+#endif // REGISTERPAGE_H
