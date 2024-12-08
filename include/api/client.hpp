@@ -5,6 +5,8 @@
 #include <vector>
 #include <zmq.hpp>
 
+namespace api {
+
 /**
  * @class Client
  * @brief A class to manage the API gateway operations.
@@ -179,5 +181,7 @@ class Client {
   auto sendRequestAndReceiveReply_(zmq::message_t& request,
                                    zmq::message_t& reply) noexcept -> bool;
 };
+
+}  // namespace api
 
 #endif  // CLIENT_HPP

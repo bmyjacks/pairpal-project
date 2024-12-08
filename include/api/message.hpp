@@ -5,6 +5,8 @@
 #include <nlohmann/json.hpp>
 #include <zmq.hpp>
 
+namespace api {
+
 /**
  * @enum MessageType
  * @brief Enum representing different types of messages.
@@ -181,7 +183,8 @@ class Message {
  private:
   MessageType type_;        ///< The type of the message
   nlohmann::json content_;  ///< The content of the message in JSON format
-
 };
+
+}  // namespace api
 
 #endif  // MESSAGE_HPP

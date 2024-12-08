@@ -2,6 +2,7 @@
 
 #include <nlohmann/json.hpp>
 
+namespace api {
 Message::Message(const MessageType& type, nlohmann::json content)
     : type_(type), content_(std::move(content)) {}
 
@@ -77,3 +78,5 @@ auto Message::getVector() const -> std::vector<std::string> {
 auto Message::getMessage() const -> std::string {
   return content_["message"].get<std::string>();
 }
+
+}  // namespace api

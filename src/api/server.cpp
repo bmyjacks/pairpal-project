@@ -9,6 +9,8 @@
 #include "api/message.hpp"
 #include "pair/pair.hpp"
 
+namespace api {
+
 Server::Server(std::string listenAddr)
     : listenAddr_(std::move(listenAddr)),
       context_(1),
@@ -248,3 +250,5 @@ auto Server::getReceivedMessages_(const std::string& username)
 auto Server::getPair_(const std::string& username) -> std::vector<std::string> {
   return pair_.getPair(username);
 }
+
+}  // namespace api
