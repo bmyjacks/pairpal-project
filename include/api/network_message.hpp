@@ -1,5 +1,5 @@
-#ifndef MESSAGE_HPP
-#define MESSAGE_HPP
+#ifndef NETWORK_MESSAGE_HPP
+#define NETWORK_MESSAGE_HPP
 
 #include <cstdint>
 #include <nlohmann/json.hpp>
@@ -184,4 +184,4 @@ class NetworkMessage {
   nlohmann::json content_;   ///< The content of the message in JSON format
 };
 
-#endif  // MESSAGE_HPP
+#endif  // NETWORK_MESSAGE_HPP

@@ -229,19 +229,31 @@ auto Server::getUserTags_(const std::string& username)
 auto Server::sendMessage_(const std::string& from, const std::string& to,
                           const std::string& message) -> bool {
   // Send message to user
-  return true;
+  return chat_.sendMessage(from, to, message);
 }
 
 auto Server::getSentMessages_(const std::string& username)
     -> std::vector<std::string> {
-  // Get all sent messages of user
-  return {};
+  const auto messages = chat_.getSentMessages(username);
+
+  std::vector<std::string> messageStrings;
+  for (const auto& message : messages) {
+    messageStrings.push_back(message.toString());
+  }
+
+  return messageStrings;
 }
 
 auto Server::getReceivedMessages_(const std::string& username)
     -> std::vector<std::string> {
-  // Get all received message of user
-  return {};
+  const auto messages = chat_.getReceivedMessages(username);
+
+  std::vector<std::string> messageStrings;
+  for (const auto& message : messages) {
+    messageStrings.push_back(message.toString());
+  }
+
+  return messageStrings;
 }
 
 auto Server::getPair_(const std::string& username) -> std::vector<std::string> {

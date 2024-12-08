@@ -27,7 +27,7 @@ add_library(api STATIC
         include/api/network_message.hpp
         src/api/network_message.cpp)
 target_include_directories(api PUBLIC include/api)
-target_link_libraries(api PRIVATE chat pair storage nlohmann_json::nlohmann_json cppzmq cppzmq-static)
+target_link_libraries(api PUBLIC chat pair storage nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
 # Chat library
 add_library(chat STATIC
@@ -40,14 +40,14 @@ add_library(chat STATIC
         include/chat/message_store.hpp
         src/chat/message_store.cpp)
 target_include_directories(chat PUBLIC include/chat)
-target_link_libraries(chat PRIVATE storage)
+target_link_libraries(chat PUBLIC storage)
 
 # Pair library
 add_library(pair STATIC
         include/pair/pair.hpp
         src/pair/pair.cpp)
 target_include_directories(pair PUBLIC include/pair)
-target_link_libraries(pair PRIVATE storage)
+target_link_libraries(pair PUBLIC storage)
 
 # Storage library
 add_library(storage STATIC
@@ -93,16 +93,14 @@ add_executable(frontend
         ${UI_SOURCES}
         ${QM_FILES}
 )
-target_include_directories(frontend PRIVATE src/frontend)
-target_link_libraries(frontend PRIVATE api Qt5::Widgets Qt5::Core Qt5::Gui)
+target_include_directories(frontend PUBLIC src/frontend)
+target_link_libraries(frontend PUBLIC api Qt5::Widgets Qt5::Core Qt5::Gui)
 
 
 # Define backend
 add_executable(backend
-        src/backend.cpp
-        src/api/network_message.cpp
-        src/api/server.cpp)
-target_link_libraries(backend PRIVATE storage chat pair api)
+        src/backend.cpp)
+target_link_libraries(backend PUBLIC api)
 
 # Tests
 # API

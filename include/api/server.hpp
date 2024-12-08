@@ -2,6 +2,7 @@
 #define SERVER_HPP
 
 #include <atomic>
+#include <chat.hpp>
 #include <pair.hpp>
 #include <storage.hpp>
 #include <thread>
@@ -50,6 +51,7 @@ class Server {
       running_;  ///< Atomic flag indicating if the server is running.
   std::thread serverThread_;  ///< The thread running the server.
 
+  Chat chat_;        ///< The Chat object.
   Pair pair_;        ///< The Pair object.
   Storage storage_;  ///< The Storage object.
 
