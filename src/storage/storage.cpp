@@ -328,3 +328,12 @@ bool Storage::removeTag(std::string username, std::string tag) {
 
   sqlite3_finalize(stmt_update);
 }
+void Storage::reset() {
+  const std:: string d = "storage_test.db";
+  if(std::remove(d.c_str())==0) {
+    std:: cout << "Delete successfully" << std::endl;
+  }
+  else {
+    std::cerr << "Error deleting database" << std::endl;
+  }
+}
