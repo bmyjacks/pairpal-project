@@ -6,7 +6,6 @@
 #include <tuple>
 
 #include "sqlite3.h"
-#include "storage.hpp"
 
 /**
  * @class Storage
@@ -84,7 +83,7 @@ std::vector<std::tuple<int,std::string,std::string,std::vector<std::string>>> ge
  * @return the bool value if successfully remove the tag
  */
   bool removeTag(std::string username, std::string tag);
-
+  void reset();
 };
 
 #endif  // STORAGE_HPP
