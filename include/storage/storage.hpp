@@ -6,7 +6,6 @@
 #include <tuple>
 
 #include "sqlite3.h"
-#include "storage.hpp"
 
 /**
  * @class Storage

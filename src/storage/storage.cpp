@@ -333,10 +333,11 @@ void Storage::reset() {
   const char* sql2 = "DELETE FROM Users_list WHERE name = 'Users_list';";
   int rc = sqlite3_exec(db,sql1,0,0,nullptr);
   if(rc!=SQLITE_OK) {
-    std:: cerr << "SQL1 error" <<std::endl;
+    std:: cerr << "SQL1 error" << sqlite3_errmsg(db)<<std::endl;
   }
   rc = sqlite3_exec(db,sql2,0,0,nullptr);
 
   if(rc!=SQLITE_OK) {
     std:: cerr << "SQL2 error"  << sqlite3_errmsg(db)<<std::endl;
   }
+}
