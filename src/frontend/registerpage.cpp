@@ -10,6 +10,7 @@
 
 
 
+
 Registerpage::Registerpage(QWidget *parent,self* selfPagePtr) :
     QDialog(parent),
     ui(new Ui::Registerpage),
@@ -58,11 +59,11 @@ Registerpage::Registerpage(QWidget *parent,self* selfPagePtr) :
         
 
           
-        if (selfPage) {
-            connect(this, &Registerpage::userInfoSaved, selfPage, &self::updateUserInfo);
-        } else {
-            qWarning() << "selfPage is not initialized!";
-        }
+        // if (selfPage) {
+        //     connect(this, &Registerpage::userInfoSaved, selfPage, &self::updateUserInfo);
+        // } else {
+        //     qWarning() << "selfPage is not initialized!";
+        // }
 
         emit userInfoSaved(name, grade, school, college, tags);
 

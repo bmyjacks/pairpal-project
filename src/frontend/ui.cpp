@@ -1,7 +1,7 @@
 #include "ui.h"
 
 std::string UI::currentUsername;
-Client UI::client = Client("tcp://localhost:30200");
+Client UI::client = Client("tcp://localhost:57880");
 
 UI::UI() { client.start(); }
 
@@ -16,6 +16,7 @@ bool UI::removeUser(const std::string& username) {
 
 bool UI::authenticateUser(const std::string& username,
                           const std::string& password) {
+  currentUsername = username;
   return client.authenticateUser(username, password);
 }
 

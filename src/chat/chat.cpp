@@ -7,9 +7,11 @@ Chat::Chat()
 { }
 
 bool Chat::sendMessage(const std::string &from, const std::string &to, const std::string &message) {
-    Dialog& dialog = dialogs_[std::make_pair(from, to)];
-    dialog.sendMessage(from, message);
-    return true;
+  auto key = std::make_pair(from, to);
+  // Try to emplace a new Dialog if it doesn't exist
+  auto& dialog = dialogs_.try_emplace(key, from, to).first->second;
+  dialog.sendMessage(from, message);
+  return true;
 }
 
 std::vector<Message> Chat::getSentMessages(const std::string &username) const {

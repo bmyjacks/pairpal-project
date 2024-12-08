@@ -3,68 +3,68 @@
 
 #include <network_message.hpp>
 
-TEST(MessageTest, TestConstructorFromType) {
+TEST(NetworkMessageTest, TestConstructorFromType) {
   const NetworkMessage message(NetworkMessageType::ADD_USER);
   ASSERT_EQ(message.getType(), NetworkMessageType::ADD_USER);
 }
 
-TEST(MessageTest, TestConstructorFromString) {
+TEST(NetworkMessageTest, TestConstructorFromString) {
   const NetworkMessage message(NetworkMessageType::ADD_USER);
   const NetworkMessage message2(message.toString());
 
-  EXPECT_EQ(message.getType(), message2.getType());
+  ASSERT_EQ(message.getType(), message2.getType());
 }
 
-TEST(MessageTest, TestSetGetUsername) {
+TEST(NetworkMessageTest, TestSetGetUsername) {
   NetworkMessage message(NetworkMessageType::ADD_USER);
   message.setUsername("test");
 
-  EXPECT_EQ(message.getUsername(), "test");
+  ASSERT_EQ(message.getUsername(), "test");
 }
 
-TEST(MessageTest, TestSetGetPassword) {
+TEST(NetworkMessageTest, TestSetGetPassword) {
   NetworkMessage message(NetworkMessageType::ADD_USER);
   message.setPassword("password");
 
-  EXPECT_EQ(message.getPassword(), "password");
+  ASSERT_EQ(message.getPassword(), "password");
 }
 
-TEST(MessageTest, TestSetGetTag) {
+TEST(NetworkMessageTest, TestSetGetTag) {
   NetworkMessage message(NetworkMessageType::ADD_USER);
   message.setTag("tag");
 
-  EXPECT_EQ(message.getTag(), "tag");
+  ASSERT_EQ(message.getTag(), "tag");
 }
 
-TEST(MessageTest, TestSetGetFrom) {
+TEST(NetworkMessageTest, TestSetGetFrom) {
   NetworkMessage message(NetworkMessageType::SEND_MESSAGE);
   message.setFrom("user");
 
-  EXPECT_EQ(message.getFrom(), "user");
+  ASSERT_EQ(message.getFrom(), "user");
 }
 
-TEST(MessageTest, TestSetGetTo) {
+TEST(NetworkMessageTest, TestSetGetTo) {
   NetworkMessage message(NetworkMessageType::SEND_MESSAGE);
   message.setTo("user");
 
-  EXPECT_EQ(message.getTo(), "user");
+  ASSERT_EQ(message.getTo(), "user");
 }
 
-TEST(MessageTest, TestSetGetMessage) {
+TEST(NetworkMessageTest, TestSetGetMessage) {
   NetworkMessage message(NetworkMessageType::SEND_MESSAGE);
   message.setMessage("message");
 
-  EXPECT_EQ(message.getMessage(), "message");
+  ASSERT_EQ(message.getMessage(), "message");
 }
 
-TEST(MessageTest, TestSetGetVector) {
+TEST(NetworkMessageTest, TestSetGetVector) {
   NetworkMessage message(NetworkMessageType::LIST_ALL_USERS);
   message.setVector({"user1", "user2"});
 
-  EXPECT_THAT(message.getVector(), testing::ElementsAre("user1", "user2"));
+  ASSERT_THAT(message.getVector(), testing::ElementsAre("user1", "user2"));
 }
 
-int main(int argc, char** argv) {
+auto main(int argc, char** argv) -> int {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

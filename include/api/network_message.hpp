@@ -35,24 +35,10 @@ enum class NetworkMessageType : uint8_t {
 class NetworkMessage {
  public:
   /**
-   * @brief Constructs a NetworkMessage with a specified type and content.
-   * @param type The type of the message.
-   * @param content The content of the message in JSON format.
-   */
-  [[deprecated]] explicit NetworkMessage(const NetworkMessageType& type,
-                                         nlohmann::json content);
-
-  /**
    * @brief Constructs a NetworkMessage with a specified type.
    * @param type The type of the message.
    */
   explicit NetworkMessage(const NetworkMessageType& type);
-
-  /**
-   * @brief Constructs a NetworkMessage from a JSON object.
-   * @param json The JSON object containing the message data.
-   */
-  [[deprecated]] explicit NetworkMessage(const nlohmann::json& json);
 
   /**
    * @brief Constructs a NetworkMessage from a string.
@@ -70,12 +56,6 @@ class NetworkMessage {
    * @return The type of the message.
    */
   [[nodiscard]] auto getType() const -> NetworkMessageType;
-
-  /**
-   * @brief Gets the content of the message.
-   * @return The content of the message in JSON format.
-   */
-  [[deprecated, nodiscard]] auto getContent() const -> nlohmann::json;
 
   /**
    * @brief Converts the message to a JSON object.

@@ -7,12 +7,19 @@
 #include "self.h"
 #include "list.h"
 #include <QPushButton>
+#include "registerpage.h"
+
 
 pairpal::pairpal(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::pairpal)
 {
     ui->setupUi(this);
+    
+    Registerpage *registerPage = new Registerpage(this, ppage8);
+    connect(registerPage, &Registerpage::userInfoSaved, ppage8, &self::updateUserInfo);
+
+    
     this->ppage4=new study;//实例学习匹配
     connect(ui->studyButton,&QPushButton::clicked,[=](){
         //切换窗口
@@ -73,10 +80,10 @@ pairpal::pairpal(QWidget *parent) :
 
     });
 
-    // connect(this->ppage8,&self::back,[=](){
-    //     this->ppage8->hide();
-    //     this->show();
-    // });
+    connect(this->ppage8,&self::back,[=](){
+        this->ppage8->hide();
+        this->show();
+    });
     connect(this->ppage8, &self::closeAll, [=]() {
         QApplication::quit();  // 关闭应用程序
     });

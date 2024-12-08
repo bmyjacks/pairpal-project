@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.29)
-#project(pairpal LANGUAGES CXX) // Some one bring a CC file, so we cannot use this line
 project(pairpal)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -111,7 +110,7 @@ add_test(NAME test-client COMMAND test-client)
 ## NetworkMessage test
 add_executable(test-network_message test/api/test-network_message.cpp)
 target_link_libraries(test-network_message PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
-add_test(NAME test-message COMMAND test-message)
+add_test(NAME test-network_message COMMAND test-network_message)
 ## Server test
 add_executable(test-server test/api/test-server.cpp)
 target_link_libraries(test-server PUBLIC api GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
@@ -122,15 +121,10 @@ add_executable(test-storage test/storage/test-storage.cpp)
 target_link_libraries(test-storage PUBLIC storage GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 add_test(NAME test-storage COMMAND test-storage)
 
-add_executable(s-test test/Storage_test/s-test.cpp)
-target_link_libraries(s-test storage)
-add_test(NAME s-test COMMAND s-test)
-
 # Chat
-add_executable(chat-test test/Chat_test/chat-test.cpp
-        src/chat/message_store.cpp)
-target_link_libraries(chat-test chat)
-add_test(NAME chat-test COMMAND chat-test)
+add_executable(test-chat test/chat/test-chat.cpp)
+target_link_libraries(test-chat PUBLIC chat GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+add_test(NAME test-chat COMMAND test-chat)
 
 # Pair
 add_executable(test-pair test/pair/test-pair.cpp)
