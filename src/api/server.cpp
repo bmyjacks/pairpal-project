@@ -53,11 +53,11 @@ void Server::run_() {
                   << '\n';
 
         auto reply = handleRequest_(request);
-        socket_.send(reply, zmq::send_flags::none);
         std::cout << std::format("[INFO] {} Sent reply {}",
                                  std::chrono::system_clock::now(),
                                  reply.to_string())
                   << '\n';
+        socket_.send(reply, zmq::send_flags::none);
       }
     } catch (const zmq::error_t& e) {
       std::cerr << std::format("[ERROR] {} Error receiving message: {}",
