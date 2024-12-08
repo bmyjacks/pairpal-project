@@ -1,6 +1,7 @@
 #include "pair.hpp"
 
 #include <algorithm>
+#include <iostream>
 #include <unordered_set>
 
 Pair::Pair() = default;
@@ -10,6 +11,8 @@ void Pair::setStorage(const Storage &storage) { storage_ = storage; }
 
 auto Pair::getPair(const std::string &username) -> std::vector<std::string> {
   const auto allUsernames = getAllUsernames_();
+
+  std::cerr << "size: " << allUsernames.size() << std::endl;
 
   std::vector<std::pair<std::string, float>> similarities;
 
@@ -36,11 +39,20 @@ auto Pair::getPair(const std::string &username) -> std::vector<std::string> {
   return result;
 }
 
-auto Pair::getAllUsernames_() -> std::vector<std::string> { return {}; }
+auto Pair::getAllUsernames_() -> std::vector<std::string> {
+  const auto users = storage_.getUsers();
+
+  std::vector<std::string> result;
+  for (const auto &user : users) {
+    result.push_back(std::get<1>(user));
+  }
+
+  return result;
+}
 
 auto Pair::getUserTags_(const std::string &username)
     -> std::vector<std::string> {
-  return {};
+  return storage_.getTags(username);
 }
 
 auto Pair::getSimilarity_(const std::string &username1,
