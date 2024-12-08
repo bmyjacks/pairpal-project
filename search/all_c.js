@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['_7echat_0',['~Chat',['../classChat.html#ab694996aa607aa60bdd14b84e481688b',1,'Chat']]],
-  ['_7eclient_1',['~Client',['../classClient.html#a840e519ca781888cbd54181572ebe3a7',1,'Client']]],
-  ['_7edialog_2',['~Dialog',['../classDialog.html#a2a1fe6ef28513eed13bfcd3a4da83ccb',1,'Dialog']]],
-  ['_7emessage_3',['~Message',['../classMessage.html#a3f7275462831f787a861271687bcad67',1,'Message::~Message()'],['../classMessage.html#a3f7275462831f787a861271687bcad67',1,'Message::~Message()']]],
-  ['_7epair_4',['~Pair',['../classPair.html#ac899d9dba2a8d9ccda54e5501d2c6d48',1,'Pair']]],
-  ['_7eserver_5',['~Server',['../classServer.html#a263268c249dbe6f49627fd50d496a37f',1,'Server']]],
-  ['_7estorage_6',['~Storage',['../classStorage.html#a73cf30f0a34250396f9eabee7dc5c93d',1,'Storage']]]
+  ['tojson_0',['toJson',['../classNetworkMessage.html#aa17fb9dfaaffaa3d54367958f49a0c43',1,'NetworkMessage']]],
+  ['tostring_1',['toString',['../classNetworkMessage.html#a4a133f766d871e00f2183f6ab90c1eb3',1,'NetworkMessage::toString()'],['../classMessage.html#a10bea40e0b83887335eaaf45b6cfd32c',1,'Message::toString()']]],
+  ['tozmqmessage_2',['toZmqMessage',['../classNetworkMessage.html#aac5a4d3d996417b95b391d40439d316e',1,'NetworkMessage']]]
 ];
