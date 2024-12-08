@@ -22,11 +22,9 @@ enable_testing()
 add_library(api STATIC
         src/api/client.cpp
         src/api/server.cpp
-        src/api/message.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
+        src/api/message.cpp)
 target_include_directories(api PUBLIC include)
-target_link_libraries(api PUBLIC pair nlohmann_json::nlohmann_json cppzmq cppzmq-static)
+target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
 # Chat library
 add_library(chat STATIC
@@ -45,9 +43,7 @@ target_link_libraries(pair PUBLIC storage)
 # Storage library
 add_library(storage STATIC
         src/storage/storage.cpp
-        src/storage/user.cpp
-        src/storage/sqlite3.c
-        src/storage/message_store.cpp)
+        src/storage/sqlite3.c)
 target_include_directories(storage PUBLIC include)
 
 # Add UI forms
