@@ -7,7 +7,6 @@
 
 #include "sqlite3.h"
 #include "storage/storage.hpp"
-#include "user.hpp"
 
 /**
  * @class Storage

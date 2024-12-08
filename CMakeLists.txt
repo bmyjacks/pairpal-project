@@ -22,17 +22,16 @@ enable_testing()
 add_library(api STATIC
         src/api/client.cpp
         src/api/server.cpp
-        src/api/message.cpp
-        src/api/message.cpp
-        src/api/server.cpp)
+        src/api/message.cpp)
 target_include_directories(api PUBLIC include)
-target_link_libraries(api PUBLIC pair nlohmann_json::nlohmann_json cppzmq cppzmq-static)
+target_link_libraries(api PUBLIC nlohmann_json::nlohmann_json cppzmq cppzmq-static)
 
 # Chat library
 add_library(chat STATIC
         src/chat/chat.cpp
         src/chat/dialog.cpp
-        src/chat/message.cpp)
+        src/chat/message.cpp
+        src/storage/message_store.cpp)
 target_include_directories(chat PUBLIC include)
 
 # Pair library
@@ -44,7 +43,6 @@ target_link_libraries(pair PUBLIC storage)
 # Storage library
 add_library(storage STATIC
         src/storage/storage.cpp
-        src/storage/user.cpp
         src/storage/sqlite3.c)
 target_include_directories(storage PUBLIC include)
 
@@ -119,6 +117,11 @@ add_executable(s-test test/Storage_test/s-test.cpp)
 target_link_libraries(s-test storage)
 add_test(NAME s-test COMMAND s-test)
 
+# Chat
+add_executable(chat-test test/Chat_test/chat-test.cpp
+        src/storage/message_store.cpp)
+target_link_libraries(chat-test chat)
+add_test(NAME chat-test COMMAND chat-test)
 
 # Pair
 add_executable(test-pair test/pair/test-pair.cpp)
