@@ -249,7 +249,7 @@ auto Server::getReceivedMessages_(const std::string& username)
 
   std::vector<std::string> messageStrings;
   for (const auto& message : messages) {
-    messageStrings.push_back(message.toString());
+    messageStrings.push_back(message.getMessage());
   }
 
   return messageStrings;
