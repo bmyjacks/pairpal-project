@@ -1,49 +1,44 @@
 #include "ui.h"
 
-std::string UI::currentUsername;
-Client UI::client_ = Client("tcp://localhost:30200");
-
-UI::UI() { client_.start(); }
+std::string UI::currentUsername; 
 
 bool UI::addUser(const std::string& username, const std::string& password) {
   currentUsername = username;
-  return client_.addUser(username, password);
+  return true;
 }
 
-bool UI::removeUser(const std::string& username) {
-  return client_.removeUser(username);
-}
+bool UI::removeUser(const std::string& username) { return true; }
 
 bool UI::authenticateUser(const std::string& username,
                           const std::string& password) {
-  return client_.authenticateUser(username, password);
+  return true;
 }
 
 bool UI::addUserTag(const std::string& username, const std::string& tag) {
-  return client_.addUserTag(username, tag);
+  return true;
 }
 
 bool UI::removeUserTag(const std::string& username, const std::string& tag) {
-  return client_.removeUserTag(username, tag);
+  return true;
 }
 
 std::vector<std::string> UI::getUserTags(const std::string& username) {
-  return client_.getUserTags(username);
+  return std::vector<std::string>();
 }
 
 bool UI::sendMessage(const std::string& from, const std::string& to,
                      const std::string& message) {
-  return client_.sendMessage(from, to, message);
+  return true;
 }
 
 std::vector<std::string> UI::getSentMessages(const std::string& username) {
-  return client_.getSentMessages(username);
+  return {"sent1", "sent2"};
 }
 
 std::vector<std::string> UI::getReceivedMessages(const std::string& username) {
-  return client_.getReceivedMessages(username);
+  return {"recv1", "recv2"};
 }
 
 std::vector<std::string> UI::getPair(const std::string& username) {
-  return client_.getPair(username);
+  return {"pair1", "pair2"};
 }

@@ -16,7 +16,7 @@ list::list(QWidget *parent) :
 
            });
 
-//    this->ppage10=new chat;//实例学习匹配
+   this->ppage10=new chat;//实例学习匹配
 //    connect(ui->nameButton,&QToolButton::clicked,[=](){
 //        //切换窗口
 //        this->hide();//隐藏
@@ -52,13 +52,14 @@ void list::onListItemClicked(QListWidgetItem *item)
     QString itemName = item->text();
 
     // 创建 chat 页面实例
-    chat *chatPage = new chat(this);
+    chat *chatPage = new chat();
     chatPage->setWindowTitle(itemName); // 设置窗口标题为项目名称
+    chatPage->setChatName(itemName);
     chatPage->show();
 
     // 设置 chat 页面中的 lb_name 标签
-    chatPage->findChild<QLabel*>("lb_name")->setText(itemName);
+    // chatPage->findChild<QLabel*>("lb_name")->setText(itemName);
 
     // 隐藏当前 list 页面
-    this->hide();
+//    this->hide();
 }

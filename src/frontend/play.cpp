@@ -31,7 +31,7 @@ play::play(QWidget *parent) :
         std::vector<std::string> pairs = UI::getPair(UI::currentUsername);
         
         // 假设你有一个 list 界面的实例
-        list *listPage = new list(this);
+        list *listPage = new list();
         listPage->updateListWidget(pairs);
         listPage->show();
     });

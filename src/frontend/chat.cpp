@@ -42,7 +42,7 @@ chat::~chat()
 
 void chat::setChatName(const QString &name)
 {
-    lb_name->setText(name);
+    ui->lb_name->setText(name);
 }
 
 void chat::onSendButtonClicked()
