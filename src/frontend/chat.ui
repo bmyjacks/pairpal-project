@@ -64,13 +64,6 @@ QPushButton:pressed
      <number>0</number>
     </property>
     <item>
-     <widget class="QPushButton" name="back11">
-      <property name="text">
-       <string>返回</string>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QWidget" name="widget" native="true">
       <property name="minimumSize">
        <size>

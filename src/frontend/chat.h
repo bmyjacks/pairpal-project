@@ -22,6 +22,7 @@ public:
     // 新增方法
     void setChatName(const QString &name);
 
+    void receiveMessages();
 protected:
     // 重写键盘事件以捕获回车键
     void keyPressEvent(QKeyEvent *event) override;
@@ -29,7 +30,7 @@ protected:
 private slots:
     void onSendButtonClicked(); // 槽函数，用于处理发送消息
 
-
+   
 
 
 signals:

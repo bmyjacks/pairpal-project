@@ -9,11 +9,11 @@ chat::chat(QWidget *parent) :
     ui(new Ui::chat)
 {
     ui->setupUi(this);
-    connect(ui->back11,&QPushButton::clicked,[=](){
-           //发一个信号
-      emit this->back();
+//    connect(ui->back11,&QPushButton::clicked,[=](){
+//           //发一个信号
+//      emit this->back();
 
-           });
+//           });
     // 使用 findChild 查找 UI 中的控件
     messageList = findChild<QTextBrowser *>("messageList"); // 显示消息列表
     inputField = findChild<QTextEdit *>("inputField");      // 输入框
@@ -59,11 +59,12 @@ void chat::onSendButtonClicked()
             // 清空输入框
             inputField->clear();
 
-            // 模拟接收一条消息
-            std::vector<std::string> receivedMessages = UI::getReceivedMessages(recipient.toStdString());
-            for (const auto& recvMsg : receivedMessages) {
-                messageList->append("对方: " + QString::fromStdString(recvMsg));
-            }
+            // // 模拟接收一条消息
+            // std::vector<std::string> receivedMessages = UI::getReceivedMessages(recipient.toStdString());
+            // for (const auto& recvMsg : receivedMessages) {
+            //     messageList->append("对方: " + QString::fromStdString(recvMsg));
+            // }
+            
 
             // 自动滚动到最新消息
             messageList->moveCursor(QTextCursor::End);
@@ -71,6 +72,19 @@ void chat::onSendButtonClicked()
             qDebug() << "Failed to send message!";
         }
     }
+    
+
+}
+void chat::receiveMessages() {
+    QString sender = lb_name->text(); // 假设 lb_name 是对方的名字
+    std::vector<std::string> receivedMessages = UI::getReceivedMessages(UI::currentUsername);
+    for (const auto& recvMsg : receivedMessages) {
+        // 过滤掉自己发送的消息，只显示对方发来的消息
+        if (recvMsg.find(sender.toStdString()) != std::string::npos) {
+            messageList->append("对方: " + QString::fromStdString(recvMsg));
+        }
+    }
+    messageList->moveCursor(QTextCursor::End);
 }
 
 // 捕获键盘事件（用于检测按下回车键）

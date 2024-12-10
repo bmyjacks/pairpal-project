@@ -1,6 +1,5 @@
 # PairPal
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/bmyjacks/pairpal-project/cmake.yml)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/bmyjacks/pairpal-project)
 
 This is the project for our CSC3002 course. We are going to implement a matching system for students to find their
@@ -14,20 +13,25 @@ Documentation is available at [here](https://bmyjacks.github.io/pairpal-project/
 
 - Frontend
     - [x] Login page
+    - [x] Register page
+    - [x] Profile page
+    - [x] Chat page
+    - [x] Matching page
 
 - API gateway
     - [x] API for client
-    - [x] API for server
+    - [x] API server
 
 - Chat system
-    - [ ] Chat system
+    - [x] Chat system
 
 - Matching system
     - [x] Tags-based matching
-    - [x] ~~Machine learning-based matching~~ (unnecessary)
+    - [ ] ~~Machine learning-based matching~~ (unnecessary)
 
 - Storage
-    - [ ] Database
+    - [x] Database for user information
+    - [x] Database for chat history
 
 ## How to run
 
@@ -53,13 +57,13 @@ cmake --build build --config Release
 First, you need to start the server:
 
 ```shell
-./build/backend
+build/backend
 ```
 
 Then, you can start the client:
 
 ```shell
-./build/frontend
+build/frontend
 ```
 
 ## Team members
@@ -71,10 +75,10 @@ Then, you can start the client:
 
 ## Thanks
 
-- [CMake](https://cmake.org/) for building the project
-- [vcpkg](https://vcpkg.io/en/) for managing dependencies
-- [googletest](https://github.com/google/googletest) for testing
-- [nlohmann-json](https://github.com/nlohmann/json) for JSON serialization
-- [cppzmq](https://github.com/zeromq/cppzmq) for networking
+- [CMake](https://cmake.org/) for building ecosystem
+- [ZeroMQ](https://zeromq.org/) for networking
+- [GoogleTest](https://google.github.io/googletest/) for unit testing
+- [nlohmann-json](https://json.nlohmann.me/) for JSON serialization
 - [Qt](https://www.qt.io/) for GUI
-
+- [SQLite](https://www.sqlite.org/index.html) for database
+- [vcpkg](https://vcpkg.io/en/) for managing dependencies

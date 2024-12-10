@@ -1,11 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "dependencies": [
+    "cppzmq",
     "gtest",
     "nlohmann-json",
+    "qt5",
+    "sqlite3",
     "vcpkg-cmake-config",
-    "vcpkg-cmake",
-    "cppzmq",
-    "qt5"
+    "vcpkg-cmake"
   ]
 }

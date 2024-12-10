@@ -29,6 +29,7 @@ signals:
     void closeAll();
 private:
     Ui::self *ui;
+    QStringList userTags;
 };
 
 #endif // SELF_H

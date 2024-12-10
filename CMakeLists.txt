@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.29)
-project(pairpal)
+project(pairpal LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
 # Add third-party libraries
-find_package(nlohmann_json CONFIG REQUIRED)
 find_package(cppzmq CONFIG REQUIRED)
 find_package(GTest CONFIG REQUIRED)
+find_package(nlohmann_json CONFIG REQUIRED)
 find_package(Qt5 REQUIRED COMPONENTS Core Gui LinguistTools Widgets)
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
 
 # Configure third-party libraries
 set(nlohmann-json_IMPLICIT_CONVERSIONS OFF)
@@ -39,7 +40,7 @@ add_library(chat STATIC
         include/chat/message_store.hpp
         src/chat/message_store.cpp)
 target_include_directories(chat PUBLIC include/chat)
-target_link_libraries(chat PUBLIC storage)
+target_link_libraries(chat PUBLIC unofficial::sqlite3::sqlite3)
 
 # Pair library
 add_library(pair STATIC
@@ -51,10 +52,9 @@ target_link_libraries(pair PUBLIC storage)
 # Storage library
 add_library(storage STATIC
         include/storage/storage.hpp
-        src/storage/storage.cpp
-        include/storage/sqlite3.h
-        src/storage/sqlite3.c)
+        src/storage/storage.cpp)
 target_include_directories(storage PUBLIC include/storage)
+target_link_libraries(storage PUBLIC unofficial::sqlite3::sqlite3)
 
 # Add UI forms
 set(UI_SOURCES
