@@ -3,13 +3,21 @@
 #include <QPushButton>
 #include "ui.h"
 #include "list.h"
+#include "pairpal.h"
 eat::eat(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::eat)
+    
 {
     ui->setupUi(this);
     connect(ui->back4,&QPushButton::clicked,[=](){
-           //发一个信号
+          
+        
+      emit this->back();
+
+           });
+    connect(ui->eatpair, &QPushButton::clicked, [=]() {
+        
         // 获取 eattime 和 eatplace 的内容
         QString eattime = ui->eattime->text();  // 获取 eattime 输入框的内容
         QString eatplace = ui->eatplace->text(); // 获取 eatplace 输入框的内容
@@ -22,16 +30,15 @@ eat::eat(QWidget *parent) :
         UI::addUserTag(UI::currentUsername, eatplace.toStdString());
         UI::addUserTag(UI::currentUsername, eatitem.toStdString());
 
-      emit this->back();
-
-           });
-    connect(ui->eatpair, &QPushButton::clicked, [=]() {
+        
         std::vector<std::string> pairs = UI::getPair(UI::currentUsername);
 
-        // 假设你有一个 list 界面的实例
+        
         list *listPage = new list();
         listPage->updateListWidget(pairs);
+        listPage->setBackButtonVisible(false); // 隐藏 back10 按钮
         listPage->show();
+         
     });
 }
 
