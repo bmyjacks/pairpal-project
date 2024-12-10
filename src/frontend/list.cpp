@@ -63,3 +63,8 @@ void list::onListItemClicked(QListWidgetItem *item)
     // 隐藏当前 list 页面
 //    this->hide();
 }
+
+void list::setBackButtonVisible(bool visible)
+{
+    ui->back10->setVisible(visible);
+}

@@ -93,6 +93,8 @@ pairpal::pairpal(QWidget *parent) :
     connect(ui->messageButton,&QPushButton::clicked,[=](){
         //切换窗口
         this->hide();//隐藏
+
+        this->ppage9->setBackButtonVisible(true); // 显示 back10 按钮
         this->ppage9->show();
 
     });

@@ -2,6 +2,7 @@
 #define EAT_H
 
 #include <QWidget>
+// #include "list.h"
 
 namespace Ui {
 class eat;
@@ -19,6 +20,7 @@ signals:
 
 private:
     Ui::eat *ui;
+    
 };
 
 #endif // EAT_H

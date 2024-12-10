@@ -9,7 +9,13 @@ study::study(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->back1,&QPushButton::clicked,[=](){
-           //发一个信号
+        
+        
+        emit this->back();
+
+           });
+    connect(ui->studypair, &QPushButton::clicked, [=]() {
+        
         // 获取 eattime 和 eatplace 的内容
         QString studytime = ui->studytime->text();  // 获取 eattime 输入框的内容
         QString studyplace = ui->studyplace->text(); // 获取 eatplace 输入框的内容
@@ -22,10 +28,7 @@ study::study(QWidget *parent) :
         UI::addUserTag(UI::currentUsername, studyplace.toStdString());
         UI::addUserTag(UI::currentUsername, studyitem.toStdString());
 
-        emit this->back();
-
-           });
-        connect(ui->studypair, &QPushButton::clicked, [=]() {
+        
         std::vector<std::string> pairs = UI::getPair(UI::currentUsername);
 
         // 假设你有一个 list 界面的实例

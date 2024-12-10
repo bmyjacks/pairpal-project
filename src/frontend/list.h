@@ -24,7 +24,7 @@ public:
 
     // 新增方法
     void updateListWidget(const std::vector<std::string>& items);
-
+    void setBackButtonVisible(bool visible); // 新增方法
 
 signals:
     void back();
