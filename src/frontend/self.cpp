@@ -41,6 +41,7 @@ void self::updateUserInfo(const QString &name, const QString &grade, const QStri
     ui->schoollabel->setText(school);     // 显示学校
     ui->collegelabel->setText(college);   // 显示学院
 
+    userTags = tags;
     // 如果你有标签显示框，可以将 tags 连接成一个字符串
     ui->tagslabel->setText(tags.join(", ")); // 显示标签
 }
