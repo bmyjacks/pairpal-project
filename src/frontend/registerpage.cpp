@@ -58,13 +58,6 @@ Registerpage::Registerpage(QWidget *parent,self* selfPagePtr) :
         UI::addUserTag(name.toStdString(), college.toStdString());
         
 
-          
-        // if (selfPage) {
-        //     connect(this, &Registerpage::userInfoSaved, selfPage, &self::updateUserInfo);
-        // } else {
-        //     qWarning() << "selfPage is not initialized!";
-        // }
-
         emit userInfoSaved(name, grade, school, college, tags);
 
         // 如果 selfPage 被正确实例化，调用 updateUserInfo 来更新 Self 页面

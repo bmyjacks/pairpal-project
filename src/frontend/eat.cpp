@@ -21,8 +21,6 @@ eat::eat(QWidget *parent) :
         // 获取 eattime 和 eatplace 的内容
         QString eattime = ui->eattime->text();  // 获取 eattime 输入框的内容
         QString eatplace = ui->eatplace->text(); // 获取 eatplace 输入框的内容
-
-        // 获取 eatitem ComboBox 中选择的内容
         QString eatitem = ui->eatitem->currentText(); // 获取 ComboBox 当前选择的项
 
         // 使用全局变量 currentUsername
