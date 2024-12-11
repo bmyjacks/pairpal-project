@@ -15,7 +15,7 @@ pairpal::pairpal(QWidget *parent) :
     ui(new Ui::pairpal)
 {
     ui->setupUi(this);
-    
+    this->ppage8=new self;
     Registerpage *registerPage = new Registerpage(this, ppage8);
     connect(registerPage, &Registerpage::userInfoSaved, ppage8, &self::updateUserInfo);
 
@@ -72,7 +72,7 @@ pairpal::pairpal(QWidget *parent) :
         this->show();
     });
 
-    this->ppage8=new self;//实例学习匹配
+    
     connect(ui->selfButton,&QPushButton::clicked,[=](){
         //切换窗口
         this->hide();//隐藏

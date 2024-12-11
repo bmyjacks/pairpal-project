@@ -58,14 +58,7 @@ void chat::onSendButtonClicked()
 
             // 清空输入框
             inputField->clear();
-
-            // // 模拟接收一条消息
-            // std::vector<std::string> receivedMessages = UI::getReceivedMessages(recipient.toStdString());
-            // for (const auto& recvMsg : receivedMessages) {
-            //     messageList->append("对方: " + QString::fromStdString(recvMsg));
-            // }
             
-
             // 自动滚动到最新消息
             messageList->moveCursor(QTextCursor::End);
         } else {
@@ -76,14 +69,42 @@ void chat::onSendButtonClicked()
 
 }
 void chat::receiveMessages() {
-    QString sender = lb_name->text(); // 假设 lb_name 是对方的名字
-    std::vector<std::string> receivedMessages = UI::getReceivedMessages(UI::currentUsername);
-    for (const auto& recvMsg : receivedMessages) {
-        // 过滤掉自己发送的消息，只显示对方发来的消息
-        if (recvMsg.find(sender.toStdString()) != std::string::npos) {
-            messageList->append("对方: " + QString::fromStdString(recvMsg));
+    // 获取发送的消息
+    std::vector<std::string> sentMessages = UI::getSentMessages(UI::currentUsername);
+    for (const auto& msg : sentMessages) {
+        QString qMsg = QString::fromStdString(msg);
+
+        // 解析消息格式
+        QStringList parts = qMsg.split("\n");
+        if (parts.size() == 3) {
+            QString to = parts[1].mid(4); // "To: " 后的内容
+            QString message = parts[2].mid(9); // "Message: " 后的内容
+            messageList->append("我 -> " + to + ": " + message);
         }
     }
+
+    // QString sender = lb_name->text(); // 假设 lb_name 是对方的名字
+    // std::vector<std::string> receivedMessages = UI::getReceivedMessages(UI::currentUsername);
+    // for (const auto& recvMsg : receivedMessages) {
+    //     // 过滤掉自己发送的消息，只显示对方发来的消息
+    //     if (recvMsg.find(sender.toStdString()) != std::string::npos) {
+    //         messageList->append("对方: " + QString::fromStdString(recvMsg));
+    //     }
+    // }
+     // 获取接收到的消息
+    std::vector<std::string> receivedMessages = UI::getReceivedMessages(UI::currentUsername);
+    for (const auto& msg : receivedMessages) {
+        QString qMsg = QString::fromStdString(msg);
+
+        // 解析消息格式
+        QStringList parts = qMsg.split("\n");
+        if (parts.size() == 3) {
+            QString from = parts[0].mid(6); // "From: " 后的内容
+            QString message = parts[2].mid(9); // "Message: " 后的内容
+            messageList->append(from + ": " + message);
+        }
+    }
+
     messageList->moveCursor(QTextCursor::End);
 }
 

@@ -32,6 +32,7 @@ self::~self()
 {
     delete ui;
 }
+
 void self::updateUserInfo(const QString &name, const QString &grade, const QString &school,
                            const QString &college, const QStringList &tags)
 {

@@ -32,5 +32,6 @@ private slots:
 private:
 //    void resetSessionData()；
     Ui::Dialog *ui;
+
 };
 #endif // DIALOG_H

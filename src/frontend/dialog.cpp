@@ -46,7 +46,8 @@ void Dialog::on_btnLogin_clicked()
     //目前是固定的姓名和密码 要调用adduser函数里的姓名和密码传入
     if(UI::authenticateUser(name.toStdString(), password.toStdString()))
     {
-
+        
+        UI::currentUsername = name.toStdString();
         this->hide();//隐藏
         this->ppage3->show();
 

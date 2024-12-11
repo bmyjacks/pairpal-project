@@ -59,7 +59,7 @@ void list::onListItemClicked(QListWidgetItem *item)
 
     // 设置 chat 页面中的 lb_name 标签
     // chatPage->findChild<QLabel*>("lb_name")->setText(itemName);
-
+    chatPage->receiveMessages();
     // 隐藏当前 list 页面
 //    this->hide();
 }

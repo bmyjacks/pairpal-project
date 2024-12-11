@@ -33,6 +33,7 @@ sport::sport(QWidget *parent) :
         // 假设你有一个 list 界面的实例
         list *listPage = new list();
         listPage->updateListWidget(pairs);
+        listPage->setBackButtonVisible(false);
         listPage->show();
     });
 }
