@@ -9,11 +9,6 @@ chat::chat(QWidget *parent) :
     ui(new Ui::chat)
 {
     ui->setupUi(this);
-//    connect(ui->back11,&QPushButton::clicked,[=](){
-//           //发一个信号
-//      emit this->back();
-
-//           });
     // 使用 findChild 查找 UI 中的控件
     messageList = findChild<QTextBrowser *>("messageList"); // 显示消息列表
     inputField = findChild<QTextEdit *>("inputField");      // 输入框
@@ -52,7 +47,8 @@ void chat::onSendButtonClicked()
     if (!message.isEmpty()) {
         // 发送消息
         QString recipient = lb_name->text(); // 假设 lb_name 是接收者
-        if (UI::sendMessage(UI::currentUsername, recipient.toStdString(), message.toStdString())) {
+        QString currentUser = QString::fromStdString(UI::currentUsername);
+        if (UI::sendMessage(currentUser.toStdString(), recipient.toStdString(), message.toStdString())) {
             // 将消息添加到消息显示区域
             messageList->append("我: " + message);
 
@@ -69,18 +65,33 @@ void chat::onSendButtonClicked()
 
 }
 void chat::receiveMessages() {
+
+    // 清空现有消息
+    messageList->clear();
+    // 创建一个向量来存储所有消息，以便我们可以按正确顺序显示
+    std::vector<QString> allMessages;
+
+   // 获取当前聊天对象的用户名
+    QString chatPartner = lb_name->text();
+    QString currentUser = QString::fromStdString(UI::currentUsername);
+
     // 获取发送的消息
     std::vector<std::string> sentMessages = UI::getSentMessages(UI::currentUsername);
     for (const auto& msg : sentMessages) {
         QString qMsg = QString::fromStdString(msg);
-
         // 解析消息格式
         QStringList parts = qMsg.split("\n");
         if (parts.size() == 3) {
             QString to = parts[1].mid(4); // "To: " 后的内容
-            QString message = parts[2].mid(9); // "Message: " 后的内容
-            messageList->append("我 -> " + to + ": " + message);
+            QString message = parts[2].mid(9).trimmed(); // "Message: " 后的内容，去除空格
+            // 只显示发给当前聊天对象的消息
+            if (to == chatPartner) {
+            //QString message = parts[2].mid(9); // "Message: " 后的内容
+            //messageList->append("我 -> " + to + ": " + message);
+            allMessages.push_back("我: " + message);
+            }
         }
+    
     }
 
     // QString sender = lb_name->text(); // 假设 lb_name 是对方的名字
@@ -95,14 +106,22 @@ void chat::receiveMessages() {
     std::vector<std::string> receivedMessages = UI::getReceivedMessages(UI::currentUsername);
     for (const auto& msg : receivedMessages) {
         QString qMsg = QString::fromStdString(msg);
-
         // 解析消息格式
         QStringList parts = qMsg.split("\n");
         if (parts.size() == 3) {
-            QString from = parts[0].mid(6); // "From: " 后的内容
-            QString message = parts[2].mid(9); // "Message: " 后的内容
-            messageList->append(from + ": " + message);
+            QString from = parts[0].mid(6).trimmed(); // "From: " 后的内容，去除空格
+            QString message = parts[2].mid(9).trimmed(); // "Message: " 后的内容，去除空格
+            if (from == chatPartner) {
+            // QString message = parts[2].mid(9); // "Message: " 后的内容
+            // //messageList->append(from + ": " + message);
+            allMessages.push_back(from + ": " + message);
+            
+            }
         }
+    }
+    // 按时间顺序显示所有消息
+    for (const auto& message : allMessages) {
+        messageList->append(message);
     }
 
     messageList->moveCursor(QTextCursor::End);
@@ -122,4 +141,3 @@ void chat::keyPressEvent(QKeyEvent *event)
     // 调用父类的 keyPressEvent 处理其他按键
     QWidget::keyPressEvent(event);
 }
-

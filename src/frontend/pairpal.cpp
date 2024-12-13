@@ -18,7 +18,7 @@ pairpal::pairpal(QWidget *parent) :
     this->ppage8=new self;
     Registerpage *registerPage = new Registerpage(this, ppage8);
     connect(registerPage, &Registerpage::userInfoSaved, ppage8, &self::updateUserInfo);
-
+    
     
     this->ppage4=new study;//实例学习匹配
     connect(ui->studyButton,&QPushButton::clicked,[=](){
@@ -77,7 +77,7 @@ pairpal::pairpal(QWidget *parent) :
         //切换窗口
         this->hide();//隐藏
         this->ppage8->show();
-
+        this->ppage8->showUserInfo();
     });
 
     connect(this->ppage8,&self::back,[=](){
@@ -94,6 +94,7 @@ pairpal::pairpal(QWidget *parent) :
         //切换窗口
         this->hide();//隐藏
 
+        this->ppage9->updateMessage();
         this->ppage9->setBackButtonVisible(true); // 显示 back10 按钮
         this->ppage9->show();
 
