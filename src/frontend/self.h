@@ -24,6 +24,7 @@ QDialog *ppage20=NULL;
 public slots:
     void updateUserInfo(const QString& name,const QString& grade, const QString& school,
                         const QString& college, const QStringList& tags);
+    void showUserInfo();
 signals:
     void back();
     void closeAll();

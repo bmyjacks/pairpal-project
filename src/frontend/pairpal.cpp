@@ -77,7 +77,7 @@ pairpal::pairpal(QWidget *parent) :
         //切换窗口
         this->hide();//隐藏
         this->ppage8->show();
-
+        this->ppage8->showUserInfo();
     });
 
     connect(this->ppage8,&self::back,[=](){
