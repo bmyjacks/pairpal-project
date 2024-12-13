@@ -94,6 +94,7 @@ pairpal::pairpal(QWidget *parent) :
         //切换窗口
         this->hide();//隐藏
 
+        this->ppage9->updateMessage();
         this->ppage9->setBackButtonVisible(true); // 显示 back10 按钮
         this->ppage9->show();
 

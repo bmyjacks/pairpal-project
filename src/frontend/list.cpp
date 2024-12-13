@@ -1,14 +1,19 @@
 #include "list.h"
-#include "ui_list.h"
-#include "chat.h"
-#include <QPushButton>
-#include <QToolButton>
-#include <QStringList>
+
+#include <gtest/gtest-printers.h>
+
 #include <QListWidgetItem>
-#include <QTimer>
+#include <QPushButton>
 #include <QSet>
-#include "ui.h"  // 添加这一行
-#include <algorithm> 
+#include <QStringList>
+#include <QTimer>
+#include <QToolButton>
+#include <unordered_set>
+#include <algorithm>
+
+#include "chat.h"
+#include "ui.h"  // ?????
+#include "ui_list.h"
 
 list::list(QWidget *parent) :
     QWidget(parent),
@@ -134,4 +139,44 @@ void list::onListItemClicked(QListWidgetItem *item)
 void list::setBackButtonVisible(bool visible)
 {
     ui->back10->setVisible(visible);
+}
+
+auto extractUser(const std::string &msg) -> std::pair<std::string, std::string> {
+  const std::string fromPrefix = "From: ";
+  const std::string toPrefix = "\nTo: ";
+  const std::string messagePrefix = "\nMessage: ";
+
+  const auto fromPos = msg.find(fromPrefix);
+  const auto toPos = msg.find(toPrefix);
+  const auto messagePos = msg.find(messagePrefix);
+
+  std::string fromUser = msg.substr(fromPos + fromPrefix.size(), toPos - fromPos - fromPrefix.size());
+  std::string toUser = msg.substr(toPos + toPrefix.size(), messagePos - toPos - toPrefix.size());
+
+  return std::make_pair(fromUser, toUser);
+}
+
+void list::updateMessage() {
+  const auto messagesRecv = UI::getReceivedMessages(UI::currentUsername);
+  const auto messageSent = UI::getSentMessages(UI::currentUsername);
+
+  std::unordered_set<std::string> contactUsername;
+
+  for (const auto &i : messagesRecv) {
+    const auto &[from, to] = extractUser(i);
+    contactUsername.insert(from);
+  }
+
+  for (const auto &i : messageSent) {
+    const auto &[from, to] = extractUser(i);
+    contactUsername.insert(to);
+  }
+
+  std::vector<std::string> uniqueName;
+
+  for (const auto &i : contactUsername) {
+    uniqueName.emplace_back(i);
+  }
+
+  updateListWidget(uniqueName);
 }
