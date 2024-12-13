@@ -36,6 +36,7 @@ private slots:
 
 private:
     Ui::list *ui;
+    // QTimer *refreshTimer;
 
 };
 

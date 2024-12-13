@@ -32,6 +32,7 @@ public:
 
 private:
     Ui::pairpal *ui;
+    
 };
 
 #endif // PAIRPAL_H

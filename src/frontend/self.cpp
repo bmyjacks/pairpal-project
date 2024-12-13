@@ -4,7 +4,7 @@
 #include <QStringList>
 #include <QLabel>
 #include "dialog.h"
-
+#include <iostream>
 
 self::self(QWidget *parent) :
     QWidget(parent),
@@ -36,6 +36,7 @@ self::~self()
 void self::updateUserInfo(const QString &name, const QString &grade, const QString &school,
                            const QString &college, const QStringList &tags)
 {
+    std::cout << "updateUserInfo called" << std::endl;
     // 在UI上显示注册页面的信息
     ui->namelabel->setText(name);         // 显示姓名
     ui->gradelabel->setText(grade);       // 显示年级

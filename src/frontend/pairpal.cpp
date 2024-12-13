@@ -18,7 +18,7 @@ pairpal::pairpal(QWidget *parent) :
     this->ppage8=new self;
     Registerpage *registerPage = new Registerpage(this, ppage8);
     connect(registerPage, &Registerpage::userInfoSaved, ppage8, &self::updateUserInfo);
-
+    
     
     this->ppage4=new study;//实例学习匹配
     connect(ui->studyButton,&QPushButton::clicked,[=](){

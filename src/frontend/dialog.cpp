@@ -24,8 +24,9 @@ Dialog::Dialog(QWidget *parent)
     });
 
 
-    //主页面
+    // 主页面
     this->ppage3 = new pairpal;
+    
 
 
 

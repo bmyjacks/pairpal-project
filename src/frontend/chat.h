@@ -43,6 +43,7 @@ private:
     QTextEdit *inputField;     // 输入框
     QPushButton *sendButton;
     QLabel *lb_name;    // 发送按钮
+    
 };
 
 #endif // CHAT_H
